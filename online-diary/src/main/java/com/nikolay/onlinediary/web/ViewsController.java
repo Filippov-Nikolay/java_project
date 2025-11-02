@@ -16,7 +16,7 @@ public class ViewsController {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "redirect:/contacts";
     }
 
     @GetMapping("/subjects")

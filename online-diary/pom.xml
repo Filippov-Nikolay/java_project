@@ -40,6 +40,12 @@
       <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
 
+      <!-- AOP logging -->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-aop</artifactId>
+      </dependency>
+
     <!-- Для BCrypt и безопасности -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
