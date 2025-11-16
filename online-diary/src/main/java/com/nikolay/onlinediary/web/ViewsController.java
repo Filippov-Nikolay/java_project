@@ -16,7 +16,22 @@ public class ViewsController {
 
     @GetMapping("/")
     public String index() {
-        return "redirect:/contacts";
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @GetMapping("/main")
+    public String main() {
+        return "main";
     }
 
     @GetMapping("/subjects")

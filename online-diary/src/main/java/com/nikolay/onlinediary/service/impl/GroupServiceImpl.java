@@ -1,0 +1,58 @@
+package com.nikolay.onlinediary.service.impl;
+
+import com.nikolay.onlinediary.domain.Group;
+import com.nikolay.onlinediary.dto.GroupDto;
+import com.nikolay.onlinediary.exception.NotFoundException;
+import com.nikolay.onlinediary.repository.GroupRepository;
+import com.nikolay.onlinediary.service.api.IGroupService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@Transactional
+public class GroupServiceImpl implements IGroupService {
+
+    private final GroupRepository groupRepository;
+
+    public GroupServiceImpl(GroupRepository groupRepository) {
+        this.groupRepository = groupRepository;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Group> findAll() {
+        return groupRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Group getById(Long id) {
+        return groupRepository.findById(id).orElseThrow(() -> new NotFoundException("Группа", id));
+    }
+
+    @Override
+    public Group create(GroupDto dto) {
+        Group group = new Group();
+        group.setName(dto.getName());
+        group.setCourse(dto.getCourse());
+        return groupRepository.create(group);
+    }
+
+    @Override
+    public Group update(Long id, GroupDto dto) {
+        Group group = getById(id);
+        group.setName(dto.getName());
+        group.setCourse(dto.getCourse());
+        groupRepository.update(group);
+        return group;
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (!groupRepository.deleteById(id)) {
+            throw new NotFoundException("Группа", id);
+        }
+    }
+}
