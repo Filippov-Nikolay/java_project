@@ -45,7 +45,7 @@ public class AssessmentServiceImpl implements IAssessmentService {
         assessment.setSubmissionId(dto.getSubmissionId());
         assessment.setTeacherId(dto.getTeacherId());
         assessment.setGrade(dto.getGrade());
-        assessment.setComment(dto.getComment());
+        assessment.setcommentText(dto.getcommentText());
         assessment.setAssessedAt(dto.getAssessedAt() != null ? dto.getAssessedAt() : LocalDateTime.now());
         return assessmentRepository.create(assessment);
     }
@@ -56,7 +56,7 @@ public class AssessmentServiceImpl implements IAssessmentService {
         assessment.setSubmissionId(dto.getSubmissionId());
         assessment.setTeacherId(dto.getTeacherId());
         assessment.setGrade(dto.getGrade());
-        assessment.setComment(dto.getComment());
+        assessment.setcommentText(dto.getcommentText());
         assessment.setAssessedAt(dto.getAssessedAt() != null ? dto.getAssessedAt() : LocalDateTime.now());
         assessmentRepository.update(assessment);
         return assessment;

@@ -50,7 +50,7 @@ public class JdbcAssessmentRepository implements AssessmentRepository {
             ps.setLong(1, assessment.getSubmissionId());
             ps.setLong(2, assessment.getTeacherId());
             ps.setInt(3, assessment.getGrade());
-            ps.setString(4, assessment.getComment());
+            ps.setString(4, assessment.getcommentText());
             LocalDateTime assessedAt = assessment.getAssessedAt() != null ? assessment.getAssessedAt() : LocalDateTime.now();
             ps.setTimestamp(5, Timestamp.valueOf(assessedAt));
             return ps;
@@ -92,7 +92,7 @@ public class JdbcAssessmentRepository implements AssessmentRepository {
                 assessment.getSubmissionId(),
                 assessment.getTeacherId(),
                 assessment.getGrade(),
-                assessment.getComment(),
+                assessment.getcommentText(),
                 Timestamp.valueOf(assessment.getAssessedAt() != null ? assessment.getAssessedAt() : LocalDateTime.now()),
                 assessment.getId()
         );

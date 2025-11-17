@@ -1,8 +1,0 @@
-/.metadata/
-target/
-.classpath
-.project
-.settings/
-bin/
-*.log
-.properties

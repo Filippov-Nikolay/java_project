@@ -11,4 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         public void addViewControllers(ViewControllerRegistry registry) {
             registry.addViewController("/error").setViewName("error");
         }
+
+        @Override
+        public void addCorsMappings(org.springframework.web.servlet.config.annotation.CorsRegistry registry) {
+            registry.addMapping("/api/**")
+                    .allowedOrigins("http://localhost:3000")
+                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .allowCredentials(true);
+        }
     }

@@ -8,18 +8,18 @@ public class Assessment {
     private Long submissionId;
     private Long teacherId;
     private int grade;
-    private String comment;
+    private String commentText;
     private LocalDateTime assessedAt;
 
     public Assessment() {
     }
 
-    public Assessment(Long id, Long submissionId, Long teacherId, int grade, String comment, LocalDateTime assessedAt) {
+    public Assessment(Long id, Long submissionId, Long teacherId, int grade, String commentText, LocalDateTime assessedAt) {
         this.id = id;
         this.submissionId = submissionId;
         this.teacherId = teacherId;
         this.grade = grade;
-        this.comment = comment;
+        this.commentText = commentText;
         this.assessedAt = assessedAt;
     }
 
@@ -55,12 +55,12 @@ public class Assessment {
         this.grade = grade;
     }
 
-    public String getComment() {
-        return comment;
+    public String getcommentText() {
+        return commentText;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setcommentText(String comment) {
+        this.commentText = commentText;
     }
 
     public LocalDateTime getAssessedAt() {
@@ -80,13 +80,13 @@ public class Assessment {
                 Objects.equals(id, that.id) &&
                 Objects.equals(submissionId, that.submissionId) &&
                 Objects.equals(teacherId, that.teacherId) &&
-                Objects.equals(comment, that.comment) &&
+                Objects.equals(commentText, that.commentText) &&
                 Objects.equals(assessedAt, that.assessedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, submissionId, teacherId, grade, comment, assessedAt);
+        return Objects.hash(id, submissionId, teacherId, grade, commentText, assessedAt);
     }
 
     @Override

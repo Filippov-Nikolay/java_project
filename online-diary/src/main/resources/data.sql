@@ -15,9 +15,9 @@ INSERT INTO groups (name, course) VALUES
  ('ИТ-201', 2);
 
 INSERT INTO submissions (student_id, subject_id, content, submitted_at) VALUES
- (2, 1, 'Работа по алгебре', CURRENT_TIMESTAMP - 2),
- (2, 2, 'Лабораторная по физике', CURRENT_TIMESTAMP - 1);
+ (2, 1, 'Работа по алгебре', SYSTIMESTAMP - INTERVAL '2' DAY),
+ (2, 2, 'Лабораторная по физике', SYSTIMESTAMP - INTERVAL '1' DAY);
 
-INSERT INTO assessments (submission_id, teacher_id, grade, comment, assessed_at) VALUES
- (1, 1, 5, 'Отличная работа', CURRENT_TIMESTAMP - 1),
- (2, 1, 4, 'Есть небольшие замечания', CURRENT_TIMESTAMP);
+INSERT INTO assessments (submission_id, teacher_id, grade, commentText, assessed_at) VALUES
+ (1, 1, 5, 'Отличная работа', SYSTIMESTAMP - INTERVAL '1' DAY),
+ (2, 1, 4, 'Есть небольшие замечания', SYSTIMESTAMP);

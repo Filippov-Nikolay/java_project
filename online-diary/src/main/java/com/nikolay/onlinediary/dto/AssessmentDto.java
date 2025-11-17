@@ -7,7 +7,7 @@ public class AssessmentDto {
     private Long submissionId;
     private Long teacherId;
     private int grade;
-    private String comment;
+    private String commentText;
     private LocalDateTime assessedAt;
 
     public Long getId() {
@@ -42,12 +42,12 @@ public class AssessmentDto {
         this.grade = grade;
     }
 
-    public String getComment() {
-        return comment;
+    public String getcommentText() {
+        return commentText;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setcommentText(String comment) {
+        this.commentText = commentText;
     }
 
     public LocalDateTime getAssessedAt() {
