@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,7 +20,16 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@app/*": ["src/app/*"],
+      "@entities/*": ["src/entities/*"],
+      "@features/*": ["src/features/*"],
+      "@widgets/*": ["src/widgets/*"],
+      "@shared/*": ["src/shared/*"],
+      "@shared/ui/*": ["src/shared/ui/*"],
+      "@shared/lib/*": ["src/shared/lib/*"],
+      "@shared/hooks/*": ["src/shared/hooks/*"],
+      "@shared/styles/*": ["src/shared/styles/*"],
+      "@config/*": ["src/shared/config/*"]
     }
   },
   "include": [

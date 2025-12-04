@@ -1,0 +1,42 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background: radial-gradient(circle at 20% 20%, #f6f8ff, #f0f4ff 35%, #e8eefc 65%);
+  color: #0f172a;
+}
+
+.header {
+  padding: 40px 48px 24px;
+  background: linear-gradient(120deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  box-shadow: 0 12px 40px rgba(30, 64, 175, 0.24);
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.content {
+  flex: 1;
+  padding: 32px 48px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 28px 24px 16px;
+  }
+
+  .content {
+    padding: 24px;
+  }
+}
