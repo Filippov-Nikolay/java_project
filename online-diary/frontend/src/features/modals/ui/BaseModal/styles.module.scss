@@ -1,0 +1,63 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  transition: opacity 0.2s ease;
+}
+
+.overlayStacked {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.overlayTop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 340px;
+  max-width: 520px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.modalStacked {
+  transform: scale(0.97);
+}
+
+.modalTop {
+  transform: scale(1);
+}
+
+.title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.content {
+  display: grid;
+  gap: 12px;
+}
+
+.closeButton {
+  margin-top: 16px;
+  align-self: flex-end;
+  padding: 8px 12px;
+  background: #1f7aec;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background: #155cbf;
+}

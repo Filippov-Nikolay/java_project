@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+
 import "@shared/styles/globals.scss";
+import { StoreProvider } from "@shared/store/StoreProvider";
 
 export const metadata: Metadata = {
   title: "Online Diary",
@@ -14,7 +16,9 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }
