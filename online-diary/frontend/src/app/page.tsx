@@ -1,3 +1,10 @@
+import DashboardPage from "./(dashboard)/page";
+
 export default function HomePage() {
-  return <main>Landing page placeholder</main>;
+    return (
+        <main>
+            <h1>Landing page placeholder</h1>
+            <DashboardPage />
+        </main>
+    )
 }

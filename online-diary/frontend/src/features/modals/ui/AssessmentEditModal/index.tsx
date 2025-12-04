@@ -1,22 +1,24 @@
 "use client";
 
-import BaseModal from "@features/modals/ui/BaseModal";
+import React from "react";
+import type { ModalComponentProps } from "@features/modals/model/types";
 
-import styles from "./styles.module.scss";
+type AssessmentEditModalProps = ModalComponentProps;
 
-type AssessmentEditModalProps = {
-  data?: {
-    assessmentId?: number;
-  };
-  isTop: boolean;
-  onClose: () => void;
+const AssessmentEditModal: React.FC<AssessmentEditModalProps> = ({
+    data,
+    isTop,
+    onClose,
+}) => {
+    // явно приводим data к нужной форме, чтобы TS был доволен
+    const { assessmentId } = (data || {}) as { assessmentId?: number };
+
+    return (
+        <div>
+            <h2>Редактирование оценки {assessmentId}</h2>
+            <button type="button" onClick={onClose}>Закрыть</button>
+        </div>
+    );
 };
 
-export default function AssessmentEditModal({ data, isTop, onClose }: AssessmentEditModalProps) {
-  return (
-    <BaseModal title="Edit assessment" isTop={isTop} onClose={onClose}>
-      <div className={styles.row}>Assessment ID: {data?.assessmentId ?? "—"}</div>
-      <p className={styles.hint}>Here you can load assessment details and show a form.</p>
-    </BaseModal>
-  );
-}
+export default AssessmentEditModal;
