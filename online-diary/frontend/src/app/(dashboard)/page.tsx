@@ -3,6 +3,7 @@
 import { openModal } from "@features/modals/model/modalSlice";
 import { showNotification } from "@features/notifications/model/notificationSlice";
 import type { NotificationStatus } from "@features/notifications/model/types";
+import ThemeToggle from "@features/theme/ui/ThemeToggle";
 import { useAppDispatch } from "@shared/store/hooks";
 
 export default function DashboardPage() {
@@ -39,7 +40,7 @@ export default function DashboardPage() {
     return (
         <div>
             <h1>Dashboard overview placeholder</h1>
-
+            <ThemeToggle />
             <button type="button" onClick={() => handleEdit(1)}>
                 Click me for call modal!
             </button>

@@ -1,0 +1,28 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  position: relative;
+}
+
+.toggle:hover {
+  background: var(--surface);
+}
+
+.toggle::before {
+  content: var(--theme-toggle-icon, "☀️");
+  font-size: 16px;
+}
+
+.toggle::after {
+  content: var(--theme-toggle-label, "Светлая тема");
+  margin-left: 6px;
+}

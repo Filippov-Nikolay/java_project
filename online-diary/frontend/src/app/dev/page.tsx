@@ -3,7 +3,10 @@
 import { openModal } from "@features/modals/model/modalSlice";
 import { showNotification } from "@features/notifications/model/notificationSlice";
 import type { NotificationStatus } from "@features/notifications/model/types";
+import ThemeToggle from "@features/theme/ui/ThemeToggle";
 import { useAppDispatch } from "@shared/store/hooks";
+
+import styles from "./styles.module.scss";
 
 const notificationMessages: Record<NotificationStatus, string> = {
     successful: "Dev check: successful notification.",
@@ -37,59 +40,33 @@ export default function DevPlaygroundPage() {
     };
 
     return (
-        <main
-            style={{
-                padding: "24px",
-                display: "grid",
-                gap: "20px",
-                maxWidth: "960px",
-                margin: "0 auto",
-            }}
-        >
-            <header style={{ display: "grid", gap: "8px" }}>
-                <h1 style={{ margin: 0 }}>Dev Playground</h1>
-                <p style={{ margin: 0, color: "#475569" }}>
-                    Страница только для разработчиков: быстрый чек модалок и
-                    уведомлений.
-                </p>
+        <main className={styles.page}>
+            <header className={styles.header}>
+                <div>
+                    <p className={styles.badge}>Dev only</p>
+                    <h1 className={styles.title}>Dev Playground</h1>
+                    <p className={styles.subtitle}>
+                        Быстрые проверки модалок, уведомлений и темы (light/dark).
+                    </p>
+                </div>
+                <ThemeToggle />
             </header>
 
-            <section
-                style={{
-                    border: "1px solid #e2e8f0",
-                    borderRadius: "12px",
-                    padding: "16px",
-                    display: "grid",
-                    gap: "12px",
-                }}
-            >
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <h2 style={{ margin: 0, fontSize: "18px" }}>Уведомления</h2>
-                    <span style={{ color: "#94a3b8", fontSize: "14px" }}>
-                        проверка статусов + автозакрытие
+            <section className={styles.card}>
+                <div className={styles.sectionHeader}>
+                    <h2>Уведомления</h2>
+                    <span className={styles.hint}>
+                        статусы, анимация появления/закрытия, автоскрытие
                     </span>
                 </div>
-
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                        gap: "10px",
-                    }}
-                >
+                <div className={styles.grid}>
                     {(Object.keys(notificationMessages) as NotificationStatus[]).map(
                         (status) => (
                             <button
                                 key={status}
                                 type="button"
                                 onClick={() => triggerNotification(status)}
-                                style={{
-                                    padding: "10px 12px",
-                                    borderRadius: "10px",
-                                    border: "1px solid #cbd5e1",
-                                    background: "#f8fafc",
-                                    cursor: "pointer",
-                                }}
+                                className={styles.button}
                             >
                                 Показать: {status}
                             </button>
@@ -98,33 +75,16 @@ export default function DevPlaygroundPage() {
                 </div>
             </section>
 
-            <section
-                style={{
-                    border: "1px solid #e2e8f0",
-                    borderRadius: "12px",
-                    padding: "16px",
-                    display: "grid",
-                    gap: "12px",
-                }}
-            >
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <h2 style={{ margin: 0, fontSize: "18px" }}>Модалки</h2>
-                    <span style={{ color: "#94a3b8", fontSize: "14px" }}>
-                        проверка стека и закрытия
-                    </span>
+            <section className={styles.card}>
+                <div className={styles.sectionHeader}>
+                    <h2>Модалки</h2>
+                    <span className={styles.hint}>проверка стека и закрытия</span>
                 </div>
-
-                <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                <div className={styles.row}>
                     <button
                         type="button"
                         onClick={triggerModal}
-                        style={{
-                            padding: "10px 12px",
-                            borderRadius: "10px",
-                            border: "1px solid #cbd5e1",
-                            background: "#f8fafc",
-                            cursor: "pointer",
-                        }}
+                        className={styles.button}
                     >
                         Открыть confirmation
                     </button>
