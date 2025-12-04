@@ -1,0 +1,98 @@
+.notification {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 260px;
+  max-width: 360px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #0f172a;
+  background: #e2e8f0;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+  border: 1px solid transparent;
+  opacity: 0;
+  transform: translateX(16px) translateY(6px);
+  animation: slideIn 200ms ease-out forwards;
+}
+
+.closing {
+  animation: slideOut 200ms ease-in forwards;
+}
+
+.content {
+  display: grid;
+  gap: 4px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.message {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  color: inherit;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.close:hover {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.successful {
+  background: #ecfdf3;
+  border-color: #22c55e;
+  color: #14532d;
+}
+
+.warning {
+  background: #fff7ed;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+.error {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+.default {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(16px) translateY(6px);
+  }
+}

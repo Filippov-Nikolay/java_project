@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { modalReducer } from "@features/modals/model/modalSlice";
+import { notificationsReducer } from "@features/notifications/model/notificationSlice";
 
 export const store = configureStore({
   reducer: {
     modals: modalReducer,
+    notifications: notificationsReducer,
   },
 });
 
