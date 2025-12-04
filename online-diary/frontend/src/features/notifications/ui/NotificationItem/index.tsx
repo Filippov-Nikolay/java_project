@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { NotificationStatus } from "@features/notifications/model/types";
 
@@ -18,23 +18,51 @@ type NotificationItemProps = {
     onRemove: () => void;
 };
 
+const CLOSE_ANIMATION_MS = 220;
+const DEFAULT_DURATION_MS = 3000;
+
 export default function NotificationItem({
     message,
     status,
-    duration = 5000,
+    duration = DEFAULT_DURATION_MS,
     onRemove,
 }: NotificationItemProps) {
     const [closing, setClosing] = useState(false);
+    const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    useEffect(() => {
-        const timerId = setTimeout(() => startClose(), duration);
-        return () => clearTimeout(timerId);
-    }, [duration]);
+    const clearTimer = () => {
+        if (timerRef.current) {
+            clearTimeout(timerRef.current);
+            timerRef.current = null;
+        }
+    };
 
     const startClose = () => {
         if (closing) return;
+        clearTimer();
         setClosing(true);
-        setTimeout(onRemove, 220);
+        setTimeout(onRemove, CLOSE_ANIMATION_MS);
+    };
+
+    const scheduleClose = (delay: number) => {
+        clearTimer();
+        timerRef.current = setTimeout(startClose, delay);
+    };
+
+    useEffect(() => {
+        scheduleClose(duration);
+        return clearTimer;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [duration]);
+
+    const handleMouseEnter = () => {
+        if (closing) return;
+        clearTimer();
+    };
+
+    const handleMouseLeave = () => {
+        if (closing) return;
+        scheduleClose(duration);
     };
 
     return (
@@ -42,6 +70,8 @@ export default function NotificationItem({
             className={`${styles.notification} ${styles[status]} ${
                 closing ? styles.closing : ""
             }`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
             <div className={styles.content}>
                 <div className={styles.title}>{statusTitle[status]}</div>
