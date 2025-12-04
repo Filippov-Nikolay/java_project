@@ -1,0 +1,32 @@
+.text {
+  margin: 0;
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.primary,
+.secondary {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: #1f7aec;
+  color: #fff;
+}
+
+.primary:hover {
+  background: #155cbf;
+}
+
+.secondary {
+  background: #f0f2f5;
+  color: #000;
+}
