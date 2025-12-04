@@ -1,36 +1,24 @@
 "use client";
 
-import type { ReactNode } from "react";
-
 import { openModal } from "@features/modals/model/modalSlice";
 import { showNotification } from "@features/notifications/model/notificationSlice";
 import type { NotificationStatus } from "@features/notifications/model/types";
-import Button from "@shared/ui/Button";
+import { buildShowcase, type ShowcaseEntry } from "@app/dev/helpers/showcase";
 import ThemeToggle from "@features/theme/ui/ThemeToggle";
 import { useAppDispatch } from "@shared/store/hooks";
 
 import styles from "./styles.module.scss";
 
-const notificationMessages: Record<NotificationStatus, string> = {
-    successful: "Dev check: successful notification.",
-    warning: "Dev check: warning notice.",
-    error: "Dev check: error state surfaced.",
-    default: "Dev check: neutral info.",
-};
-
-type ShowcaseEntry = {
-    id?: string;
-    addedAt: string; // YYYY-MM-DD
-    title: string;
-    description: string;
-    render: () => ReactNode;
-};
-
 const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
+
 const parseDateSafe = (date: string) => {
-    const ms = Date.parse(`${date}T00:00:00`);
-    return Number.isFinite(ms) ? ms : 0;
+    const parts = date.split("-").map(Number);
+    if (parts.length !== 3) return 0;
+    const [year, month, day] = parts;
+    if (!year || !month || !day) return 0;
+    return Date.UTC(year, month - 1, day);
 };
+
 const isNewEntry = (date: string, now: number) => {
     const ms = parseDateSafe(date);
     if (!ms) return false;
@@ -45,7 +33,7 @@ export default function DevPlaygroundPage() {
         dispatch(
             showNotification({
                 status,
-                message: notificationMessages[status],
+                message: `Dev check: ${status} notification`,
             }),
         );
     };
@@ -62,61 +50,10 @@ export default function DevPlaygroundPage() {
         );
     };
 
-    const showcase: ShowcaseEntry[] = [
-        {
-            id: "theme-toggle",
-            addedAt: "2025-04-12",
-            title: "Переключатель темы",
-            description: "Кнопка с сохранением выбора и моментальной инициализацией темы.",
-            render: () => <ThemeToggle />,
-        },
-        {
-            id: "notifications-all",
-            addedAt: "2025-04-12",
-            title: "Уведомления (все статусы)",
-            description: "Четыре кнопки для всех статусов в одном месте.",
-            render: () => (
-                <div className={styles.row}>
-                    {(["successful", "warning", "error", "default"] as NotificationStatus[]).map(
-                        (status) => (
-                            <Button
-                                key={status}
-                                label={`Показать ${status}`}
-                                onClick={() => triggerNotification(status)}
-                            />
-                        ),
-                    )}
-                </div>
-            ),
-        },
-        {
-            id: "modal-confirm",
-            addedAt: "2025-04-12",
-            title: "Модал: confirmation",
-            description: "Проверка открытия/закрытия модала подтверждения.",
-            render: () => (
-                <Button label="Открыть confirmation" onClick={triggerModal} />
-            ),
-        },
-        {
-            id: "button-demo",
-            addedAt: "2025-04-12",
-            title: "Новая кнопка (UI)",
-            description: "Градиентная кнопка с темой, иконкой, загрузкой.",
-            render: () => (
-                <div className={styles.row}>
-                    <Button label="Обычная кнопка" />
-                    <Button
-                        label="С иконкой"
-                        icon="⭐"
-                        iconPosition="left"
-                        onClick={() => triggerNotification("successful")}
-                    />
-                    <Button label="Загрузка..." isLoading />
-                </div>
-            ),
-        },
-    ];
+    const showcase: ShowcaseEntry[] = buildShowcase({
+        onNotify: triggerNotification,
+        onOpenConfirm: triggerModal,
+    });
 
     const newEntries = showcase
         .filter((entry) => isNewEntry(entry.addedAt, now))
