@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import { openModal } from "@features/modals/model/modalSlice";
 import { showNotification } from "@features/notifications/model/notificationSlice";
 import type { NotificationStatus } from "@features/notifications/model/types";
@@ -15,8 +17,36 @@ const notificationMessages: Record<NotificationStatus, string> = {
     default: "Dev check: neutral info.",
 };
 
+type ShowcaseEntry = {
+    id?: string;
+    addedAt: string;
+    title: string;
+    description: string;
+    render: () => ReactNode;
+};
+
+const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
+const parseDateSafe = (date: string) => {
+    const ms = new Date(date).getTime();
+    return Number.isFinite(ms) ? ms : 0;
+};
+const isNewEntry = (date: string, now: number) => {
+    const ms = parseDateSafe(date);
+    if (!ms) return false;
+    return now - ms < TWO_DAYS_MS;
+};
+
 export default function DevPlaygroundPage() {
     const dispatch = useAppDispatch();
+    const now = Date.now();
+
+    // ←←←← ВСТАВЬ ЭТО ВРЕМЕННО ←←←←
+    console.log("Сегодня (ms):", now);
+    console.log("Дата 2025-04-12 (ms):", parseDateSafe("2025-04-12"));
+    console.log("Разница (мс):", now - parseDateSafe("2025-04-12"));
+    console.log("2 дня (мс):", 2 * 24 * 60 * 60 * 1000);
+    console.log("Компонент новый?", isNewEntry("2025-04-12", now));
+    // ←←←← КОНЕЦ ВРЕМЕННОГО ЛОГА ←←←←
 
     const triggerNotification = (status: NotificationStatus) => {
         dispatch(
@@ -39,6 +69,57 @@ export default function DevPlaygroundPage() {
         );
     };
 
+    const showcase: ShowcaseEntry[] = [
+        {
+            id: "theme-toggle",
+            addedAt: "2025-12-04",
+            title: "Переключатель темы",
+            description: "Кнопка с сохранением выбора и моментальной инициализацией темы.",
+            render: () => <ThemeToggle />,
+        },
+        {
+            id: "notifications-all",
+            addedAt: "2025-12-04",
+            title: "Уведомления (все статусы)",
+            description: "Четыре кнопки для всех статусов в одном месте.",
+            render: () => (
+                <div className={styles.row}>
+                    {(["successful", "warning", "error", "default"] as NotificationStatus[]).map(
+                        (status) => (
+                            <button
+                                key={status}
+                                type="button"
+                                className={styles.button}
+                                onClick={() => triggerNotification(status)}
+                            >
+                                Показать {status}
+                            </button>
+                        ),
+                    )}
+                </div>
+            ),
+        },
+        {
+            id: "modal-confirm",
+            addedAt: "2025-12-01",
+            title: "Модал: confirmation",
+            description: "Проверка открытия/закрытия модала подтверждения.",
+            render: () => (
+                <button type="button" className={styles.button} onClick={triggerModal}>
+                    Открыть confirmation
+                </button>
+            ),
+        },
+    ];
+
+    const newEntries = showcase
+        .filter((entry) => isNewEntry(entry.addedAt, now))
+        .sort((a, b) => parseDateSafe(b.addedAt) - parseDateSafe(a.addedAt));
+
+    const oldEntries = showcase
+        .filter((entry) => !isNewEntry(entry.addedAt, now))
+        .sort((a, b) => parseDateSafe(b.addedAt) - parseDateSafe(a.addedAt));
+
     return (
         <main className={styles.page}>
             <header className={styles.header}>
@@ -52,42 +133,58 @@ export default function DevPlaygroundPage() {
                 <ThemeToggle />
             </header>
 
-            <section className={styles.card}>
+            <section className={`${styles.card} ${styles.newSection}`}>
                 <div className={styles.sectionHeader}>
-                    <h2>Уведомления</h2>
-                    <span className={styles.hint}>
-                        статусы, анимация появления/закрытия, автоскрытие
-                    </span>
+                    <h2>New</h2>
+                    <span className={styles.hint}>компоненты за последние 2 дня</span>
                 </div>
-                <div className={styles.grid}>
-                    {(Object.keys(notificationMessages) as NotificationStatus[]).map(
-                        (status) => (
-                            <button
-                                key={status}
-                                type="button"
-                                onClick={() => triggerNotification(status)}
-                                className={styles.button}
-                            >
-                                Показать: {status}
-                            </button>
-                        ),
+                <div className={styles.newList}>
+                    {newEntries.length === 0 ? (
+                        <p className={styles.newItemDescription}>Новых компонентов нет.</p>
+                    ) : (
+                        newEntries.map((item) => (
+                            <div key={item.id ?? item.title} className={styles.newItem}>
+                                <div className={styles.newItemHeader}>
+                                    <div>
+                                        <p className={styles.newItemTitle}>{item.title}</p>
+                                        <p className={styles.newItemDate}>
+                                            Добавлено: {item.addedAt}
+                                        </p>
+                                    </div>
+                                    <span className={styles.badgeNew}>NEW</span>
+                                </div>
+                                <p className={styles.newItemDescription}>{item.description}</p>
+                                <div className={styles.newContent}>{item.render()}</div>
+                            </div>
+                        ))
                     )}
                 </div>
             </section>
 
             <section className={styles.card}>
                 <div className={styles.sectionHeader}>
-                    <h2>Модалки</h2>
-                    <span className={styles.hint}>проверка стека и закрытия</span>
+                    <h2>Остальные</h2>
+                    <span className={styles.hint}>отсортированы по дате добавления</span>
                 </div>
-                <div className={styles.row}>
-                    <button
-                        type="button"
-                        onClick={triggerModal}
-                        className={styles.button}
-                    >
-                        Открыть confirmation
-                    </button>
+                <div className={styles.newList}>
+                    {oldEntries.length === 0 ? (
+                        <p className={styles.newItemDescription}>Нет старых компонентов.</p>
+                    ) : (
+                        oldEntries.map((item) => (
+                            <div key={item.id ?? item.title} className={styles.newItem}>
+                                <div className={styles.newItemHeader}>
+                                    <div>
+                                        <p className={styles.newItemTitle}>{item.title}</p>
+                                        <p className={styles.newItemDate}>
+                                            Добавлено: {item.addedAt}
+                                        </p>
+                                    </div>
+                                </div>
+                                <p className={styles.newItemDescription}>{item.description}</p>
+                                <div className={styles.newContent}>{item.render()}</div>
+                            </div>
+                        ))
+                    )}
                 </div>
             </section>
         </main>
