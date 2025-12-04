@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { openModal } from "@features/modals/model/modalSlice";
 import { showNotification } from "@features/notifications/model/notificationSlice";
 import type { NotificationStatus } from "@features/notifications/model/types";
+import Button from "@shared/ui/Button";
 import ThemeToggle from "@features/theme/ui/ThemeToggle";
 import { useAppDispatch } from "@shared/store/hooks";
 
@@ -19,7 +20,7 @@ const notificationMessages: Record<NotificationStatus, string> = {
 
 type ShowcaseEntry = {
     id?: string;
-    addedAt: string;
+    addedAt: string; // YYYY-MM-DD
     title: string;
     description: string;
     render: () => ReactNode;
@@ -27,7 +28,7 @@ type ShowcaseEntry = {
 
 const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
 const parseDateSafe = (date: string) => {
-    const ms = new Date(date).getTime();
+    const ms = Date.parse(`${date}T00:00:00`);
     return Number.isFinite(ms) ? ms : 0;
 };
 const isNewEntry = (date: string, now: number) => {
@@ -39,14 +40,6 @@ const isNewEntry = (date: string, now: number) => {
 export default function DevPlaygroundPage() {
     const dispatch = useAppDispatch();
     const now = Date.now();
-
-    // ←←←← ВСТАВЬ ЭТО ВРЕМЕННО ←←←←
-    console.log("Сегодня (ms):", now);
-    console.log("Дата 2025-04-12 (ms):", parseDateSafe("2025-04-12"));
-    console.log("Разница (мс):", now - parseDateSafe("2025-04-12"));
-    console.log("2 дня (мс):", 2 * 24 * 60 * 60 * 1000);
-    console.log("Компонент новый?", isNewEntry("2025-04-12", now));
-    // ←←←← КОНЕЦ ВРЕМЕННОГО ЛОГА ←←←←
 
     const triggerNotification = (status: NotificationStatus) => {
         dispatch(
@@ -72,28 +65,25 @@ export default function DevPlaygroundPage() {
     const showcase: ShowcaseEntry[] = [
         {
             id: "theme-toggle",
-            addedAt: "2025-12-04",
+            addedAt: "2025-04-12",
             title: "Переключатель темы",
             description: "Кнопка с сохранением выбора и моментальной инициализацией темы.",
             render: () => <ThemeToggle />,
         },
         {
             id: "notifications-all",
-            addedAt: "2025-12-04",
+            addedAt: "2025-04-12",
             title: "Уведомления (все статусы)",
             description: "Четыре кнопки для всех статусов в одном месте.",
             render: () => (
                 <div className={styles.row}>
                     {(["successful", "warning", "error", "default"] as NotificationStatus[]).map(
                         (status) => (
-                            <button
+                            <Button
                                 key={status}
-                                type="button"
-                                className={styles.button}
+                                label={`Показать ${status}`}
                                 onClick={() => triggerNotification(status)}
-                            >
-                                Показать {status}
-                            </button>
+                            />
                         ),
                     )}
                 </div>
@@ -101,13 +91,29 @@ export default function DevPlaygroundPage() {
         },
         {
             id: "modal-confirm",
-            addedAt: "2025-12-01",
+            addedAt: "2025-04-12",
             title: "Модал: confirmation",
             description: "Проверка открытия/закрытия модала подтверждения.",
             render: () => (
-                <button type="button" className={styles.button} onClick={triggerModal}>
-                    Открыть confirmation
-                </button>
+                <Button label="Открыть confirmation" onClick={triggerModal} />
+            ),
+        },
+        {
+            id: "button-demo",
+            addedAt: "2025-04-12",
+            title: "Новая кнопка (UI)",
+            description: "Градиентная кнопка с темой, иконкой, загрузкой.",
+            render: () => (
+                <div className={styles.row}>
+                    <Button label="Обычная кнопка" />
+                    <Button
+                        label="С иконкой"
+                        icon="⭐"
+                        iconPosition="left"
+                        onClick={() => triggerNotification("successful")}
+                    />
+                    <Button label="Загрузка..." isLoading />
+                </div>
             ),
         },
     ];

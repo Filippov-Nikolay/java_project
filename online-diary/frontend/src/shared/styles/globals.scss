@@ -7,6 +7,9 @@
     --surface: #ffffff;
     --surface-muted: #f8fafc;
     --border-color: #e2e8f0;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-contrast: #ffffff;
 }
 
 :root[data-theme="dark"] {
@@ -16,6 +19,9 @@
     --surface: #111827;
     --surface-muted: #1f2937;
     --border-color: #1f2937;
+    --accent: #38bdf8;
+    --accent-hover: #0ea5e9;
+    --accent-contrast: #0b1220;
 }
 
 body {
