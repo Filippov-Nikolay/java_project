@@ -1,8 +1,8 @@
 .toggle {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
+  gap: var(--theme-toggle-gap, 8px);
+  padding: var(--theme-toggle-padding, 10px 12px);
   border-radius: 12px;
   border: 1px solid var(--border-color);
   background: var(--surface-muted);
@@ -24,5 +24,5 @@
 
 .toggle::after {
   content: var(--theme-toggle-label, "Светлая тема");
-  margin-left: 6px;
+  margin-left: var(--theme-toggle-label-gap, 6px);
 }

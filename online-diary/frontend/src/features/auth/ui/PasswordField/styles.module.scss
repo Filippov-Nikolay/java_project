@@ -1,0 +1,33 @@
+.wrapper {
+  position: relative;
+}
+
+/* доп. паддинг справа, чтобы глаз не наезжал на текст */
+.input {
+  padding-right: 44px; /* подгони по вкусу под размер иконки */
+}
+
+.eye {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye:hover {
+  color: var(--accent);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}

@@ -1,1 +1,35 @@
-/* Styles for Input */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.input {
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  font-size: 14px;
+  background: var(--surface);
+  color: var(--text-primary);
+  outline: none;
+
+  &:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+}
+
+.inputError {
+  border-color: #ef4444;
+}
+
+.error {
+  font-size: 12px;
+  color: #ef4444;
+}

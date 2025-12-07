@@ -1,0 +1,183 @@
+.page {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 640px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  border-radius: 24px;
+  overflow: hidden;
+
+  background: var(--surface);
+  box-shadow: 0 14px 15px rgba(15, 23, 42, 0.45);
+}
+
+/* Левая колонка */
+
+.left {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px 28px;
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoMark {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  background: #6366f1;
+  color: #ffffff;
+}
+
+.logoText {
+  font-weight: 600;
+  font-size: 18px;
+  color: #4f46e5;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+/* для гифки */
+.logoImage {
+  height: 32px;   /* чтобы не была слишком большой */
+  width: auto;
+  display: block;
+}
+
+
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  --theme-toggle-label: "";          
+  --theme-toggle-gap: 0;
+  --theme-toggle-label-gap: 0;
+  --theme-toggle-padding: 6px;
+}
+
+
+.content {
+  width: 380px;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.forgot {
+  margin-top: 4px;
+  align-self: center;
+  border: none;
+  background: none;
+  font-size: 13px;
+  color: #6b7280;
+  cursor: pointer;
+
+  &:hover {
+    color: #4f46e5;
+  }
+}
+
+.footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.muted {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Правая колонка */
+
+.right {
+  position: relative;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 32px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: soft-light;
+  opacity: 0.35;
+  background-image: radial-gradient(circle at 20% 20%, #ffffff 0, transparent 55%),
+    radial-gradient(circle at 80% 70%, #ffffff 0, transparent 55%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 260px;
+  color: #f9fafb;
+}
+
+.heroTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.heroText {
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+
+@media (max-width: 900px) {
+  .page {
+    max-width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .right {
+    display: none; 
+  }
+
+  .left {
+    padding: 24px 20px;
+  }
+}
