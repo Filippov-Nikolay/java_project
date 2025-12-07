@@ -1,60 +1,53 @@
 "use client";
 
-import ThemeToggle from "@features/theme/ui/ThemeToggle";
-import LoginForm, { type LoginFormValues } from "@features/auth/ui/LoginForm";
-import { useAuth } from "@features/auth/model/useAuth";
+import { AuthHeader } from "@shared/layouts/AuthHeader";
+import { AuthFooter } from "@shared/layouts/AuthFooter";
+import RecoveryForm, {
+  type RecoveryFormValues,
+} from "@features/auth/ui/RecoveryForm";
+// пока можно просто логировать, позже подвяжешь к useAuth
+// import { useAuth } from "@features/auth/model/useAuth";
 
-import styles from "./styles.module.scss";
+import styles from "../login/styles.module.scss"; // переиспользуем тот же layout
 
-export default function LoginPage() {
-    const { login, pending, error } = useAuth();
+export default function ForgotPasswordPage() {
+  // const { sendRecoveryLink, pending, error } = useAuth();
+  const pending = false;
+  const error: string | null = null;
 
-    const handleSubmit = (values: LoginFormValues) => {
-        login(values);
-    };
+  const handleSubmit = (values: RecoveryFormValues) => {
+    // тут потом подвяжешь запрос на бэкенд
+    console.log("Recovery request:", values.identifier);
+  };
 
-    return (
-        <main className={styles.page}>
-            {/* Левая часть: логин */}
-            <section className={styles.left}>
-                <header className={styles.header}>
-                    <div className={styles.brand}>
-                        {/* Можешь потом заменить на свой логотип */}
-                        <span className={styles.logoMark}>JB</span>
-                        <span className={styles.logoText}>JByte</span>
-                    </div>
+  return (
+    <main className={styles.page}>
+      <section className={styles.left}>
+        <AuthHeader />
 
-                    <div className={styles.headerRight}>
-                        {/* Переключатель языка потом добавим, пока только тема */}
-                        <ThemeToggle />
-                    </div>
-                </header>
+        <div className={styles.content}>
+          <div className={styles.heading}>
+            <h1 className={styles.title}>Забули пароль?</h1>
+            <p className={styles.subtitle}>
+              Введіть свою адресу електронної пошти нижче,
+              і ми надішлемо вам електронний лист, який дозволить вам скинути її.
+            </p>
+          </div>
 
-                <div className={styles.content}>
-                  <div className={styles.heading}>
-                      <h1 className={styles.title}>Логін</h1>
-                  </div>
-                    
+          <RecoveryForm
+            onSubmit={handleSubmit}
+            pending={pending}
+            error={error}
+          />
+        </div>
 
-                    <LoginForm onSubmit={handleSubmit} pending={pending} error={error} />
+        <AuthFooter/>
+      </section>
 
-                    <button type="button" className={styles.forgot}>
-                        Забули пароль?
-                    </button>
-                </div>
-
-                <footer className={styles.footer}>
-                    <span className={styles.muted}>© {new Date().getFullYear()} JByte</span>
-                </footer>
-            </section>
-
-            {/* Правая часть: иллюстрация / фон */}
-            <aside className={styles.right}>
-                <div className={styles.overlay} />
-                <div className={styles.heroContent}>
-                    
-                </div>
-            </aside>
-        </main>
-    );
+      <aside className={styles.right}>
+        <div className={styles.overlay} />
+        <div className={styles.heroContent} />
+      </aside>
+    </main>
+  );
 }

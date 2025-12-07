@@ -1,4 +1,10 @@
 /* Global styles placeholder */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
     font-family: Arial, sans-serif;
     --bg: #ffffff;
