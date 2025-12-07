@@ -5,6 +5,8 @@ import LoginForm, { type LoginFormValues } from "@features/auth/ui/LoginForm";
 import { useAuth } from "@features/auth/model/useAuth";
 
 import styles from "./styles.module.scss";
+import { AuthHeader } from "@shared/layouts/AuthHeader";
+import { AuthFooter } from "@shared/layouts/AuthFooter";
 
 export default function LoginPage() {
     const { login, pending, error } = useAuth();
@@ -17,18 +19,7 @@ export default function LoginPage() {
         <main className={styles.page}>
             {/* Левая часть: логин */}
             <section className={styles.left}>
-                <header className={styles.header}>
-                    <div className={styles.brand}>
-                        {/* Можешь потом заменить на свой логотип */}
-                        <span className={styles.logoMark}>JB</span>
-                        <span className={styles.logoText}>JByte</span>
-                    </div>
-
-                    <div className={styles.headerRight}>
-                        {/* Переключатель языка потом добавим, пока только тема */}
-                        <ThemeToggle />
-                    </div>
-                </header>
+                <AuthHeader logoShort="JB" logoText="JByte" />
 
                 <div className={styles.content}>
                   <div className={styles.heading}>
@@ -43,9 +34,7 @@ export default function LoginPage() {
                     </button>
                 </div>
 
-                <footer className={styles.footer}>
-                    <span className={styles.muted}>© {new Date().getFullYear()} JByte</span>
-                </footer>
+                <AuthFooter brandName="JByte" />
             </section>
 
             {/* Правая часть: иллюстрация / фон */}

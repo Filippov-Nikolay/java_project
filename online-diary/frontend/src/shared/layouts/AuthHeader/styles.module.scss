@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoMark {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  background: #6366f1;
+  color: #ffffff;
+}
+
+.logoText {
+  font-weight: 600;
+  font-size: 18px;
+  color: #4f46e5;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  --theme-toggle-label: "";          
+  --theme-toggle-gap: 0;
+  --theme-toggle-label-gap: 0;
+  --theme-toggle-padding: 6px;
+}
+
