@@ -23,12 +23,4 @@
   background: var(--surface);
 }
 
-.toggle::before {
-  font-size: 16px;
-}
 
-.toggle::after {
-  /* текст управляется переменной, по умолчанию как раньше */
-  content: var(--theme-toggle-label, "Светлая тема");
-  margin-left: var(--theme-toggle-label-gap, 6px);
-}

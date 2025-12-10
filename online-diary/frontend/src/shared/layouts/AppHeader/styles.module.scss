@@ -10,6 +10,10 @@
   background: var(--surface);
   color: var(--text-primary);
   border-bottom: 1px solid var(--border-color);
+
+   position: sticky; /* можно fixed, но sticky тут удобнее */
+  top: 0;
+  z-index: 100;     /* выше сайдбара и контента */
 }
 
 .left {

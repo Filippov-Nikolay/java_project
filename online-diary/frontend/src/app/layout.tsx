@@ -6,15 +6,18 @@ import ThemeWatcher from "@features/theme/ui/ThemeWatcher";
 import "@shared/styles/globals.scss";
 
 const themeInitScript = `
-(function() {
+(function () {
   try {
     var storageKey = "theme-mode";
     var stored = localStorage.getItem(storageKey);
     var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    var mode = stored === "dark" || stored === "light" ? stored : (systemDark ? "dark" : "light");
+    var mode =
+      stored === "dark" || stored === "light"
+        ? stored
+        : (systemDark ? "dark" : "light");
+
+    // сразу ставим атрибут, чтобы CSS подхватил тему до отрисовки
     document.documentElement.setAttribute("data-theme", mode);
-    document.documentElement.style.setProperty("--theme-toggle-label", mode === "dark" ? '"Темная тема"' : '"Светлая тема"');
-    document.documentElement.style.setProperty("--theme-toggle-icon", mode === "dark" ? '"🌙"' : '"☀️"');
   } catch (e) {
     // ignore
   }
@@ -22,19 +25,19 @@ const themeInitScript = `
 `;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-    return (
-        <html lang="ru" suppressHydrationWarning>
-            <head>
-                <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-            </head>
-            <body>
-                <StoreProvider>
-                    <ThemeWatcher />
-                    {children}
-                    <NotificationRoot />
-                    <ModalRoot />
-                </StoreProvider>
-            </body>
-        </html>
-    );
+  return (
+    <html lang="uk" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body>
+        <StoreProvider>
+          <ThemeWatcher />
+          {children}
+          <NotificationRoot />
+          <ModalRoot />
+        </StoreProvider>
+      </body>
+    </html>
+  );
 }

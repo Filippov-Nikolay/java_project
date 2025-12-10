@@ -13,14 +13,15 @@ export default function ThemeToggle() {
   const dispatch = useAppDispatch();
   const mode = useAppSelector(selectThemeMode);
 
-  const Icon = mode === "dark" ? DarkModeRoundedIcon : LightModeRoundedIcon;
+  // если сейчас dark → показываем "солнце" (переключатель на светлую)
+  const Icon = mode === "dark" ? LightModeRoundedIcon : DarkModeRoundedIcon;
+  const ariaLabel = mode === "dark" ? "Світла тема" : "Темна тема";
 
   return (
     <button
       type="button"
       className={styles.toggle}
-      suppressHydrationWarning
-      aria-label={mode === "dark" ? "Темная тема" : "Светлая тема"}
+      aria-label={ariaLabel}
       onClick={() => dispatch(toggleTheme())}
     >
       <Icon className={styles.icon} />

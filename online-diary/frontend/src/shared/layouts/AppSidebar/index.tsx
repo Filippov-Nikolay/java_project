@@ -7,6 +7,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import FactCheckRoundedIcon from '@mui/icons-material/FactCheckRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 
+import { IconRailArrowRight, IconRailArrowLeft } from "@shared/assets";
+
+
 import styles from "./styles.module.scss";
 
 type NavItem = {
@@ -56,7 +59,7 @@ export function AppSidebar() {
           aria-label="Відкрити меню"
           onClick={handleOpen}
         >
-          ⮞
+          <IconRailArrowRight />
         </button>
       </aside>
 
@@ -100,7 +103,7 @@ export function AppSidebar() {
           aria-label="Закрити меню"
           onClick={handleClose}
         >
-          ⮜
+          <IconRailArrowLeft />
         </button>
       </div>
     </>
