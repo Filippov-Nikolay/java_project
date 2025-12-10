@@ -1,10 +1,5 @@
-import DashboardPage from "./(dashboard)/page";
+import { redirect } from "next/navigation";
 
 export default function HomePage() {
-    return (
-        <main>
-            <h1>Landing page placeholder</h1>
-            <DashboardPage />
-        </main>
-    )
+  redirect("/dashboard");
 }

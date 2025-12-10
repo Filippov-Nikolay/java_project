@@ -1,8 +1,14 @@
 .toggle {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--theme-toggle-gap, 8px);
-  padding: var(--theme-toggle-padding, 10px 12px);
+
+  /* добавляем фиксированную высоту и минимальную ширину */
+  height: 40px;
+  min-width: 40px;
+
+  padding: var(--theme-toggle-padding, 0 12px);
   border-radius: 12px;
   border: 1px solid var(--border-color);
   background: var(--surface-muted);
@@ -18,11 +24,11 @@
 }
 
 .toggle::before {
-  content: var(--theme-toggle-icon, "☀️");
   font-size: 16px;
 }
 
 .toggle::after {
+  /* текст управляется переменной, по умолчанию как раньше */
   content: var(--theme-toggle-label, "Светлая тема");
   margin-left: var(--theme-toggle-label-gap, 6px);
 }

@@ -27,7 +27,7 @@ export default function LoginPage() {
 
                     <LoginForm onSubmit={handleSubmit} pending={pending} error={error} />
 
-                    <Link href="/recovery" className={styles.forgot}>
+                    <Link href="/auth/recovery" className={styles.forgot}>
                         Забули пароль?
                     </Link>
                 </div>

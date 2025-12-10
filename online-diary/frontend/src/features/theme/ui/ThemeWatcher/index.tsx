@@ -19,10 +19,6 @@ export default function ThemeWatcher() {
                 "--theme-toggle-label",
                 mode === "dark" ? '"Темная тема"' : '"Светлая тема"',
             );
-            document.documentElement.style.setProperty(
-                "--theme-toggle-icon",
-                mode === "dark" ? '"🌙"' : '"☀️"',
-            );
         } catch {
             // ignore storage errors
         }

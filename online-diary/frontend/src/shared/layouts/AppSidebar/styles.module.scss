@@ -1,0 +1,213 @@
+.rail {
+  position: sticky;
+  top: 64px; /* высота хедера */
+  height: calc(100vh - 64px);
+
+  width: 92px;
+  min-width: 92px;
+
+  border-right: 1px solid var(--border-color);
+  background: var(--surface);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  z-index: 20;
+}
+
+.railNav {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.railItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.railIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+
+  color: var(--text-secondary);
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 120ms ease;
+    padding: 25px;
+}
+
+.railItem:hover .railIcon {
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.railItemActive .railIcon {
+  background: var(--surface-muted);
+  border-color: var(--text-primary);
+  color: var(--accent);
+}
+
+/* кнопка "меню" в узком rail */
+
+.railToggle {
+  margin-top: auto;
+  margin-bottom: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--text-secondary);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+.railToggle:hover {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+/* --- Оверлей и большая панель --- */
+
+.backdrop {
+  position: fixed;
+  inset: 64px 0 0 0;
+  background: rgba(15, 23, 42, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+  z-index: 30;
+}
+
+.backdropOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: fixed;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+
+  width: 280px;
+  background: var(--surface);
+  border-right: 1px solid var(--border-color);
+
+  transform: translateX(-100%);
+  transition: transform 180ms ease;
+  z-index: 40;
+
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px;
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+.drawerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding-bottom: 56px; /* место под кнопку */
+}
+
+.drawerItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  transition:
+    background 150ms ease,
+    color 150ms ease;
+}
+
+.drawerItem:hover {
+  background: var(--surface-muted);
+  color: var(--text-primary);
+}
+
+.drawerItemActive {
+  background: var(--surface-muted);
+  color: var(--accent);
+  box-shadow: none;
+}
+
+.drawerItemIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.drawerItemActive .drawerItemIcon {
+  background: var(--surface);
+  border-color: transparent;
+  color: var(--accent);
+}
+
+.drawerItemLabel {
+  white-space: nowrap;
+}
+
+/* кнопка закрытия внизу большой панели */
+
+.drawerToggle {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+
+  margin: 0;            /* убираем старые авто-маржины */
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--text-secondary);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+.drawerToggle:hover {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+

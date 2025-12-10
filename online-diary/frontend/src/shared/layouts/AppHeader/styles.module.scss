@@ -1,0 +1,79 @@
+/* src/shared/layouts/AppHeader/styles.module.scss */
+
+.header {
+  height: 64px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--surface);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoText {
+  font-weight: 700;
+  font-size: 20px;
+  color: #6366f1;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* кастомизация ThemeToggle под круглую иконку */
+.themeToggleWrapper {
+  display: flex;
+  align-items: center;
+  --theme-toggle-label: "";
+  --theme-toggle-gap: 0;
+  --theme-toggle-label-gap: 0;
+  --theme-toggle-padding: 6px;
+}
+
+
+/* аватар в том же стиле, что тогл и колокольчик */
+.avatarButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.avatarButton:hover {
+  background: var(--surface);
+}
+
+.avatarInitials {
+  width: 24px;
+  height: 24px;
+  border-radius:50%;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}

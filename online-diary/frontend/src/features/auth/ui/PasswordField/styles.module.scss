@@ -2,9 +2,8 @@
   position: relative;
 }
 
-/* доп. паддинг справа, чтобы глаз не наезжал на текст */
-.input {
-  padding-right: 44px; /* подгони по вкусу под размер иконки */
+.input :global(input) {
+  padding-right: 44px; // место под иконку
 }
 
 .eye {

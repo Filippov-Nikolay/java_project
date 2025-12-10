@@ -16,7 +16,7 @@ export const AuthHeader = ({
   return (
     <header className={styles.header}>
       <div className={styles.brand}>
-        <Link href="/login"><LogoMark/></Link>
+        <Link href="/auth/login"><LogoMark/></Link>
         <span className={styles.logoText}>{logoText}</span>
       </div>
 

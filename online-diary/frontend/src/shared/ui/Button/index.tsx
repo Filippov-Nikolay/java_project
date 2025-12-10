@@ -24,6 +24,7 @@ export default function Button({
     isLoading = false,
     className,
     disabled,
+    type,
     ...rest
 }: ButtonProps) {
     const textContent = label ?? children;
@@ -32,7 +33,7 @@ export default function Button({
 
     return (
         <button
-            type="button"
+            type={type ?? "button"} 
             className={mergedClassName}
             disabled={disabled || isLoading}
             {...rest}
