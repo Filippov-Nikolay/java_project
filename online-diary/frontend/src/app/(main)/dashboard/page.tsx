@@ -1,237 +1,412 @@
 // src/app/dashboard/page.tsx
+import Link from "next/link";
 import styles from "./styles.module.scss";
+import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
+
+
+/* моковые данные*/
+
+type Accrual = {
+  date: string;
+  title: string;
+  type: string;
+  delta: string;
+};
+
+type Leader = {
+  place: number;
+  name: string;
+  score: number;
+};
+
+type Feedback = {
+  subject: string;
+  text: string;
+  author: string;
+  date: string;
+};
 
 type TodayLesson = {
   time: string;
   title: string;
-  type: string;
-  teacher: string;
   room: string;
 };
 
-type LastGrade = {
-  subject: string;
-  workType: string;
-  date: string;
-  teacher: string;
-  grade: string;
-};
+const ACCRUALS: Accrual[] = [
+  {
+    date: "10 December",
+    title: "Розробка хмарних додатків",
+    type: "Відвідування заняття",
+    delta: "+1 💎",
+  },
+  {
+    date: "10 December",
+    title: "Оцінка уроку викладача студентом",
+    type: "Опитування",
+    delta: "+1 💎",
+  },
+  {
+    date: "09 December",
+    title: "Інтелектуальний аналіз даних",
+    type: "Відвідування заняття",
+    delta: "+1 💎",
+  },
+];
+
+const LEADERS: Leader[] = [
+  { place: 1, name: "Руденко Олена Костянтинівна", score: 8176 },
+  { place: 2, name: "Шевченко Марія Василівна", score: 8103 },
+  { place: 3, name: "Філіппов Микола Олегович", score: 8017 },
+  { place: 4, name: "Одійцов Андрій Георгійович", score: 7714 },
+  { place: 5, name: "Джосан Дмитро Валерійович", score: 7086 },
+];
+
+const FEEDBACKS: Feedback[] = [
+  {
+    subject: "Економіка та бізнес",
+    text: "По ДЗ все добре, але треба бути активнішим на парах.",
+    author: "Разинкин Нікіта",
+    date: "23.05.2024",
+  },
+  {
+    subject: "Теорія ймовірностей та матстатистика",
+    text: "Все гаразд. Залік зданий.",
+    author: "Касьянова Валерія",
+    date: "18.03.2024",
+  },
+];
 
 const TODAY_LESSONS: TodayLesson[] = [
   {
-    time: "08:30 – 10:00",
-    title: "Математичний аналіз",
-    type: "Лекція",
-    teacher: "к. Петренко",
-    room: "ауд. 204",
+    time: "08:50 – 10:10",
+    title: "Програмування з використанням Java",
+    room: "ауд. онлайн 2",
   },
   {
-    time: "10:20 – 11:50",
-    title: "ООП (Java)",
-    type: "Лабораторна",
-    teacher: "к. Іваненко",
-    room: "ауд. 305",
+    time: "10:20 – 11:40",
+    title: "Програмування з використанням Java",
+    room: "ауд. онлайн 2",
   },
 ];
 
-const LAST_GRADES: LastGrade[] = [
+const studentName = "Данило";
+const todayLessonsCount = 3;  
+const group = "КН-П-221";
+const allHomework = 25;
+const dedlineHomework = 5;
+
+const initials = studentName
+  .split(" ")
+  .filter(Boolean)
+  .map((p) => p[0])
+  .join("")
+  .slice(0, 2)
+  .toUpperCase();
+
+
+const quickStats = [
   {
-    subject: "Математичний аналіз",
-    workType: "Самостійна робота",
-    date: "08.12.2025",
-    teacher: "к. Петренко",
-    grade: "95 / 100",
+    value: todayLessonsCount,
+    label: "пар(и) сьогодні",
+    href: "/schedule",
   },
   {
-    subject: "ООП (Java)",
-    workType: "Лабораторна",
-    date: "07.12.2025",
-    teacher: "к. Іваненко",
-    grade: "4.5 / 5",
+    value: allHomework,
+    label: "Завдання до виконання",
+    href: "/homework",
   },
   {
-    subject: "Історія",
-    workType: "Тест",
-    date: "05.12.2025",
-    teacher: "к. Коваленко",
-    grade: "88 / 100",
+    value: dedlineHomework,
+    label: "Завдань протерміновано",
+    href: "/homework",
   },
 ];
+
 
 export default function DashboardPage() {
   return (
     <div className={styles.page}>
-      {/* верхняя сетка: приветствие + середній бал */}
-      <div className={styles.topGrid}>
-        <section className={`${styles.card} ${styles.welcome}`}>
-          <div className={styles.welcomeHeader}>
-            <h1 className={styles.welcomeTitle}>Привіт, Студенте 👋</h1>
-            <p className={styles.welcomeSubtitle}>
-              Гарного дня! Ось що чекає на тебе сьогодні:
-            </p>
-          </div>
+      <div className={styles.grid}>
+        {/* ЛЕВАЯ КОЛОНКА */}
+        <div className={styles.colLeft}>
+          <section className={`${styles.card} ${styles.profile}`}>
+            <div className={styles.profileTop}>
+              <div className={styles.profileHeader}>
+                <div className={styles.profileAvatar}>
+                  <span>{initials}</span>
+                </div>
 
-          <div className={styles.chipsRow}>
-            <span className={styles.chip}>3 пари</span>
-            <span className={styles.chip}>2 домашні</span>
-            <span className={styles.chip}>1 дедлайн</span>
-          </div>
-
-          <div className={styles.homeworkBlock}>
-            <div>
-              <div className={styles.blockLabel}>Домашні завдання</div>
-              <div className={styles.homeworkList}>
-                <span>Математика</span>
-                <span>ООП (Java)</span>
+                <div className={styles.profileText}>
+                  <p className={styles.profileGreeting}>
+                    Привіт,{" "}
+                    <span className={styles.profileName}>{studentName}</span> 👋
+                  </p>
+                  <p className={styles.profileSub}>{group}</p>
+                </div>
               </div>
+
+              <Link
+                href="/profile"
+                className={styles.profileMore}
+                aria-label="Перейти в профіль"
+              >
+                <KeyboardArrowRightRoundedIcon className={styles.profileMoreIcon} />
+              </Link>
             </div>
-            <div className={styles.homeworkMeta}>
-              <span>завтра · 12:00</span>
-              <span>пʼятниця · 18:00</span>
-            </div>
-          </div>
 
-          <button type="button" className={styles.linkButton}>
-            Перейти до всіх завдань
-          </button>
-        </section>
-
-        <section className={`${styles.card} ${styles.avgGrade}`}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Середній бал</h2>
-          </div>
-
-          <div className={styles.avgGradeMain}>
-            <div className={styles.avgGradeValue}>4.3 / 5.0</div>
-            <div className={styles.avgGradeHint}>за поточний семестр</div>
-          </div>
-
-          <dl className={styles.avgGradeList}>
-            <div className={styles.avgGradeRow}>
-              <dt>Математика</dt>
-              <dd>4.6</dd>
-            </div>
-            <div className={styles.avgGradeRow}>
-              <dt>ООП (Java)</dt>
-              <dd>4.1</dd>
-            </div>
-            <div className={styles.avgGradeRow}>
-              <dt>Англійська</dt>
-              <dd>4.7</dd>
-            </div>
-          </dl>
-        </section>
-      </div>
-
-      {/* останні оцінки */}
-      <section className={`${styles.card} ${styles.lastGrades}`}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Останні оцінки</h2>
-          <button type="button" className={styles.textButton}>
-            Всі оцінки
-          </button>
-        </div>
-
-        <div className={styles.lastGradesList}>
-          {LAST_GRADES.map((g) => (
-            <div key={`${g.subject}-${g.date}`} className={styles.gradeItem}>
-              <div className={styles.gradeMain}>
-                <div className={styles.gradeSubject}>{g.subject}</div>
-                <div className={styles.gradeValue}>{g.grade}</div>
-              </div>
-              <div className={styles.gradeMeta}>
-                <span>{g.workType}</span>
-                <span>{g.date}</span>
-                <span>{g.teacher}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* сетка: відвідуваність + календар + пари сьогодні */}
-      <div className={styles.bottomGrid}>
-        <section className={`${styles.card} ${styles.attendance}`}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Відвідуваність</h2>
-            <span className={styles.sectionNote}>за останній місяць</span>
-          </div>
-
-          <div className={styles.attendanceRow}>
-            <div className={styles.attendanceCard}>
-              <div className={styles.attendanceValue}>87%</div>
-              <div className={styles.attendanceLabel}>Присутність</div>
-              <div className={styles.attendanceHint}>усі заняття</div>
-            </div>
-            <div className={styles.attendanceCard}>
-              <div className={styles.attendanceValue}>6%</div>
-              <div className={styles.attendanceLabel}>Запізнення</div>
-              <div className={styles.attendanceHint}>від усіх пар</div>
-            </div>
-            <div className={styles.attendanceCard}>
-              <div className={styles.attendanceValue}>7%</div>
-              <div className={styles.attendanceLabel}>Пропуски</div>
-              <div className={styles.attendanceHint}>без поважної причини</div>
-            </div>
-          </div>
-        </section>
-
-        <section className={`${styles.card} ${styles.calendar}`}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Календар</h2>
-            <span className={styles.sectionNote}>Грудень 2025</span>
-          </div>
-
-          <div className={styles.calendarGrid}>
-            {["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"].map((d) => (
-              <div key={d} className={styles.calendarWeekday}>
-                {d}
-              </div>
-            ))}
-
-            {/* просто демо-сетка – числа можно потом генерить реально */}
-            {Array.from({ length: 31 }).map((_, i) => {
-              const day = i + 1;
-              const isToday = day === 8;
-              const hasEvents = [3, 5, 12, 19, 24].includes(day);
-
-              return (
-                <button
-                  key={day}
-                  type="button"
-                  className={`${styles.calendarDay} ${
-                    isToday ? styles.calendarDayToday : ""
-                  } ${hasEvents ? styles.calendarDayWithEvents : ""}`}
+            {/* кликабельные карточки со стрелками */}
+            <div className={styles.profileInfoRow}>
+              {quickStats.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={styles.profileInfoItem}
                 >
-                  {day}
+                  <div className={styles.profileInfoTexts}>
+                    <span className={styles.profileInfoValue}>{item.value}</span>
+                    <span className={styles.profileInfoLabel}>{item.label}</span>
+                  </div>
+
+                  <KeyboardArrowRightRoundedIcon className={styles.profileInfoChevron} />
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* 2. Середній бал + мини-график */}
+          <section className={`${styles.card} ${styles.avgSection}`}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Середній бал</h2>
+              <button className={styles.chipSmall} type="button">
+                Рік
+              </button>
+            </div>
+
+            <div className={styles.avgTopRow}>
+              <div className={styles.avgStatBlock}>
+                <div className={styles.avgStatValue}>10</div>
+                <div className={styles.avgStatLabel}>Класна робота</div>
+              </div>
+              <div className={styles.avgStatBlock}>
+                <div className={styles.avgStatValue}>11</div>
+                <div className={styles.avgStatLabel}>Самостійна робота</div>
+              </div>
+              <div className={styles.avgStatBlock}>
+                <div className={styles.avgStatValue}>9.6</div>
+                <div className={styles.avgStatLabel}>Контрольні</div>
+              </div>
+              <div className={styles.avgStatBlock}>
+                <div className={styles.avgStatValue}>12</div>
+                <div className={styles.avgStatLabel}>Тематична</div>
+              </div>
+            </div>
+
+            {/* заглушка под график */}
+            <div className={styles.chartStub}>
+              <div className={styles.chartGrid} />
+              <div className={styles.chartLine} />
+            </div>
+          </section>
+
+          {/* 3. Оцінки-календарем */}
+          <section className={`${styles.card} ${styles.marksSection}`}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Оцінки</h2>
+            </div>
+
+            <div className={styles.marksFilterRow}>
+              <label className={styles.checkbox}>
+                <input type="checkbox" defaultChecked /> <span>Класна робота</span>
+              </label>
+              <label className={styles.checkbox}>
+                <input type="checkbox" defaultChecked />{" "}
+                <span>Самостійна робота</span>
+              </label>
+              <label className={styles.checkbox}>
+                <input type="checkbox" defaultChecked /> <span>Контрольні</span>
+              </label>
+            </div>
+
+            <div className={styles.marksCalendar}>
+              <div className={styles.marksMonth}>December</div>
+              <div className={styles.marksRow}>
+                <span className={styles.marksDot}>2</span>
+                <span className={styles.marksDot}>2</span>
+                <span className={styles.marksDot}>12</span>
+                <span className={`${styles.marksDot} ${styles.marksDotAccent}`}>
+                  2
+                </span>
+              </div>
+
+              <div className={styles.marksMonth}>November</div>
+              <div className={styles.marksRow}>
+                {["10", "12", "2", "2", "12", "2", "11", "10", "12", "11", "12"].map(
+                  (d, index) => (
+                    <span key={`${d}-${index}`} className={styles.marksDot}>
+                      {d}
+                    </span>
+                  ),
+                )}
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* ЦЕНТРАЛЬНАЯ КОЛОНКА */}
+        <div className={styles.colCenter}>
+          {/* Нарахування */}
+          <section className={`${styles.card} ${styles.accrualsSection}`}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Нарахування</h2>
+              <div className={styles.accrualBadges}>
+                <span className={styles.chipSmall}>👑 11</span>
+                <span className={styles.chipSmall}>3993</span>
+                <span className={styles.chipSmall}>2964 💎</span>
+              </div>
+            </div>
+
+            <div className={styles.accrualList}>
+              {ACCRUALS.map((acc) => (
+                <div key={`${acc.title}-${acc.date}`} className={styles.accrualItem}>
+                  <div className={styles.accrualLeft}>
+                    <div className={styles.accrualIcon}>📅</div>
+                  </div>
+                  <div className={styles.accrualMiddle}>
+                    <div className={styles.accrualTitle}>{acc.title}</div>
+                    <div className={styles.accrualMeta}>
+                      <span>{acc.type}</span>
+                      <span>{acc.date}</span>
+                    </div>
+                  </div>
+                  <div className={styles.accrualRight}>{acc.delta}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Таблиця лідерів */}
+          <section className={`${styles.card} ${styles.leadersSection}`}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Таблиця лідерів</h2>
+              <button type="button" className={styles.chipSmall}>
+                Група
+              </button>
+            </div>
+
+            <div className={styles.leadersList}>
+              {LEADERS.map((l) => (
+                <div key={l.place} className={styles.leaderItem}>
+                  <div className={styles.leaderPlace}>{l.place}</div>
+                  <div className={styles.leaderInfo}>
+                    <div className={styles.leaderName}>{l.name}</div>
+                  </div>
+                  <div className={styles.leaderScore}>{l.score} ⭐</div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Відгуки */}
+          <section className={`${styles.card} ${styles.feedbackSection}`}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Відгуки</h2>
+            </div>
+
+            <div className={styles.feedbackList}>
+              {FEEDBACKS.map((fb) => (
+                <div key={fb.date + fb.author} className={styles.feedbackItem}>
+                  <div className={styles.feedbackSubject}>{fb.subject}</div>
+                  <div className={styles.feedbackText}>{fb.text}</div>
+                  <div className={styles.feedbackMeta}>
+                    <span>{fb.author}</span>
+                    <span>{fb.date}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        {/* ПРАВАЯ КОЛОНКА */}
+        <div className={styles.colRight}>
+          {/* Календар + легенда */}
+          <section className={`${styles.card} ${styles.calendarSection}`}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Грудень 2025</h2>
+
+              <div className={styles.calendarNav}>
+                <button className={styles.navIcon} type="button">
+                  {"<"}
                 </button>
-              );
-            })}
-          </div>
-        </section>
+                <button className={styles.navIcon} type="button">
+                  {">"}
+                </button>
+              </div>
+            </div>
 
-        <section className={`${styles.card} ${styles.todayLessons}`}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Пари сьогодні</h2>
-            <span className={styles.sectionNote}>2 заняття</span>
-          </div>
+            <div className={styles.calendarGrid}>
+              {["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"].map((d) => (
+                <div key={d} className={styles.calendarWeekday}>
+                  {d}
+                </div>
+              ))}
 
-          <div className={styles.todayLessonsList}>
-            {TODAY_LESSONS.map((l) => (
-              <div key={l.time} className={styles.lessonItem}>
-                <div className={styles.lessonTime}>{l.time}</div>
-                <div className={styles.lessonMain}>
-                  <div className={styles.lessonTitle}>{l.title}</div>
-                  <div className={styles.lessonMeta}>
-                    <span>{l.type}</span>
-                    <span>{l.teacher}</span>
+              {Array.from({ length: 31 }).map((_, i) => {
+                const day = i + 1;
+                const hasLesson = [1, 8, 11, 18, 25].includes(day);
+                const isExam = [15].includes(day);
+                const isHoliday = [29, 30, 31].includes(day);
+
+                return (
+                  <div
+                    key={day}
+                    className={`${styles.calendarDay} ${
+                      hasLesson ? styles.calendarDayLesson : ""
+                    } ${isExam ? styles.calendarDayExam : ""} ${
+                      isHoliday ? styles.calendarDayHoliday : ""
+                    }`}
+                  >
+                    {day}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className={styles.calendarLegend}>
+              <span>
+                <span className={`${styles.legendDot} ${styles.legendLesson}`} />
+                Є заняття
+              </span>
+              <span>
+                <span className={`${styles.legendDot} ${styles.legendExam}`} />
+                Екзамен
+              </span>
+              <span>
+                <span className={`${styles.legendDot} ${styles.legendHoliday}`} />
+                Канікули
+              </span>
+            </div>
+          </section>
+
+          {/* Розклад на сьогодні */}
+          <section className={`${styles.card} ${styles.todaySection}`}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Розклад на сьогодні</h2>
+            </div>
+
+            <div className={styles.todayList}>
+              {TODAY_LESSONS.map((l) => (
+                <div key={l.time} className={styles.todayItem}>
+                  <div className={styles.todayTitle}>{l.title}</div>
+                  <div className={styles.todayMeta}>
+                    <span>{l.time}</span>
                     <span>{l.room}</span>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,18 @@
 .page {
   padding: 24px 32px 40px;
+}
+
+/* три колонки, как на скрине */
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2.4fr);
+  gap: 24px;
+}
+
+.colLeft,
+.colCenter,
+.colRight {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -9,113 +22,20 @@
 
 .card {
   background: var(--surface);
-  border: 1px solid var(--border-color);
   border-radius: 18px;
-  padding: 20px 22px;
+  border: 1px solid var(--border-color);
+  padding: 18px 20px;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
 }
 
-/* верхняя сетка */
-
-.topGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.6fr);
-  gap: 24px;
-}
-
-/* приветствие */
-
-.welcomeHeader {
-  margin-bottom: 12px;
-}
-
-.welcomeTitle {
-  margin: 0 0 4px;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.welcomeSubtitle {
-  margin: 0;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.chipsRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.chip {
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: var(--surface-muted);
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.homeworkBlock {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 12px;
-}
-
-.blockLabel {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
-}
-
-.homeworkList {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 14px;
-}
-
-.homeworkMeta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.linkButton {
-  margin-top: 4px;
-  padding: 0;
-  border: none;
-  background: none;
-  color: #60a5fa;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.linkButton:hover {
-  text-decoration: underline;
-}
-
-/* середній бал */
-
-.avgGrade {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+/* заголовки секций */
 
 .sectionHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 
 .sectionTitle {
@@ -124,209 +44,356 @@
   font-weight: 600;
 }
 
-.sectionNote {
-  font-size: 12px;
+.chipSmall {
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  padding: 4px 10px;
+  background: var(--surface-muted);
   color: var(--text-secondary);
-}
-
-.textButton {
-  border: none;
-  background: none;
-  color: #60a5fa;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
 }
 
-.textButton:hover {
-  text-decoration: underline;
-}
+/* 1. Два счетчика задач */
 
-.avgGradeMain {
-  display: flex;
+.card.profile {
+  display: inline-flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 16px;
+  padding: 14px 16px;
+  width: max-content;
+  max-width: 100%;
+  flex: 0 0 auto;
+  align-self: flex-start;
 }
 
-.avgGradeValue {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.avgGradeHint {
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.avgGradeList {
-  margin: 10px 0 0;
-  padding: 0;
-}
-
-.avgGradeRow {
+/* верхняя строка: аватар + текст + стрелка */
+.profileTop {
   display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  padding: 4px 0;
-}
-
-.avgGradeRow dt {
-  color: var(--text-secondary);
-}
-
-.avgGradeRow dd {
-  margin: 0;
-}
-
-/* останні оцінки */
-
-.lastGrades {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.lastGradesList {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.gradeItem {
-  background: var(--surface-muted);
-  border-radius: 14px;
-  padding: 10px 12px;
-}
-
-.gradeMain {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 4px;
 }
 
-.gradeSubject {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.gradeValue {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.gradeMeta {
-  font-size: 12px;
-  color: var(--text-secondary);
+.profileHeader {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  align-items: center;
+  gap: 16px;
 }
 
-/* нижняя сетка */
+.profileMore {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
 
-.bottomGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 2.1fr) minmax(0, 2fr) minmax(0, 2.1fr);
-  gap: 24px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
-/* відвідуваність */
-
-.attendanceRow {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 8px;
+.profileMore:hover {
+  background: var(--surface);
+  color: var(--text-primary);
 }
 
-.attendanceCard {
-  border-radius: 14px;
-  background: var(--surface-muted);
-  padding: 10px 12px;
+.profileMoreIcon {
+  font-size: 18px;
+}
+
+.profile {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  text-align: center;
+  gap: 16px;
 }
 
-.attendanceValue {
-  font-size: 20px;
+/* верх: аватар + текст */
+.profileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 16px;
+}
+
+.profileAvatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--surface-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 700;
+  font-size: 18px;
+  color: var(--accent);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.35);
+  flex-shrink: 0;
 }
 
-.attendanceLabel {
-  font-size: 13px;
+.profileAvatar span {
+  letter-spacing: 0.04em;
 }
 
-.attendanceHint {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-/* календарь */
-
-.calendarGrid {
-  margin-top: 8px;
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+.profileText {
+  display: flex;
+  flex-direction: column;
   gap: 4px;
 }
 
-.calendarWeekday {
-  font-size: 11px;
-  text-align: center;
+.profileGreeting {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.profileName {
+  color: var(--accent);
+}
+
+.profileSub {
+  margin: 0;
+  font-size: 13px;
   color: var(--text-secondary);
 }
 
-.calendarDay {
-  border: none;
-  border-radius: 8px;
-  padding: 4px 0;
-  font-size: 12px;
-  background: transparent;
-  color: var(--text-primary);
-  cursor: pointer;
+/* низ: маленькие статистики */
+.profileInfoRow {
+  display: flex;
+  gap: 12px;
 }
 
-.calendarDayToday {
-  background: #2563eb;
-  color: #ffffff;
-}
+.profileInfoItem {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  /* стрелка сразу после текста, без растяжения */
+  gap: 8px;
 
-.calendarDayWithEvents:not(.calendarDayToday) {
+  padding: 8px 12px;
+  border-radius: 12px;
   background: var(--surface-muted);
+
+  text-decoration: none;
+  color: var(--text-primary);
+  min-width: 150px;
+  transition:
+    background 150ms ease,
+    transform 120ms ease;
 }
 
-/* пари сьогодні */
+.profileInfoChevron {
+  font-size: 18px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
 
-.todayLessonsList {
-  margin-top: 8px;
+  margin-left: auto;
+}
+
+.profileInfoItem:hover {
+  background: var(--surface);
+  transform: translateY(-1px);
+}
+
+.profileInfoTexts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profileInfoValue {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.profileInfoLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.profileInfoChevron {
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.profileInfoItem:hover .profileInfoChevron {
+  color: var(--text-primary);
+}
+
+
+/* 2. Середній бал */
+
+.avgSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.avgTopRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.avgStatBlock {
+  border-radius: 14px;
+  padding: 8px 10px;
+  background: var(--surface-muted);
+  font-size: 12px;
+}
+
+.avgStatValue {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.avgStatLabel {
+  margin-top: 2px;
+  color: var(--text-secondary);
+}
+
+/* заглушка-график */
+
+.chartStub {
+  margin-top: 4px;
+  border-radius: 14px;
+  background: var(--surface-muted);
+  padding: 8px 10px 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chartGrid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      to right,
+      rgba(148, 163, 184, 0.15) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to top,
+      rgba(148, 163, 184, 0.15) 1px,
+      transparent 1px
+    );
+  background-size: 32px 18px;
+}
+
+.chartLine {
+  position: relative;
+  height: 80px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4f46e5, #22c55e, #f97316);
+  opacity: 0.7;
+  clip-path: polygon(0 70%, 20% 60%, 40% 55%, 60% 50%, 80% 40%, 100% 30%);
+}
+
+/* 3. Оцінки */
+
+.marksSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.marksFilterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.checkbox input {
+  accent-color: #6366f1;
+}
+
+.marksCalendar {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.marksMonth {
+  font-weight: 600;
+}
+
+.marksRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.marksDot {
+  min-width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.marksDotAccent {
+  background: #facc15;
+  color: #0f172a;
+}
+
+/* Нарахування */
+
+.accrualsSection {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.lessonItem {
+.accrualBadges {
+  display: flex;
+  gap: 6px;
+}
+
+.accrualList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.accrualItem {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 12px;
-  border-radius: 14px;
-  background: var(--surface-muted);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
   padding: 8px 10px;
+  border-radius: 12px;
+  background: var(--surface-muted);
 }
 
-.lessonTime {
-  font-size: 12px;
-  color: var(--text-secondary);
-  white-space: nowrap;
+.accrualIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  background: var(--surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.lessonTitle {
+.accrualTitle {
   font-size: 14px;
   font-weight: 500;
 }
 
-.lessonMeta {
+.accrualMeta {
   margin-top: 2px;
   font-size: 11px;
   color: var(--text-secondary);
@@ -335,15 +402,220 @@
   gap: 8px;
 }
 
+.accrualRight {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Таблиця лідерів */
+
+.leadersSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.leadersList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.leaderItem {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  padding: 6px 8px;
+}
+
+.leaderPlace {
+  width: 24px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.leaderName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leaderScore {
+  font-weight: 600;
+}
+
+/* Відгуки */
+
+.feedbackSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feedbackList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feedbackItem {
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: var(--surface-muted);
+  font-size: 13px;
+}
+
+.feedbackSubject {
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.feedbackText {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.feedbackMeta {
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 8px;
+}
+
+/* Календар справа */
+
+.calendarSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.calendarNav {
+  display: flex;
+  gap: 4px;
+}
+
+.navIcon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  cursor: pointer;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  font-size: 11px;
+}
+
+.calendarWeekday {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.calendarDay {
+  text-align: center;
+  padding: 4px 0;
+  border-radius: 8px;
+}
+
+.calendarDayLesson {
+  background: rgba(59, 130, 246, 0.18);
+}
+
+.calendarDayExam {
+  background: rgba(249, 115, 22, 0.22);
+}
+
+.calendarDayHoliday {
+  background: rgba(34, 197, 94, 0.16);
+}
+
+.calendarLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.legendLesson {
+  background: #3b82f6;
+}
+
+.legendExam {
+  background: #f97316;
+}
+
+.legendHoliday {
+  background: #22c55e;
+}
+
+/* Розклад на сьогодні */
+
+.todaySection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todayList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todayItem {
+  border-radius: 12px;
+  background: var(--surface-muted);
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.todayTitle {
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.todayMeta {
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 8px;
+}
+
 /* адаптив */
 
-@media (max-width: 1100px) {
-  .topGrid,
-  .bottomGrid {
+@media (max-width: 1280px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .colRight {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .attendanceRow {
-    grid-template-columns: 1fr;
+  .colRight {
+    grid-column: auto;
   }
 }
