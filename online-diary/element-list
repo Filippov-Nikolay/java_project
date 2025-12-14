@@ -1,0 +1,13 @@
+com.nikolay.onlinediary
+com.nikolay.onlinediary.aop
+com.nikolay.onlinediary.config
+com.nikolay.onlinediary.domain
+com.nikolay.onlinediary.domain.enums
+com.nikolay.onlinediary.dto
+com.nikolay.onlinediary.exception
+com.nikolay.onlinediary.repository
+com.nikolay.onlinediary.service.api
+com.nikolay.onlinediary.service.factory
+com.nikolay.onlinediary.service.impl
+com.nikolay.onlinediary.service.time
+com.nikolay.onlinediary.web
