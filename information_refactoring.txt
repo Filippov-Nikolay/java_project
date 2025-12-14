@@ -1,4 +1,0 @@
-- Добавил кэширование горячих справочников (subjects, groups) через Spring Cache/Proxy
-- Ускорил БД-операции: новые индексы по внешним ключам (courses, submissions, assessments)
-- Починил работу с комментариями оценок: корректные геттеры/сеттеры и SQL-колонка commentText
-- Паттерны: Proxy/Decorator (кэширование сервисов), Strategy (TimeProvider), Factory + Builder (создание Assessment/Submission)
