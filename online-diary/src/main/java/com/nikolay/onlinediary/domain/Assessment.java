@@ -55,12 +55,12 @@ public class Assessment {
         this.grade = grade;
     }
 
-    public String getcommentText() {
+    public String getCommentText() {
         return commentText;
     }
 
-    public void setcommentText(String comment) {
-        this.commentText = commentText;
+    public void setCommentText(String comment) {
+        this.commentText = comment;
     }
 
     public LocalDateTime getAssessedAt() {

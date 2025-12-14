@@ -56,3 +56,10 @@ CREATE TABLE assessments (
     assessed_at TIMESTAMP,
     CONSTRAINT fk_assessment_submission FOREIGN KEY (submission_id) REFERENCES submissions(id)
 );
+
+-- Hot-path indexes to speed up joins and filtering
+CREATE INDEX idx_courses_student_id ON courses (student_id);
+CREATE INDEX idx_submissions_student_id ON submissions (student_id);
+CREATE INDEX idx_submissions_subject_id ON submissions (subject_id);
+CREATE INDEX idx_assessments_submission_id ON assessments (submission_id);
+CREATE INDEX idx_assessments_teacher_id ON assessments (teacher_id);

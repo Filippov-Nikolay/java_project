@@ -5,10 +5,10 @@ import com.nikolay.onlinediary.dto.SubmissionDto;
 import com.nikolay.onlinediary.exception.NotFoundException;
 import com.nikolay.onlinediary.repository.SubmissionRepository;
 import com.nikolay.onlinediary.service.api.ISubmissionService;
+import com.nikolay.onlinediary.service.factory.SubmissionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,9 +16,11 @@ import java.util.List;
 public class SubmissionServiceImpl implements ISubmissionService {
 
     private final SubmissionRepository submissionRepository;
+    private final SubmissionFactory submissionFactory;
 
-    public SubmissionServiceImpl(SubmissionRepository submissionRepository) {
+    public SubmissionServiceImpl(SubmissionRepository submissionRepository, SubmissionFactory submissionFactory) {
         this.submissionRepository = submissionRepository;
+        this.submissionFactory = submissionFactory;
     }
 
     @Override
@@ -47,21 +49,14 @@ public class SubmissionServiceImpl implements ISubmissionService {
 
     @Override
     public Submission create(SubmissionDto dto) {
-        Submission submission = new Submission();
-        submission.setStudentId(dto.getStudentId());
-        submission.setSubjectId(dto.getSubjectId());
-        submission.setContent(dto.getContent());
-        submission.setSubmittedAt(dto.getSubmittedAt() != null ? dto.getSubmittedAt() : LocalDateTime.now());
+        Submission submission = submissionFactory.createFromDto(dto);
         return submissionRepository.create(submission);
     }
 
     @Override
     public Submission update(Long id, SubmissionDto dto) {
         Submission submission = getById(id);
-        submission.setStudentId(dto.getStudentId());
-        submission.setSubjectId(dto.getSubjectId());
-        submission.setContent(dto.getContent());
-        submission.setSubmittedAt(dto.getSubmittedAt() != null ? dto.getSubmittedAt() : LocalDateTime.now());
+        submissionFactory.applyDto(dto, submission);
         submissionRepository.update(submission);
         return submission;
     }

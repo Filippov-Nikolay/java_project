@@ -40,6 +40,12 @@
       <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
 
+    <!-- Cache abstraction for hot read operations -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+
       <!-- AOP logging -->
       <dependency>
           <groupId>org.springframework.boot</groupId>

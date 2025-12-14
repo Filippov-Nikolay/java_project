@@ -27,7 +27,7 @@ public class JdbcAssessmentRepository implements AssessmentRepository {
                 rs.getLong("submission_id"),
                 rs.getLong("teacher_id"),
                 rs.getInt("grade"),
-                rs.getString("comment"),
+                rs.getString("commentText"),
                 assessedAt
         );
     };
@@ -44,13 +44,13 @@ public class JdbcAssessmentRepository implements AssessmentRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO assessments (submission_id, teacher_id, grade, comment, assessed_at) VALUES (?, ?, ?, ?, ?)",
+                    "INSERT INTO assessments (submission_id, teacher_id, grade, commentText, assessed_at) VALUES (?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
             ps.setLong(1, assessment.getSubmissionId());
             ps.setLong(2, assessment.getTeacherId());
             ps.setInt(3, assessment.getGrade());
-            ps.setString(4, assessment.getcommentText());
+            ps.setString(4, assessment.getCommentText());
             LocalDateTime assessedAt = assessment.getAssessedAt() != null ? assessment.getAssessedAt() : LocalDateTime.now();
             ps.setTimestamp(5, Timestamp.valueOf(assessedAt));
             return ps;
@@ -64,7 +64,7 @@ public class JdbcAssessmentRepository implements AssessmentRepository {
     @Override
     public Optional<Assessment> findById(Long id) {
         List<Assessment> assessments = jdbcTemplate.query(
-                "SELECT id, submission_id, teacher_id, grade, comment, assessed_at FROM assessments WHERE id = ?",
+                "SELECT id, submission_id, teacher_id, grade, commentText, assessed_at FROM assessments WHERE id = ?",
                 ASSESSMENT_ROW_MAPPER,
                 id
         );
@@ -73,13 +73,13 @@ public class JdbcAssessmentRepository implements AssessmentRepository {
 
     @Override
     public List<Assessment> findAll() {
-        return jdbcTemplate.query("SELECT id, submission_id, teacher_id, grade, comment, assessed_at FROM assessments ORDER BY assessed_at DESC", ASSESSMENT_ROW_MAPPER);
+        return jdbcTemplate.query("SELECT id, submission_id, teacher_id, grade, commentText, assessed_at FROM assessments ORDER BY assessed_at DESC", ASSESSMENT_ROW_MAPPER);
     }
 
     @Override
     public List<Assessment> findBySubmissionId(Long submissionId) {
         return jdbcTemplate.query(
-                "SELECT id, submission_id, teacher_id, grade, comment, assessed_at FROM assessments WHERE submission_id = ? ORDER BY assessed_at DESC",
+                "SELECT id, submission_id, teacher_id, grade, commentText, assessed_at FROM assessments WHERE submission_id = ? ORDER BY assessed_at DESC",
                 ASSESSMENT_ROW_MAPPER,
                 submissionId
         );
@@ -88,11 +88,11 @@ public class JdbcAssessmentRepository implements AssessmentRepository {
     @Override
     public boolean update(Assessment assessment) {
         int updated = jdbcTemplate.update(
-                "UPDATE assessments SET submission_id = ?, teacher_id = ?, grade = ?, comment = ?, assessed_at = ? WHERE id = ?",
+                "UPDATE assessments SET submission_id = ?, teacher_id = ?, grade = ?, commentText = ?, assessed_at = ? WHERE id = ?",
                 assessment.getSubmissionId(),
                 assessment.getTeacherId(),
                 assessment.getGrade(),
-                assessment.getcommentText(),
+                assessment.getCommentText(),
                 Timestamp.valueOf(assessment.getAssessedAt() != null ? assessment.getAssessedAt() : LocalDateTime.now()),
                 assessment.getId()
         );
