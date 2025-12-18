@@ -2,6 +2,9 @@ package com.nikolay.onlinediary.domain;
 
 import java.util.Objects;
 
+/**
+ * School subject with human readable name and optional description.
+ */
 public class Subject {
 	private Long id;
     private String name;

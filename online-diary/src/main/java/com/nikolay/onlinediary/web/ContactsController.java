@@ -17,6 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * MVC controller serving JSP pages for contact management.
+ */
 @Controller
 @RequestMapping("/contacts")
 public class ContactsController {

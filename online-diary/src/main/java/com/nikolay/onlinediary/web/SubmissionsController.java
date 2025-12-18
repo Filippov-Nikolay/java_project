@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST controller for homework submissions.
+ */
 @RestController
 @RequestMapping("/api/submissions")
 public class SubmissionsController {

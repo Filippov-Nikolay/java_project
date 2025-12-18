@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * Health-check DAO that performs a minimal SELECT to verify DB connectivity.
+ */
 @Repository
 public class JdbcHealthDao {
 

@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service layer handling CRUD for contacts with duplicate checks.
+ */
 @Service
 @Transactional
 public class ContactServiceImpl implements IContactService {

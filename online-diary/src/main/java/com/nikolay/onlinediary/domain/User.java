@@ -2,6 +2,9 @@ package com.nikolay.onlinediary.domain;
 
 import java.util.Objects;
 
+/**
+ * System user with credentials and role.
+ */
 public class User {
 	private Long id;
     private String username;

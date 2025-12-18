@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Simple MVC controller serving JSP pages and health check info.
+ */
 @Controller
 public class ViewsController {
 

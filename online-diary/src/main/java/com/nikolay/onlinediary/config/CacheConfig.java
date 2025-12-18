@@ -6,6 +6,9 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Enables Spring cache abstraction and provides a simple in-memory cache manager.
+ */
 @Configuration
 @EnableCaching
 public class CacheConfig {

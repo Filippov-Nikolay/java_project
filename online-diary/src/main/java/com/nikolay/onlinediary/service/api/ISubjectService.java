@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.dto.SubjectDto;
 
 import java.util.List;
 
+/**
+ * Business operations for subjects.
+ */
 public interface ISubjectService {
     List<Subject> findAll();
 

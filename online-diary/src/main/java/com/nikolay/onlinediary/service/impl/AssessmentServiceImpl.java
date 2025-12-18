@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service layer orchestrating assessment persistence and mapping rules.
+ */
 @Service
 @Transactional
 public class AssessmentServiceImpl implements IAssessmentService {

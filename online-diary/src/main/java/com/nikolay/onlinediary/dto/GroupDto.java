@@ -1,5 +1,8 @@
 package com.nikolay.onlinediary.dto;
 
+/**
+ * DTO for creating or updating group records.
+ */
 public class GroupDto {
     private Long id;
     private String name;

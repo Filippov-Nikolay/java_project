@@ -2,6 +2,9 @@ package com.nikolay.onlinediary.dto;
 
 import java.time.LocalDateTime;
 
+/**
+ * Transport DTO for creating or updating assessments.
+ */
 public class AssessmentDto {
     private Long id;
     private Long submissionId;

@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service layer orchestrating submission persistence and DTO mapping.
+ */
 @Service
 @Transactional
 public class SubmissionServiceImpl implements ISubmissionService {

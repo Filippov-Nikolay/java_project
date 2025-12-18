@@ -3,6 +3,9 @@ package com.nikolay.onlinediary.domain;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Represents a teacher's assessment of a submission with optional comment and timestamp.
+ */
 public class Assessment {
 	private Long id;
     private Long submissionId;

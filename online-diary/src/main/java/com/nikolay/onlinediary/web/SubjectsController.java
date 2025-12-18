@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST controller for subjects catalogue.
+ */
 @RestController
 @RequestMapping("/api/subjects")
 public class SubjectsController {

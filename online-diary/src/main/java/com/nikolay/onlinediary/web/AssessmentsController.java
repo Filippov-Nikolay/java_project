@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST endpoints for managing assessments.
+ */
 @RestController
 @RequestMapping("/api/assessments")
 public class AssessmentsController {

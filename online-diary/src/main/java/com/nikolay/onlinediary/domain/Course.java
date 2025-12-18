@@ -12,6 +12,9 @@ import jakarta.persistence.Table;
 
 import java.util.Objects;
 
+/**
+ * Course entity associated with a single student (ManyToOne).
+ */
 @Entity
 @Table(name = "courses")
 public class Course {

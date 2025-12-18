@@ -13,6 +13,9 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * JDBC implementation of {@link com.nikolay.onlinediary.repository.UserRepository}.
+ */
 @Repository
 public class JdbcUserRepository implements UserRepository {
 

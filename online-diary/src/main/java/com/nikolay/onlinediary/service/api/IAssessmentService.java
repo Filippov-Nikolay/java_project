@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.dto.AssessmentDto;
 
 import java.util.List;
 
+/**
+ * Business operations around assessments.
+ */
 public interface IAssessmentService {
     List<Assessment> findAll();
 

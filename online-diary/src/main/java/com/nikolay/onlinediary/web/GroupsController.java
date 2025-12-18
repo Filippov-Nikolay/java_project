@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST controller for CRUD operations on groups.
+ */
 @RestController
 @RequestMapping("/api/groups")
 public class GroupsController {

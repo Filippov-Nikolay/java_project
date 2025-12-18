@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.domain.User;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Storage abstraction for system users.
+ */
 public interface UserRepository {
 	User create(User user);
 

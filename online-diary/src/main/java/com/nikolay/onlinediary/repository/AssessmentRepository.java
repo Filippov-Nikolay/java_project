@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.domain.Assessment;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Storage abstraction for assessments.
+ */
 public interface AssessmentRepository {
 	Assessment create(Assessment assessment);
 

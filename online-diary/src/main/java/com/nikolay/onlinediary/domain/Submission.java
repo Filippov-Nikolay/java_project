@@ -3,6 +3,9 @@ package com.nikolay.onlinediary.domain;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Homework submission with student/subject linkage and optional submitted timestamp.
+ */
 public class Submission {
 	private Long id;
     private Long studentId;

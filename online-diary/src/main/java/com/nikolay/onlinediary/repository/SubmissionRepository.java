@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Storage abstraction for submissions.
+ */
 public interface SubmissionRepository {
 	 Submission create(Submission submission);
 

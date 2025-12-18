@@ -2,6 +2,9 @@ package com.nikolay.onlinediary.domain;
 
 import java.util.Objects;
 
+/**
+ * Academic group with a name and course number.
+ */
 public class Group {
 	private Long id;
     private String name;

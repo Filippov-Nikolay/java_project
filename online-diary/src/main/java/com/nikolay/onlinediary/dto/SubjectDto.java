@@ -1,5 +1,8 @@
 package com.nikolay.onlinediary.dto;
 
+/**
+ * DTO for subject creation and update operations.
+ */
 public class SubjectDto {
     private Long id;
     private String name;

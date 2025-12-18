@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * Simple AOP aspect that logs controller method invocation start/end/errors.
+ */
 @Aspect
 @Component
 public class LoggingAspect {

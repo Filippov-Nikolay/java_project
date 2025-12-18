@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * JDBC-based implementation of {@link com.nikolay.onlinediary.repository.AssessmentRepository}.
+ */
 @Repository
 public class JdbcAssessmentRepository implements AssessmentRepository {
 

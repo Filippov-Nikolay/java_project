@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Configures simple MVC helpers: error view mapping and CORS for the API.
+ */
     @Configuration
     public class WebConfig implements WebMvcConfigurer {
 

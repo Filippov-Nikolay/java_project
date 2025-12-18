@@ -2,6 +2,9 @@ package com.nikolay.onlinediary.domain;
 
 import java.util.Objects;
 
+/**
+ * Contact entity representing a person entry in the address book.
+ */
 public class Contact {
     private Long id;
     private String firstName;

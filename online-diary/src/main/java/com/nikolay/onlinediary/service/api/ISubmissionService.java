@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.dto.SubmissionDto;
 
 import java.util.List;
 
+/**
+ * Business operations for managing submissions.
+ */
 public interface ISubmissionService {
     List<Submission> findAll();
 

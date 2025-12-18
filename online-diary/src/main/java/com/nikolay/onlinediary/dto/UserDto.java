@@ -1,5 +1,8 @@
 package com.nikolay.onlinediary.dto;
 
+/**
+ * DTO for transferring user identity and role data.
+ */
 public class UserDto {
     private Long id;
     private String username;

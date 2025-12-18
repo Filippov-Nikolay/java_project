@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.dto.AssessmentDto;
 import com.nikolay.onlinediary.service.time.TimeProvider;
 import org.springframework.stereotype.Component;
 
+/**
+ * Factory/Builder helper for converting assessment DTOs into domain entities.
+ */
 @Component
 public class AssessmentFactory {
 
@@ -14,10 +17,16 @@ public class AssessmentFactory {
         this.timeProvider = timeProvider;
     }
 
+    /**
+     * Creates a new Assessment instance from DTO values applying default timestamps.
+     */
     public Assessment createFromDto(AssessmentDto dto) {
         return builder(new Assessment()).fromDto(dto).build();
     }
 
+    /**
+     * Applies DTO values to an existing Assessment instance.
+     */
     public Assessment applyDto(AssessmentDto dto, Assessment target) {
         return builder(target).fromDto(dto).build();
     }

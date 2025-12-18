@@ -14,6 +14,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Student entity that owns a collection of courses.
+ */
 @Entity
 @Table(name = "students")
 public class Student {

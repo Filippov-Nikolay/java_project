@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.dto.GroupDto;
 
 import java.util.List;
 
+/**
+ * Business operations for managing groups.
+ */
 public interface IGroupService {
     List<Group> findAll();
 

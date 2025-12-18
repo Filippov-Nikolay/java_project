@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service layer for managing groups with caching of reads.
+ */
 @Service
 @Transactional
 public class GroupServiceImpl implements IGroupService {

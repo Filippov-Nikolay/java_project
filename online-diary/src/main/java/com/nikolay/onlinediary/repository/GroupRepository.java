@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.domain.Group;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Storage abstraction for academic groups.
+ */
 public interface GroupRepository {
  	Group create(Group group);
 

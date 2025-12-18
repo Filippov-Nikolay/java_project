@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+/**
+ * DTO carrying validation rules for contact form submissions.
+ */
 public class ContactForm {
     private Long id;
 

@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.dto.ContactForm;
 
 import java.util.List;
 
+/**
+ * Business operations for contact entities and form submissions.
+ */
 public interface IContactService {
     List<Contact> findAll();
 

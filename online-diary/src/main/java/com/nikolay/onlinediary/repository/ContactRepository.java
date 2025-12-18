@@ -5,6 +5,9 @@ import com.nikolay.onlinediary.domain.Contact;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Storage abstraction for contacts.
+ */
 public interface ContactRepository {
     List<Contact> findAll();
 

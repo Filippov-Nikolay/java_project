@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service layer for subjects with caching of the catalog.
+ */
 @Service
 @Transactional
 public class SubjectServiceImpl implements ISubjectService {

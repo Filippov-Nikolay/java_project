@@ -2,6 +2,9 @@ package com.nikolay.onlinediary.dto;
 
 import java.time.LocalDateTime;
 
+/**
+ * DTO used to transfer submission data between layers.
+ */
 public class SubmissionDto {
     private Long id;
     private Long studentId;

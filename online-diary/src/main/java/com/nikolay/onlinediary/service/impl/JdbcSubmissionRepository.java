@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * JDBC implementation of {@link com.nikolay.onlinediary.repository.SubmissionRepository}.
+ */
 @Repository
 public class JdbcSubmissionRepository implements SubmissionRepository {
 
