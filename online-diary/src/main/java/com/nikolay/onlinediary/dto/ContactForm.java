@@ -11,20 +11,22 @@ import jakarta.validation.constraints.Size;
 public class ContactForm {
     private Long id;
 
-    @NotBlank(message = "Имя обязательно")
-    @Size(max = 50, message = "Имя не должно превышать 50 символов")
+    @NotBlank(message = "First name is required")
+    @Size(max = 50, message = "First name must be at most 50 characters")
     private String firstName;
 
-    @NotBlank(message = "Фамилия обязательна")
-    @Size(max = 50, message = "Фамилия не должна превышать 50 символов")
+    @NotBlank(message = "Last name is required")
+    @Size(max = 50, message = "Last name must be at most 50 characters")
     private String lastName;
 
-    @NotBlank(message = "E-mail обязателен")
-    @Email(message = "Введите корректный e-mail")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email")
     private String email;
 
-    @NotBlank(message = "Телефон обязателен")
-    @Pattern(regexp = "^\\+?[0-9 ()-]{7,20}$", message = "Телефон может содержать только цифры, пробелы и символы +()-")
+    @NotBlank(message = "Phone must not be blank")
+    @Pattern(
+            regexp = "^\\+?[0-9 ()-]{3,20}$",
+            message = "Phone number must be 3-20 characters and may include digits, spaces, plus, parentheses, and dashes")
     private String phone;
 
     public Long getId() {
