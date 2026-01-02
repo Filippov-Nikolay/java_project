@@ -1,5 +1,4 @@
 package com.nikolay.onlinediary.domain.enums;
 
-public enum AssessmentType {
-
+public enum AttendanceStatus {
 }

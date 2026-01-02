@@ -1,5 +1,4 @@
 package com.nikolay.onlinediary.domain;
 
-public class TeacherSubject {
-
+public class Schedule {
 }
