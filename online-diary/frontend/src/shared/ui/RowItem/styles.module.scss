@@ -1,0 +1,79 @@
+.root {
+  border-radius: 12px;
+  background: var(--surface-muted);
+  padding: 8px 10px;
+  font-size: 13px;
+
+  display: grid;
+  gap: 10px;
+  align-items: center;
+}
+
+/* вариант с иконкой слева */
+.withIcon {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+/* вариант без иконки */
+.noIcon {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #f9fafb;
+}
+
+.middle {
+  min-width: 0;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.right {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+/* адаптив */
+@media (max-width: 600px) {
+  .withIcon {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .noIcon {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .right {
+    display: none;
+  }
+}

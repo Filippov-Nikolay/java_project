@@ -1,0 +1,70 @@
+.root {
+  position: relative;
+  margin-top: 4px;
+}
+
+/* лента карточек */
+.track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+
+/* кнопки навигации (’карусь’) */
+.nav {
+  position: absolute;
+  top: -34px;      /* подгоняется под твой header DashboardCard */
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  cursor: pointer;
+  font-size: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navBtn:hover {
+  background: var(--surface);
+}
+
+.infoChevron {
+  font-size: 18px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* скроллбар (по желанию можно убрать) */
+.track::-webkit-scrollbar {
+  height: 6px;
+}
+.track::-webkit-scrollbar-track {
+  background: transparent;
+}
+.track::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
+}
+.track::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.55);
+}
+
+@media (max-width: 900px) {
+  .itemWidthProbe {
+    min-width: 220px;
+    max-width: 220px;
+  }
+}

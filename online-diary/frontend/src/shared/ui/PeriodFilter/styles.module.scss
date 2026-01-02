@@ -1,0 +1,32 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+
+  padding: 2px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+}
+
+.option {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 3px 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background 120ms ease,
+    color 120ms ease;
+}
+
+.optionActive {
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.35);
+}

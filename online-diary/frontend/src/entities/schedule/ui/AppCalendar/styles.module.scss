@@ -1,0 +1,79 @@
+
+.muiCalendar :global(.MuiPickersCalendarHeader-root) {
+  display: none;
+}
+
+
+.muiCalendar :global(.MuiDayCalendar-header) {
+  margin: 0;
+  padding: 0 2px;
+}
+
+.muiCalendar :global(.MuiDayCalendar-weekDayLabel) {
+  width: 100%;
+  margin: 0;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.muiCalendar :global(.MuiDayCalendar-slideTransition),
+.muiCalendar :global(.MuiDayCalendar-monthContainer) {
+  height: auto;
+  margin: 0;
+}
+
+.muiCalendar :global(.MuiDayCalendar-weekContainer) {
+  margin: 2px 0;
+  justify-content: space-between;
+}
+
+.muiCalendar :global(.MuiPickersDay-root) {
+  width: 32px;
+  height: 28px;
+  margin: 0;
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.muiCalendar :global(.MuiPickersDay-root.Mui-selected) {
+  background: var(--accent);
+  color: #fff;
+}
+
+.muiCalendar :global(.MuiPickersDay-root.Mui-selected:hover) {
+  background: var(--accent);
+}
+
+.muiCalendar :global(.MuiPickersDay-root.MuiPickersDay-dayOutsideMonth) {
+  opacity: 0.25;
+}
+
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.dotLesson {
+  background: #3b82f6;
+}
+
+.dotExam {
+  background: #f97316;
+}
+
+.dotHoliday {
+  background: #22c55e;
+}

@@ -1,0 +1,27 @@
+
+.nav {
+  display: flex;
+  gap: 6px;
+}
+
+.navBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendarWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+
