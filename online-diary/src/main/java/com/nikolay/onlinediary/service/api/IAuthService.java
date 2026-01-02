@@ -1,5 +1,20 @@
 package com.nikolay.onlinediary.service.api;
 
-public interface IAuthService {
+import com.nikolay.onlinediary.dto.UserResponseDto;
+import com.nikolay.onlinediary.dto.UserUpdateDto;
+import java.util.List;
 
+public interface IAuthService {
+    UserResponseDto getCurrentUser();
+
+    List<UserResponseDto> getAllUsers();
+
+    UserResponseDto getUserById(Long id);
+
+    UserResponseDto updateUser(Long id, UserUpdateDto dto);
+
+    void deleteUser(Long id);
+
+    void requestPasswordReset(String email);
+    void resetPassword(String token, String newPassword);
 }

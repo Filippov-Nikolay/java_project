@@ -5,71 +5,80 @@ import com.nikolay.onlinediary.dto.SubmissionDto;
 import com.nikolay.onlinediary.exception.NotFoundException;
 import com.nikolay.onlinediary.repository.SubmissionRepository;
 import com.nikolay.onlinediary.service.api.ISubmissionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class SubmissionServiceImpl implements ISubmissionService {
 
-    private final SubmissionRepository submissionRepository;
+    private final SubmissionRepository repository;
 
-    public SubmissionServiceImpl(SubmissionRepository submissionRepository) {
-        this.submissionRepository = submissionRepository;
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubmissionDto> findAll() {
+        return repository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Submission> findAll() {
-        return submissionRepository.findAll();
+    public SubmissionDto getById(Long id) {
+        return repository.findById(id).map(this::mapToDto).orElseThrow(() -> new NotFoundException("Робота", id));
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Submission getById(Long id) {
-        return submissionRepository.findById(id).orElseThrow(() -> new NotFoundException("Отправка", id));
+    @Transactional
+    public SubmissionDto create(SubmissionDto dto) {
+        Submission submission = Submission.builder()
+                .studentId(dto.getStudentId())
+                .subjectId(dto.getSubjectId())
+                .content(dto.getContent())
+                .submittedAt(LocalDateTime.now())
+                .status("TODO")
+                .build();
+        return mapToDto(repository.save(submission));
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Submission> findByStudentId(Long studentId) {
-        return submissionRepository.findByStudentId(studentId);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Submission> findBySubjectId(Long subjectId) {
-        return submissionRepository.findBySubjectId(subjectId);
-    }
-
-    @Override
-    public Submission create(SubmissionDto dto) {
-        Submission submission = new Submission();
-        submission.setStudentId(dto.getStudentId());
-        submission.setSubjectId(dto.getSubjectId());
-        submission.setContent(dto.getContent());
-        submission.setSubmittedAt(dto.getSubmittedAt() != null ? dto.getSubmittedAt() : LocalDateTime.now());
-        return submissionRepository.create(submission);
-    }
-
-    @Override
-    public Submission update(Long id, SubmissionDto dto) {
-        Submission submission = getById(id);
-        submission.setStudentId(dto.getStudentId());
-        submission.setSubjectId(dto.getSubjectId());
-        submission.setContent(dto.getContent());
-        submission.setSubmittedAt(dto.getSubmittedAt() != null ? dto.getSubmittedAt() : LocalDateTime.now());
-        submissionRepository.update(submission);
-        return submission;
-    }
-
-    @Override
+    @Transactional
     public void delete(Long id) {
-        if (!submissionRepository.deleteById(id)) {
-            throw new NotFoundException("Отправка", id);
-        }
+        repository.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubmissionDto> findByStudentId(Long studentId) {
+        return repository.findByStudentIdOrderBySubmittedAtDesc(studentId).stream().map(this::mapToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubmissionDto> findBySubjectId(Long subjectId) {
+        return repository.findBySubjectId(subjectId).stream().map(this::mapToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public SubmissionDto update(Long id, SubmissionDto dto) {
+        Submission s = repository.findById(id).orElseThrow(() -> new NotFoundException("Робота", id));
+        s.setContent(dto.getContent());
+        return mapToDto(repository.save(s));
+    }
+
+    private SubmissionDto mapToDto(Submission s) {
+        return SubmissionDto.builder()
+                .id(s.getId())
+                .studentId(s.getStudentId())
+                .subjectId(s.getSubjectId())
+                .content(s.getContent())
+                .submittedAt(s.getSubmittedAt())
+                .status(s.getStatus())
+                .points(s.getPoints())
+                .build();
     }
 }
