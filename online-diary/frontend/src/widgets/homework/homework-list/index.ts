@@ -1,0 +1,1 @@
+export { HomeworkList } from "./ui/page";
