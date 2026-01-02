@@ -1,0 +1,96 @@
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  span b {
+    color: var(--text-primary);
+    margin-left: 4px;
+  }
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--surface-muted);
+  }
+}
+
+.icon {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.pickerBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.searchInput {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: var(--accent);
+  }
+
+  &::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+
+  /* Стилизация скроллбара */
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { 
+    background: var(--border-color); 
+    border-radius: 10px; 
+  }
+}
+
+.item, .itemActive {
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+  }
+}
+
+.itemActive {
+  background: rgba(56, 189, 248, 0.1); // прозрачный акцентный цвет
+  color: var(--accent);
+  font-weight: 500;
+}
