@@ -1,0 +1,40 @@
+.day {
+  border-radius: 10px !important;
+  position: relative !important;
+  overflow: visible !important; 
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    display: none;
+  }
+
+  &::before {
+    left: calc(50% - 4px);
+  }
+
+  &::after {
+    left: calc(50% + 2px);
+  }
+
+  &.hasLecture::before {
+    display: block;
+    background: #4dabf7 !important;
+  }
+
+  &.hasPractice::after {
+    display: block;
+    background: #51cf66 !important;
+  }
+
+  &.hasExam::after {
+    display: block;
+    background: #ff6b6b !important;
+  }
+
+  &.hasLecture:not(:global(.Mui-selected)) { background-color: rgba(56, 189, 248, 0.1) !important; }
+}

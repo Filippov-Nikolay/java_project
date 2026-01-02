@@ -1,0 +1,1 @@
+export { WeekView } from "./ui/page";

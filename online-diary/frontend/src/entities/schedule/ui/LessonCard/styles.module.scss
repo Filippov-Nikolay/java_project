@@ -1,0 +1,17 @@
+.card {
+  position: absolute;
+  left: 2px; right: 2px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background-color: var(--surface-muted);
+  border-left: 4px solid var(--accent);
+  box-shadow: var(--card-shadow-elevated);
+  z-index: 5;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  .title { font-size: 12px; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
+  .info { font-size: 10px; color: var(--text-secondary); }
+  &.lecture { border-left-color: #4dabf7; }
+  &.practice { border-left-color: #51cf66; }
+  &.exam { border-left-color: #ff6b6b; }
+}
