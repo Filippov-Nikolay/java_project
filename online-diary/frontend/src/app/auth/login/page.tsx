@@ -16,7 +16,7 @@ export default function LoginPage() {
 
     return (
         <main className={styles.page}>
-            {/* Левая часть: логин */}
+
             <section className={styles.left}>
                 <AuthHeader/>
 
@@ -35,7 +35,6 @@ export default function LoginPage() {
                 <AuthFooter/>
             </section>
 
-            {/* Правая часть: иллюстрация / фон */}
             <aside className={styles.right}>
                 <div className={styles.overlay} />
                 <div className={styles.heroContent}>
