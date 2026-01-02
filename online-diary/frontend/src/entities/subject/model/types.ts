@@ -1,5 +1,5 @@
-// Types for subjects
 export type Subject = {
   id: string;
-  title: string;
+  name: string; // Або name
+  description?: string; // Додано
 };

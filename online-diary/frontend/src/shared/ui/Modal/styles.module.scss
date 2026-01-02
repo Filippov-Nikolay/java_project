@@ -1,1 +1,41 @@
-/* Styles for Modal */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.content {
+  background: var(--surface);
+  width: 100%;
+  max-width: 450px;
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow-elevated);
+  overflow: hidden;
+  animation: scaleUp 0.2s ease;
+}
+
+.header {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  h3 { margin: 0; font-size: 16px; }
+}
+
+.close {
+  background: none; border: none; color: var(--text-secondary);
+  font-size: 24px; cursor: pointer;
+}
+
+.body { padding: 20px; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }

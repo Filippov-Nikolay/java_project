@@ -8,12 +8,15 @@ import type {
 import styles from "./styles.module.scss";
 
 type IconPosition = "left" | "right";
+// 1. Описываем допустимые варианты
+type ButtonVariant = "primary" | "secondary" | "outline" | "ghost"; 
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     label?: string;
     icon?: ReactNode;
     iconPosition?: IconPosition;
     isLoading?: boolean;
+    variant?: ButtonVariant; // 2. Добавляем в типы
 };
 
 export default function Button({
@@ -22,13 +25,21 @@ export default function Button({
     icon,
     iconPosition = "left",
     isLoading = false,
+    variant = "primary", // 3. Значение по умолчанию
     className,
     disabled,
     type,
     ...rest
 }: ButtonProps) {
     const textContent = label ?? children;
-    const mergedClassName = [styles.button, className].filter(Boolean).join(" ");
+    
+    // 4. Добавляем styles[variant] в список классов
+    const mergedClassName = [
+        styles.button, 
+        styles[variant], 
+        className
+    ].filter(Boolean).join(" ");
+    
     const showIcon = icon && !isLoading;
 
     return (

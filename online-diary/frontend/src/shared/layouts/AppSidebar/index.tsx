@@ -20,8 +20,8 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   {href: "/dashboard", icon: <DashboardIcon/>, label: "Main"},
-  {href: "/groups", icon: <FactCheckRoundedIcon/>, label: "homework"},
-  {href: "/schedule", icon: <CalendarMonthRoundedIcon/>, label: "schedule"}
+  {href: "/homework", icon: <FactCheckRoundedIcon/>, label: "Homework"},
+  {href: "/schedule", icon: <CalendarMonthRoundedIcon/>, label: "Schedule"}
 ];
 
 export function AppSidebar() {

@@ -1,8 +1,13 @@
-// Types for user domain
-export type Role = "student" | "teacher" | "admin";
+export type UserRole = 'ADMIN' | 'TEACHER' | 'STUDENT';
 
-export type User = {
-  id: string;
-  name: string;
-  role: Role;
-};
+export interface User {
+  id: number;
+  login: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: UserRole;
+  groupId?: number;   
+  groupName?: string; 
+  avatarUrl?: string;
+}
