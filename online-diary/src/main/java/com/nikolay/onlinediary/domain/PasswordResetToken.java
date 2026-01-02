@@ -5,7 +5,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "\"Password_Reset_Tokens\"") // Обов'язково в лапках
+@Table(name = "\"Password_Reset_Tokens\"")
 @Data
 @Builder
 @NoArgsConstructor
@@ -23,7 +23,6 @@ public class PasswordResetToken {
     @JoinColumn(nullable = false, name = "\"user_id\"")
     private User user;
 
-    // SENIOR FIX: Явно вказуємо назву колонки як у базі (snake_case)
     @Column(name = "\"expiry_date\"", nullable = false)
     private LocalDateTime expiryDate;
 
