@@ -1,0 +1,22 @@
+.container {
+    padding: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+.header {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+    p { color: #94a3b8; font-size: 15px; margin-top: 8px; }
+}
+
+.card {
+    background: #111827;
+    border-radius: 20px;
+    border: 1px solid #1f2937;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}

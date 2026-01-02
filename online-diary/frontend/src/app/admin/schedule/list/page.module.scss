@@ -1,0 +1,103 @@
+@import "../shared.module.scss";
+
+.filterBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    background: #111827;
+    padding: 20px 24px;
+    border-radius: 16px;
+    border: 1px solid #1f2937;
+    margin-bottom: 32px;
+}
+
+.filterGroup {
+    position: relative;
+    flex: 1;
+    .filterIcon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #64748b; }
+    .clearIcon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: #64748b; cursor: pointer; &:hover { color: #ef4444; } }
+    .searchInput {
+        width: 100%;
+        padding: 12px 44px;
+        border-radius: 12px;
+        border: 1px solid #374151;
+        background: #1f2937;
+        color: #f8fafc;
+        &:focus { border-color: #3b82f6; outline: none; }
+    }
+}
+
+.filterSelects {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+
+    .selectWrapper {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+
+        label { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; white-space: nowrap; }
+
+        select {
+            appearance: none; // ОБОВ'ЯЗКОВО
+            min-width: 180px;
+            padding: 10px 40px 10px 16px;
+            border-radius: 12px;
+            border: 1px solid #374151;
+            background: #1f2937;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            color: #f8fafc;
+            cursor: pointer;
+            transition: all 0.3s;
+
+            &:hover { border-color: #4b5563; }
+            &:focus { border-color: #3b82f6; outline: none; }
+        }
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    th { background: #1f2937; padding: 18px 24px; text-align: left; color: #94a3b8; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    td { padding: 20px 24px; border-bottom: 1px solid #1f2937; vertical-align: middle; }
+    tr:hover { background: rgba(31, 41, 55, 0.5); }
+}
+
+.tableActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    button {
+        width: 36px; height: 36px; border-radius: 10px; border: 1px solid #374151; background: #1f2937;
+        display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; color: #94a3b8;
+        &:hover { transform: translateY(-2px); color: #fff; }
+        &.editBtn:hover { background: #3b82f6; border-color: #3b82f6; }
+        &.deleteBtn:hover { background: #ef4444; border-color: #ef4444; }
+    }
+}
+.typeInfo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.groupBadge { background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.2); }
+.typeTag {
+    padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase;
+    &.lecture { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.2); }
+    &.practice { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.2); }
+    &.exam { background: rgba(248, 113, 113, 0.15); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.2); }
+}
+.dateTime { display: flex; flex-direction: column; gap: 4px; .dateText { display: flex; align-items: center; gap: 8px; font-weight: 600; color: #f1f5f9; svg { color: #3b82f6; } } .lessonText { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #64748b; } }
+.subjectName { font-weight: 700; color: #ffffff; font-size: 16px; }
+.teacherName { font-size: 13px; color: #94a3b8; margin-top: 2px; }
+.room { display: flex; align-items: center; gap: 2px; font-size: 12px; color: #64748b; margin-top: 4px; }
+.resetBtn { background: none; border: none; color: #3b82f6; font-weight: 600; cursor: pointer; &:hover { text-decoration: underline; } }
+.loader { padding: 100px; text-align: center; color: #3b82f6; font-weight: 600; }
+.noResults { padding: 60px; text-align: center; color: #64748b; }
