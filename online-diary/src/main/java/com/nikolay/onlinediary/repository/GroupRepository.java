@@ -1,18 +1,12 @@
 package com.nikolay.onlinediary.repository;
 
 import com.nikolay.onlinediary.domain.Group;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface GroupRepository {
- 	Group create(Group group);
-
-    Optional<Group> findById(Long id);
-
-    List<Group> findAll();
-
-    boolean update(Group group);
-
-    boolean deleteById(Long id);
+@Repository
+public interface GroupRepository extends JpaRepository<Group, Long> {
+    Optional<Group> findByName(String name);
 }

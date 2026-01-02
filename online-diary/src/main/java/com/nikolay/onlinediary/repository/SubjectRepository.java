@@ -1,18 +1,12 @@
 package com.nikolay.onlinediary.repository;
 
 import com.nikolay.onlinediary.domain.Subject;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface SubjectRepository {
-	Subject create(Subject subject);
-
-    Optional<Subject> findById(Long id);
-
-    List<Subject> findAll();
-
-    boolean update(Subject subject);
-
-    boolean deleteById(Long id);
+@Repository
+public interface SubjectRepository extends JpaRepository<Subject, Long> {
+    Optional<Subject> findByName(String name);
 }

@@ -1,20 +1,34 @@
 package com.nikolay.onlinediary.repository;
 
 import com.nikolay.onlinediary.domain.User;
+import com.nikolay.onlinediary.domain.enums.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository {
-	User create(User user);
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findById(Long id);
+    // Для авторизації - шукаємо тільки активних
+    Optional<User> findByLoginAndEnabledTrue(String login);
 
-    Optional<User> findByEmail(String email);
+    // Всі активні користувачі
+    @Query("SELECT u FROM User u WHERE u.enabled = true")
+    List<User> findAllActive();
 
-    List<User> findAll();
+    // Всі активні за роллю
+    @Query("SELECT u FROM User u WHERE u.role = :role AND u.enabled = true")
+    List<User> findAllActiveByRole(@Param("role") Role role);
 
-    boolean update(User user);
+    // Для імпорту з Excel
+    Optional<User> findByLastNameAndFirstNameAndEnabledTrue(String lastName, String firstName);
 
-    boolean deleteById(Long id);
+    // Список студентів для Журналу (Тільки активні!)
+    List<User> findByGroupIdAndRoleAndEnabledTrueOrderByLastNameAsc(Long groupId, Role role);
+
+    Optional<User> findByEmailAndEnabledTrue(String email);
 }
