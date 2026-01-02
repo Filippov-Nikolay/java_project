@@ -1,66 +1,36 @@
 package com.nikolay.onlinediary.domain;
 
-import java.util.Objects;
+import jakarta.persistence.*;
+import lombok.*;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
+@Table(name = "\"Groups\"")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = "subjects")
+@EqualsAndHashCode(exclude = "subjects")
 public class Group {
-	private Long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "\"name\"", nullable = false)
     private String name;
+
+    @Column(name = "\"course\"", nullable = false)
     private Integer course;
 
-    public Group() {
-    }
-
-    public Group(Long id, String name, Integer course) {
-        this.id = id;
-        this.name = name;
-        this.course = course;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getCourse() {
-        return course;
-    }
-
-    public void setCourse(Integer course) {
-        this.course = course;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Group group = (Group) o;
-        return Objects.equals(id, group.id) &&
-                Objects.equals(name, group.name) &&
-                Objects.equals(course, group.course);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, course);
-    }
-
-    @Override
-    public String toString() {
-        return "Group{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", course=" + course +
-                '}';
-    }
+    @Builder.Default
+    @ManyToMany
+    @JoinTable(
+            name = "\"Group_Subjects\"",
+            joinColumns = @JoinColumn(name = "\"group_id\""),
+            inverseJoinColumns = @JoinColumn(name = "\"subject_id\"")
+    )
+    private Set<Subject> subjects = new HashSet<>();
 }

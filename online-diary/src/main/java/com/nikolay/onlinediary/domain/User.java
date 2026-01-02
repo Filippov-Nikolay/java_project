@@ -1,89 +1,79 @@
 package com.nikolay.onlinediary.domain;
 
-import java.util.Objects;
+import com.nikolay.onlinediary.domain.enums.Role;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class User {
-	private Long id;
-    private String username;
+@Entity
+@Table(name = "\"Users\"")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"subjects", "group"})
+@EqualsAndHashCode(exclude = {"subjects", "group"})
+public class User implements UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "\"login\"", unique = true, nullable = false)
+    private String login;
+
+    @Column(name = "\"email\"")
     private String email;
-    private String passwordHash;
-    private String role;
 
-    public User() {
-    }
+    @Column(name = "\"password_hash\"", nullable = false)
+    private String password;
 
-    public User(Long id, String username, String email, String passwordHash, String role) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.role = role;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "\"role\"")
+    private Role role;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "\"first_name\"")
+    private String firstName;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "\"last_name\"")
+    private String lastName;
 
-    public String getUsername() {
-        return username;
-    }
+    @Lob
+    @Column(name = "\"avatar\"")
+    private byte[] avatar;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "\"group_id\"")
+    private Group group;
 
-    public String getEmail() {
-        return email;
-    }
+    @Builder.Default
+    @Column(name = "\"enabled\"")
+    private boolean enabled = true;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+    @Builder.Default
+    @ManyToMany
+    @JoinTable(
+            name = "\"Teacher_Subjects\"",
+            joinColumns = @JoinColumn(name = "\"teacher_id\""),
+            inverseJoinColumns = @JoinColumn(name = "\"subject_id\"")
+    )
+    private Set<Subject> subjects = new HashSet<>();
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(passwordHash, user.passwordHash) &&
-                Objects.equals(role, user.role);
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, email, passwordHash, role);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
-                '}';
-    }
+    @Override public String getPassword() { return password; }
+    @Override public String getUsername() { return login; }
+    @Override public boolean isAccountNonExpired() { return true; }
+    @Override public boolean isAccountNonLocked() { return true; }
+    @Override public boolean isCredentialsNonExpired() { return true; }
+    @Override public boolean isEnabled() { return enabled; }
 }

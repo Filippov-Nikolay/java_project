@@ -1,102 +1,42 @@
 package com.nikolay.onlinediary.domain;
 
+import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
+@Entity
+@Table(name = "\"Assessments\"")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Assessment {
-	private Long id;
-    private Long submissionId;
-    private Long teacherId;
-    private int grade;
-    private String commentText;
-    private LocalDateTime assessedAt;
 
-    public Assessment() {
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Assessment(Long id, Long submissionId, Long teacherId, int grade, String commentText, LocalDateTime assessedAt) {
-        this.id = id;
-        this.submissionId = submissionId;
-        this.teacherId = teacherId;
-        this.grade = grade;
-        this.commentText = commentText;
-        this.assessedAt = assessedAt;
-    }
+    @Column(name = "\"title\"", nullable = false)
+    private String title;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "\"type\"")
+    private String type;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "\"points_max\"")
+    private Integer pointsMax;
 
-    public Long getSubmissionId() {
-        return submissionId;
-    }
+    @Column(name = "\"deadline\"")
+    private LocalDateTime deadline;
 
-    public void setSubmissionId(Long submissionId) {
-        this.submissionId = submissionId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "\"subject_id\"")
+    private Subject subject;
 
-    public Long getTeacherId() {
-        return teacherId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "\"group_id\"")
+    private Group group;
 
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public int getGrade() {
-        return grade;
-    }
-
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
-
-    public String getcommentText() {
-        return commentText;
-    }
-
-    public void setcommentText(String comment) {
-        this.commentText = commentText;
-    }
-
-    public LocalDateTime getAssessedAt() {
-        return assessedAt;
-    }
-
-    public void setAssessedAt(LocalDateTime assessedAt) {
-        this.assessedAt = assessedAt;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Assessment that = (Assessment) o;
-        return grade == that.grade &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(submissionId, that.submissionId) &&
-                Objects.equals(teacherId, that.teacherId) &&
-                Objects.equals(commentText, that.commentText) &&
-                Objects.equals(assessedAt, that.assessedAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, submissionId, teacherId, grade, commentText, assessedAt);
-    }
-
-    @Override
-    public String toString() {
-        return "Assessment{" +
-                "id=" + id +
-                ", submissionId=" + submissionId +
-                ", teacherId=" + teacherId +
-                ", grade=" + grade +
-                ", assessedAt=" + assessedAt +
-                '}';
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "\"teacher_id\"")
+    private User teacher;
 }
