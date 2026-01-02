@@ -2,8 +2,20 @@ import path from "path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+
+
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:8080/api/:path*', 
+      },
+    ];
+  },
+
+  
   webpack: (config) => {
-    // алиасы
+
     config.resolve.alias = {
       ...(config.resolve.alias ?? {}),
       "@app": path.resolve(__dirname, "src/app"),
@@ -18,12 +30,27 @@ const nextConfig: NextConfig = {
       "@config": path.resolve(__dirname, "src/shared/config"),
     };
 
-    // 🔹 вот это добавляем для SVGR
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: ["@svgr/webpack"],
-    });
+   const fileLoaderRule = config.module.rules.find((rule: any) =>
+      rule.test?.test?.(".svg")
+    );
+
+    
+
+    config.module.rules.push(
+      // Переиспользуем стандартное правило для SVG, если импорт идет через ?url
+      {
+        ...fileLoaderRule,
+        test: /\.svg$/i,
+        resourceQuery: /url/, // *.svg?url
+      },
+      // Для всех остальных импортов SVG — используем SVGR
+      {
+        test: /\.svg$/i,
+        issuer: fileLoaderRule.issuer,
+        resourceQuery: { not: [...(fileLoaderRule.resourceQuery?.not ?? []), /url/] },
+        use: ["@svgr/webpack"],
+      }
+    );
 
     return config;
   },

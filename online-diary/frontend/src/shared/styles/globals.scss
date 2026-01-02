@@ -19,6 +19,7 @@
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
   --accent-contrast: #ffffff;
+  --card-shadow-elevated: 0 5px 12px rgba(15, 23, 42,  0.45);
 }
 
 :root[data-theme="dark"] {
@@ -31,6 +32,7 @@
   --accent: #38bdf8;
   --accent-hover: #0ea5e9;
   --accent-contrast: #0b1220;
+  --card-shadow-elevated: 0 18px 40px rgba(15, 23, 42, 0.45);
 }
 
 body {
@@ -39,3 +41,5 @@ body {
   background: var(--bg);
   color: var(--text-primary);
 }
+
+
