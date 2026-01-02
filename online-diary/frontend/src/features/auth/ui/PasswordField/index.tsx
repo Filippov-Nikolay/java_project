@@ -28,7 +28,7 @@ export default function PasswordField({
         onChange={onChange}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className={styles.input} // класс на корневой div Input
+        className={styles.input}
       />
 
       <button

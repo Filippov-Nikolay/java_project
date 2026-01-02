@@ -19,7 +19,8 @@ export const useAuth = () => {
         setError(null);
 
         try {
-            const res = await fetch("/api/auth/login", {
+
+            const res = await fetch("http://localhost:8080/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ login, password }),
@@ -29,6 +30,14 @@ export const useAuth = () => {
                 throw new Error("Невірний логін або пароль");
             }
 
+            const data = await res.json(); 
+
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("userRole", data.role);
+
+            document.cookie = `token=${data.token}; path=/; max-age=86400; SameSite=Lax`;
+            document.cookie = `userRole=${data.role}; path=/; max-age=86400; SameSite=Lax`;
+
             dispatch(
                 showNotification({
                     status: "successful",
@@ -36,7 +45,8 @@ export const useAuth = () => {
                 }),
             );
 
-            window.location.href = "/";
+            window.location.href = "/homework"; 
+
         } catch (err: any) {
             const msg = err.message ?? "Помилка входу";
             setError(msg);
@@ -51,9 +61,5 @@ export const useAuth = () => {
         }
     };
 
-    return {
-        login,
-        pending,
-        error,
-    };
+    return { login, pending, error };
 };
