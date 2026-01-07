@@ -1,0 +1,45 @@
+.wrapper {
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  th {
+    padding: 16px;
+    background: var(--surface-muted);
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+.statusDone { color: var(--success); font-weight: 600; }
+.statusMissing { color: var(--text-muted); }
+
+.grade {
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.actionBtn {
+  background: none;
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+}
+
+.link { color: var(--accent); text-decoration: none; &:hover { text-decoration: underline; } }

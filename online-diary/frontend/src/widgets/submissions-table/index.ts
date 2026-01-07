@@ -1,0 +1,1 @@
+export { SubmissionsTable } from "./ui/page";

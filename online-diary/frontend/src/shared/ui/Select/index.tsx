@@ -13,15 +13,18 @@ interface SelectProps {
   options: Option[];
   value: string;
   onChange: (value: string) => void;
-  label?: string;
+  placeholder?: string; // Додано для підтримки підказок
+  label?: string; // Можна використовувати як альтернативу placeholder
   className?: string;
 }
 
-export const CustomSelect = ({ options, value, onChange, label, className }: SelectProps) => {
+export const CustomSelect = ({ options, value, onChange, placeholder, label, className }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const currentLabel = options.find(o => o.value === value)?.label || label;
+  // Пріоритет тексту: Обраний варіант -> Placeholder -> Label -> Дефолтний текст
+  const selectedOption = options.find(o => o.value === value);
+  const currentLabel = selectedOption ? selectedOption.label : (placeholder || label || "Виберіть...");
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -35,7 +38,7 @@ export const CustomSelect = ({ options, value, onChange, label, className }: Sel
     <div className={clsx(styles.root, className)} ref={rootRef}>
       <button 
         type="button" 
-        className={clsx(styles.trigger, isOpen && styles.active)} 
+        className={clsx(styles.trigger, isOpen && styles.active, !selectedOption && styles.isPlaceholder)} 
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>{currentLabel}</span>

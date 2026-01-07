@@ -22,21 +22,21 @@ export default function HomeworkPage() {
 
   const subjectsList = Array.from(new Set(homeworks.map((i) => i.subjectName)));
 
-  if (isLoading) return <div className={styles.loading}>Завантаження...</div>;
+  if (isLoading) return null; 
 
   return (
     <main className={styles.page}>
       <header className={styles.header}>
         <div className={styles.tabs}>
-          {['todo', 'pending', 'done'].map((tab) => (
-            <button
-              key={tab}
-              className={activeTab === tab ? styles.tabActive : styles.tab}
-              onClick={() => setActiveTab(tab as any)}
-            >
-              {tab === 'todo' ? 'До виконання' : tab === 'pending' ? 'На перевірці' : 'Виконані'}
-            </button>
-          ))}
+           {['todo', 'pending', 'done'].map((tab) => (
+             <button
+               key={tab}
+               className={activeTab === tab ? styles.tabActive : styles.tab}
+               onClick={() => setActiveTab(tab as any)}
+             >
+               {tab === 'todo' ? 'До виконання' : tab === 'pending' ? 'На перевірці' : 'Виконані'}
+             </button>
+           ))}
         </div>
 
         <div className={styles.filterRow}>
@@ -51,10 +51,10 @@ export default function HomeworkPage() {
               className={`${styles.overdueToggle} ${sortByOverdue ? styles.overdueActive : ''}`}
               onClick={() => setSortByOverdue(!sortByOverdue)}
             >
-              ⚠️ Спочатку протерміновані
+              ⚠️ Протерміновані
             </button>
             
-            <span className={styles.sortLabel}>Всього: {totalCount}</span>
+            <span className={styles.sortLabel}>Доступно завдань: {totalCount}</span>
           </div>
 
           <div className={styles.right}>

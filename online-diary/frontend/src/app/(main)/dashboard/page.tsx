@@ -5,10 +5,9 @@ import dayjs from "dayjs";
 import styles from "./styles.module.scss";
 
 import { useGetHomeworks, useHomeworkStats } from "@entities/homework";
-import { DashboardSkeleton } from "./DashboardSkeleton";
 import { useUser } from "@entities/user";
 import { useDaySchedule } from "@entities/schedule";
-import { assessmentApi, Accrual } from "@entities/assessment"; // Імпорт з index.ts
+import { assessmentApi, Accrual } from "@entities/assessment";
 
 import { DashboardProfileCard } from "@widgets/dashboard/dashboard-profile-card";
 import { DashboardAverageScoreCard } from "@widgets/dashboard/dashboard-average-score-card";
@@ -41,7 +40,7 @@ export default function DashboardPage() {
   const { lessons, loading: isScheduleLoading } = useDaySchedule(today);
 
   useEffect(() => {
-    // Тепер assessmentApi гарантовано існує
+
     assessmentApi.getStudentAccruals().then(setAccruals);
   }, []);
 
@@ -51,9 +50,7 @@ export default function DashboardPage() {
 
   const { todoCount, overdueCount } = useHomeworkStats(homeworks);
 
-  if (isHwLoading || isUserLoading || isScheduleLoading) {
-    return <DashboardSkeleton />;
-  }
+
 
   const quickStats = [
     { value: todayLessonsCount, label: "пар сьогодні", href: "/schedule" },

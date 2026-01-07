@@ -1,0 +1,294 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal {
+  background: var(--surface);
+  color: var(--text-primary);
+  width: 100%;
+  max-width: 580px;
+  border-radius: 28px;
+  padding: 32px;
+  position: relative;
+  box-shadow: var(--card-shadow-elevated);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+.closeIconBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: var(--surface-muted);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 24px; // Розмір іконки IoClose
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  &:hover { background: #ef4444; color: white; transform: rotate(90deg); }
+}
+
+.header {
+  margin-bottom: 28px;
+  .topMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    .subjectBadge {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .assignedDate { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
+  }
+  .title { font-size: 23px; font-weight: 700; margin: 0 0 20px; line-height: 1.1; letter-spacing: -0.5px; }
+}
+
+.teacherRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface-muted);
+  padding: 10px 16px;
+  border-radius: 16px;
+  width: fit-content;
+  border: 1px solid var(--border-color);
+  .avatar {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+  }
+  .teacherInfo {
+    display: flex; flex-direction: column;
+    .label { font-size: 10px; text-transform: uppercase; color: var(--text-secondary); font-weight: 700; }
+    .name { font-size: 14px; font-weight: 700; }
+  }
+}
+
+.scrollContent {
+  overflow-y: auto;
+  padding-right: 8px;
+  margin-right: -8px;
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+}
+
+.descriptionSection {
+  margin-bottom: 24px;
+  p { line-height: 1.6; color: var(--text-secondary); font-size: 16px; margin-bottom: 16px; }
+  .teacherFileLink {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--bg);
+    padding: 12px 18px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    border: 1px solid var(--border-color);
+    transition: 0.2s;
+    svg { font-size: 18px; } // Іконка IoDocumentTextOutline
+    &:hover { border-color: var(--accent); transform: translateY(-2px); }
+  }
+}
+
+.deadlineBanner {
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+  padding: 18px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  .deadlineInfo {
+    display: flex; align-items: center; gap: 14px;
+    .clockIcon { font-size: 22px; color: var(--text-secondary); } // IoTimeOutline
+    .dText {
+      display: flex; flex-direction: column;
+      .dLabel { font-size: 10px; text-transform: uppercase; color: var(--text-secondary); font-weight: 800; }
+      .dValue { font-weight: 800; font-size: 15px; }
+    }
+  }
+  .remainingTag {
+    background: var(--text-primary);
+    color: var(--surface);
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  &.urgent {
+    background: #fff1f2;
+    border-color: #fecdd3;
+    .clockIcon { color: #be123c; }
+    .remainingTag { background: #ef4444; color: white; }
+    .dValue { color: #be123c; }
+  }
+}
+
+.uploadBlock {
+  .areaTitle { font-size: 18px; font-weight: 800; margin-bottom: 16px; }
+}
+
+.dropZone {
+  border: 2px dashed var(--border-color);
+  border-radius: 20px;
+  padding: 40px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  background: var(--surface-muted);
+  &:hover { border-color: var(--accent); background: var(--bg); }
+  .uploadIcon { font-size: 44px; margin-bottom: 12px; color: var(--text-secondary); opacity: 0.6; } // IoCloudUploadOutline
+  p { margin: 8px 0; font-weight: 600; font-size: 15px; }
+  .blue { color: var(--accent); font-weight: 800; }
+  small { color: var(--text-secondary); font-size: 12px; }
+}
+.dragActive { border-color: var(--accent); background: rgba(37, 99, 235, 0.05); }
+
+.fileList {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
+  .fileChip {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+    svg { font-size: 16px; } // IoDocumentTextOutline
+    .removeFileBtn { 
+      background: rgba(0,0,0,0.1); border: none; color: inherit; cursor: pointer; 
+      width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      &:hover { background: rgba(0,0,0,0.2); }
+    }
+  }
+}
+
+.commentField {
+  width: 100%; min-height: 110px;
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 20px;
+  background: var(--bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  resize: none;
+  font-family: inherit;
+  font-size: 15px;
+  &:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+}
+
+.statusCard {
+  text-align: center;
+  padding: 40px 24px;
+  background: var(--surface-muted);
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  .stateIcon { font-size: 52px; color: var(--text-secondary); margin-bottom: 16px; } 
+  h3 { font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+  p { color: var(--text-secondary); line-height: 1.5; margin-bottom: 24px; }
+  .myFileLink {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 24px; color: var(--accent); text-decoration: none; font-weight: 700;
+    background: var(--surface); padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border-color);
+    svg { font-size: 18px; }
+  }
+  .cancelBtn { 
+    display: inline-flex; align-items: center; gap: 8px; 
+    svg { font-size: 18px; }
+  }
+  .statusIcon{
+    font-size: 52px; 
+    color: var(--text-secondary); 
+    margin-bottom: 16px; 
+  }
+}
+
+.doneCard {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(20, 184, 166, 0.05));
+  border-color: rgba(34, 197, 94, 0.2);
+  .scoreContainer {
+    width: 80px; height: 80px;
+    background: var(--surface);
+    margin: 0 auto 20px;
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    .scoreValue { font-size: 32px; font-weight: 900; color: #16a34a; }
+    .scoreMax { font-size: 14px; color: var(--text-secondary); font-weight: 700; }
+  }
+  .feedbackBox {
+    background: var(--surface);
+    padding: 20px; border-radius: 18px;
+    margin-bottom: 24px; text-align: left;
+    border: 1px solid var(--border-color);
+    .fbLabel { display: block; font-size: 11px; font-weight: 800; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; }
+    p { margin: 0; color: var(--text-primary); font-size: 15px; }
+  }
+}
+
+.doneFooter {
+  display: flex; flex-direction: column; gap: 16px; align-items: center;
+  .retakeBtn { 
+    display: inline-flex; align-items: center; gap: 8px; 
+    svg { font-size: 18px; }
+  }
+  .downloadOld { 
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text-secondary); font-weight: 600; text-decoration: none; 
+    &:hover { color: var(--accent); }
+    svg { font-size: 16px; }
+  }
+}
+
+.footer {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  .mainSubmitBtn {
+    width: 100%;
+    padding: 16px;
+    font-weight: 800;
+    font-size: 16px;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+  }
+  .closeTextBtn {
+    background: none; border: none;
+    color: var(--text-secondary);
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    &:hover { color: var(--text-primary); }
+  }
+}
+
+.hiddenInput { display: none; }

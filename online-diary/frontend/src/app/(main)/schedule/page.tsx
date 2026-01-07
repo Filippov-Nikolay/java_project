@@ -6,7 +6,7 @@ import "dayjs/locale/uk";
 import isToday from "dayjs/plugin/isToday";
 
 import { DaySchedule, ScheduleEvent } from "@entities/schedule";
-import { fetchSchedule } from "@entities/schedule/api/scheduleApi"; // Використовуємо наш новий API
+import { fetchSchedule } from "@entities/schedule/api/scheduleApi"; 
 import { AppCalendar } from "@entities/schedule/ui/AppCalendar";
 import Button from "@shared/ui/Button";
 import styles from "./styles.module.scss";
@@ -21,17 +21,15 @@ export default function SchedulePage() {
   const [view, setView] = useState<"week" | "month">("week");
   const [currentDate, setCurrentDate] = useState(dayjs().locale("uk"));
   const [lessons, setLessons] = useState<ScheduleEvent[]>([]);
-  const [loading, setLoading] = useState(false);
+
   const [now, setNow] = useState(dayjs());
   const [isMounted, setIsMounted] = useState(false);
 
   const hours = useMemo(() => Array.from({ length: 15 }, (_, i) => i + 7), []);
 
-
   const loadScheduleData = useCallback(async () => {
-    setLoading(true);
-    try {
 
+    try {
       const start = currentDate.startOf(view).format("YYYY-MM-DD");
       const end = currentDate.endOf(view).format("YYYY-MM-DD");
       
@@ -39,9 +37,8 @@ export default function SchedulePage() {
       setLessons(data);
     } catch (err) {
       console.error("Помилка завантаження розкладу:", err);
-    } finally {
-      setLoading(false);
-    }
+    } 
+ 
   }, [currentDate, view]);
 
   useEffect(() => {
@@ -63,7 +60,6 @@ export default function SchedulePage() {
     const end = dayjs(`${lessonDate} ${time.end}`, "YYYY-MM-DD HH:mm");
     return now.isAfter(start) && now.isBefore(end);
   };
-
 
   const weekDays = useMemo(() => {
     const start = currentDate.startOf("week");
@@ -153,12 +149,20 @@ export default function SchedulePage() {
           </div>
 
           <div className={styles.gridBody}>
-            {loading ? (
-              <div className={styles.loading}>Завантаження...</div>
-            ) : isMounted && view === "week" ? (
-              <WeekView hours={hours} weekDays={weekDays} events={lessons} now={now} indicatorPos={indicatorPos} />
+            {isMounted && view === "week" ? (
+              <WeekView 
+                hours={hours} 
+                weekDays={weekDays} 
+                events={lessons} 
+                now={now} 
+                indicatorPos={indicatorPos} 
+              />
             ) : isMounted ? (
-              <MonthView monthDays={monthDays} currentDate={currentDate} events={lessons} />
+              <MonthView 
+                monthDays={monthDays} 
+                currentDate={currentDate} 
+                events={lessons} 
+              />
             ) : null}
           </div>
         </div>

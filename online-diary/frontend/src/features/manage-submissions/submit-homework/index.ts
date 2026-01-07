@@ -1,0 +1,1 @@
+export { HomeworkDetailModal } from "./ui/page";

@@ -16,8 +16,8 @@ import styles from "./styles.module.scss";
 
 export const DashboardCalendarCard = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs().locale("uk"));
-  
-  const { lessons, loading } = useDaySchedule(selectedDate);
+
+  const { lessons } = useDaySchedule(selectedDate);
 
   const formattedLessons = useMemo(() => {
     return lessons
@@ -41,7 +41,6 @@ export const DashboardCalendarCard = () => {
        title={selectedDate.format("MMMM YYYY")} 
        className={styles.root}
     >
-
       <AppCalendar 
         key={lessons.length + selectedDate.month()} 
         value={selectedDate} 
@@ -50,14 +49,10 @@ export const DashboardCalendarCard = () => {
       />
 
       <div className={styles.scheduleWrapper}>
-        {loading ? (
-          <div className={styles.loading}>Завантаження...</div>
-        ) : (
-          <DaySchedule 
-            title={`Розклад на ${selectedDate.format("DD MMM")}`} 
-            lessons={formattedLessons} 
-          />
-        )}
+        <DaySchedule 
+          title={`Розклад на ${selectedDate.format("DD MMM")}`} 
+          lessons={formattedLessons} 
+        />
       </div>
     </DashboardCard>
   );
