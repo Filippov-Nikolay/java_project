@@ -87,9 +87,12 @@ export const SubmissionsTable = ({ assessmentId }: { assessmentId: string }) => 
                                     <span className={styles.name}>{sub.studentName}</span>
                                 </td>
                                 <td>
-                                    <div className={clsx(styles.badge, sub.submitted ? styles.badgeDone : styles.badgeMissing)}>
-                                        {sub.submitted ? <IoCheckmarkCircle /> : <IoAlertCircleOutline />}
-                                        {sub.submitted ? "Здано" : "Очікується"}
+                                    <div className={clsx(
+                                        styles.badge, 
+                                        sub.grade !== null ? styles.badgeGraded : (sub.submitted ? styles.badgeDone : styles.badgeMissing)
+                                    )}>
+                                        {sub.grade !== null ? <IoCheckmarkCircle /> : (sub.submitted ? <IoTimeOutline /> : <IoAlertCircleOutline />)}
+                                        {sub.grade !== null ? "Перевірено" : (sub.submitted ? "Очікує перевірки" : "Не здано")}
                                     </div>
                                 </td>
                                 <td className={styles.date}>

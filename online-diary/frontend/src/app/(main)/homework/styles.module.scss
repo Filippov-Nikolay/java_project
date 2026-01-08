@@ -45,12 +45,16 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  @media (max-width: 768px) {
+      flex-wrap: wrap;
+  }
 }
 
 .left {
   display: flex;
   align-items: center;
   gap: 16px;
+
 }
 
 .overdueToggle {
@@ -99,6 +103,9 @@
 
 .compactSelect {
   min-width: 160px;
+    @media (max-width: 375px) {
+      min-width: 80px;
+  }
 }
 
 .loading {

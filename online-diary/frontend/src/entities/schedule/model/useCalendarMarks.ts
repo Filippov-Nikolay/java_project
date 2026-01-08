@@ -15,7 +15,9 @@ export function useCalendarMarks(lessons: ScheduleEvent[] = []) {
 
     if (dayLessons.length === 0) return [];
 
-    return Array.from(new Set(dayLessons.map(l => l.type)));
+    return Array.from(new Set(
+      dayLessons.map(l => l.type.toLowerCase() as ScheduleEventType)
+    ));
   };
 
   return { getDayTypes };

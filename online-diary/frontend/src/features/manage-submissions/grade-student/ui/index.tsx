@@ -23,11 +23,13 @@ export const GradeModal = ({
         setIsSubmitting(true);
         try {
             const token = localStorage.getItem("token");
+ 
             await gradeSubmissionRequest(token, assessmentId, studentId, { grade, feedback });
+            
             onSuccess();
-            onClose();
+            onClose(); 
         } catch (err) {
-            alert("Помилка при збереженні оцінки");
+            alert("Помилка при збереженні");
         } finally {
             setIsSubmitting(false);
         }

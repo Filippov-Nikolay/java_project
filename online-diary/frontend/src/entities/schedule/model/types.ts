@@ -20,3 +20,4 @@ export interface ScheduleEvent {
   startTime?: string;
   endTime?: string;
 }
+

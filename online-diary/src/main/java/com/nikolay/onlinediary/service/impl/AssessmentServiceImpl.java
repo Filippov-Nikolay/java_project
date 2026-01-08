@@ -102,7 +102,7 @@ public class AssessmentServiceImpl implements IAssessmentService {
         Assessment assessment = Assessment.builder()
                 .title(dto.getTitle())
                 .description(dto.getDescription())
-                .type(dto.getType())
+                .type(dto.getType() != null ? dto.getType() : "HOMEWORK")
                 .deadline(dto.getDeadline())
                 .pointsMax(12)
                 .subject(subjectRepository.findById(dto.getSubjectId()).orElseThrow())

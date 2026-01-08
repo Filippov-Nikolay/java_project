@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useAppDispatch } from "@shared/store/hooks";
 import { showNotification } from "@features/notifications/model/notificationSlice";
-import Cookies from "js-cookie"; // Рекомендується встановити: npm install js-cookie
+import Cookies from "js-cookie";
 
 export type AuthCredentials = {
     login: string;
@@ -15,9 +15,7 @@ export const useAuth = () => {
     const [pending, setPending] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    /**
-     * Функція входу в систему
-     */
+
     const login = async ({ login, password }: AuthCredentials) => {
         setPending(true);
         setError(null);
@@ -35,12 +33,10 @@ export const useAuth = () => {
 
             const data = await res.json(); 
 
-            // 1. Зберігаємо в LocalStorage для клієнтських запитів та хука useUser
             localStorage.setItem("token", data.token);
             localStorage.setItem("userRole", data.role);
 
-            // 2. Встановлюємо Cookies для роботи файлу proxy.ts (Next.js 16)
-            // Назва 'userRole' повинна суворо збігатися з тою, що в proxy.ts
+
             Cookies.set("token", data.token, { expires: 7, path: "/" });
             Cookies.set("userRole", data.role, { expires: 7, path: "/" });
 
@@ -51,7 +47,6 @@ export const useAuth = () => {
                 }),
             );
 
-            // Використовуємо hard redirect для того, щоб proxy.ts перевірив нові куки
             window.location.href = "/dashboard"; 
 
         } catch (err: any) {
@@ -68,15 +63,12 @@ export const useAuth = () => {
         }
     };
 
-    /**
-     * Функція виходу з системи
-     */
+
     const logout = () => {
-        // 1. Очищаємо LocalStorage
+
         localStorage.removeItem("token");
         localStorage.removeItem("userRole");
 
-        // 2. Видаляємо Cookies, щоб закрити доступ на рівні сервера
         Cookies.remove("token", { path: "/" });
         Cookies.remove("userRole", { path: "/" });
 
@@ -87,7 +79,6 @@ export const useAuth = () => {
             }),
         );
 
-        // Повертаємо на сторінку логіну
         window.location.href = "/auth/login";
     };
 

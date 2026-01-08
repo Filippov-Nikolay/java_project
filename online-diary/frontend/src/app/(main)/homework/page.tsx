@@ -64,7 +64,14 @@ export default function HomeworkPage() {
               onSelect={setSubject}
             />
 
-            {activeTab === 'todo' && (
+            
+            
+            <span className={styles.sortLabel}>Доступно завдань: {totalCount}</span>
+          </div>
+
+          <div className={styles.right}>
+            <div className={styles.sortContainer}>
+              {activeTab === 'todo' && (
               <button
                 className={`${styles.overdueToggle} ${sortByOverdue ? styles.overdueActive : ''}`}
                 onClick={() => setSortByOverdue(!sortByOverdue)}
@@ -73,11 +80,6 @@ export default function HomeworkPage() {
               </button>
             )}
             
-            <span className={styles.sortLabel}>Доступно завдань: {totalCount}</span>
-          </div>
-
-          <div className={styles.right}>
-            <div className={styles.sortContainer}>
               <span className={styles.sortLabel}>Сортувати:</span>
               <CustomSelect
                 options={[

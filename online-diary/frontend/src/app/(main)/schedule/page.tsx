@@ -1,45 +1,41 @@
 "use client";
-
 import { useState, useMemo, useEffect, useCallback } from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/uk"; 
 import isToday from "dayjs/plugin/isToday";
+import { IoCalendarOutline, IoAppsOutline } from "react-icons/io5";
+import clsx from "clsx";
 
 import { DaySchedule, ScheduleEvent } from "@entities/schedule";
 import { fetchSchedule } from "@entities/schedule/api/scheduleApi"; 
 import { AppCalendar } from "@entities/schedule/ui/AppCalendar";
+import { IoMenuOutline, IoCloseOutline } from "react-icons/io5";
 import Button from "@shared/ui/Button";
-import styles from "./styles.module.scss";
 import { WeekView } from "@widgets/schedule/WeekView";
 import { MonthView } from "@widgets/schedule/MonthView";
 import { LESSON_TIMES } from "@shared/config/schedule";
-import { IoCalendarOutline, IoAppsOutline } from "react-icons/io5";
+import styles from "./styles.module.scss";
 
 dayjs.extend(isToday);
 dayjs.locale("uk");
 
 export default function SchedulePage() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [view, setView] = useState<"week" | "month">("week");
   const [currentDate, setCurrentDate] = useState(dayjs().locale("uk"));
   const [lessons, setLessons] = useState<ScheduleEvent[]>([]);
-
-  const [now, setNow] = useState(dayjs());
   const [isMounted, setIsMounted] = useState(false);
+  const [now, setNow] = useState(dayjs());
 
   const hours = useMemo(() => Array.from({ length: 15 }, (_, i) => i + 7), []);
 
   const loadScheduleData = useCallback(async () => {
-
     try {
       const start = currentDate.startOf(view).format("YYYY-MM-DD");
       const end = currentDate.endOf(view).format("YYYY-MM-DD");
-      
       const data = await fetchSchedule(start, end);
       setLessons(data);
-    } catch (err) {
-      console.error("Помилка завантаження розкладу:", err);
-    } 
- 
+    } catch (err) { console.error(err); } 
   }, [currentDate, view]);
 
   useEffect(() => {
@@ -48,20 +44,7 @@ export default function SchedulePage() {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    if (isMounted) {
-      loadScheduleData();
-    }
-  }, [currentDate, view, isMounted, loadScheduleData]);
-
-  const isLessonActive = (lessonDate: string, lessonNumber: number) => {
-    // const time = LESSON_TIMES[lessonNumber as keyof typeof LESSON_TIMES];
-    // if (!time) return false;
-    // const start = dayjs(`${lessonDate} ${time.start}`, "YYYY-MM-DD HH:mm");
-    // const end = dayjs(`${lessonDate} ${time.end}`, "YYYY-MM-DD HH:mm");
-    // return now.isAfter(start) && now.isBefore(end);
-    return true;
-  };
+  useEffect(() => { if (isMounted) loadScheduleData(); }, [currentDate, view, isMounted, loadScheduleData]);
 
   const weekDays = useMemo(() => {
     const start = currentDate.startOf("week");
@@ -76,106 +59,95 @@ export default function SchedulePage() {
     return days;
   }, [currentDate]);
 
-  const indicatorPos = useMemo(() => (now.hour() * 80) + (now.minute() / 60) * 80, [now]);
-
   const sidebarLessons = useMemo(() => {
     return lessons
-      .filter((l: ScheduleEvent) => l.date === currentDate.format("YYYY-MM-DD"))
-      .map((l: ScheduleEvent) => {
-        const lNum = l.lessonNumber as keyof typeof LESSON_TIMES;
-        const time = LESSON_TIMES[lNum];
-        return {
-          ...l,
-          title: l.subjectName,
-          startTime: time?.start || "--:--",
-          endTime: time?.end || "--:--",
-          teacherFullName: l.teacherFullName || "Викладач не вказаний",
-          isActive: isLessonActive(l.date, l.lessonNumber)
-        };
-      })
-      .sort((a, b) => a.lessonNumber - b.lessonNumber);
-  }, [lessons, currentDate, now]);
+      .filter((l) => l.date === currentDate.format("YYYY-MM-DD"))
+      .map((l) => ({
+        ...l,
+        title: l.subjectName,
+        startTime: LESSON_TIMES[l.lessonNumber as keyof typeof LESSON_TIMES]?.start || "--:--",
+        endTime: LESSON_TIMES[l.lessonNumber as keyof typeof LESSON_TIMES]?.end || "--:--",
+        isActive: true
+      })).sort((a, b) => a.lessonNumber - b.lessonNumber);
+  }, [lessons, currentDate]);
 
   return (
-    <div className={styles.page}>
-      <aside className={styles.sidebar}>
+    <div className={styles.page} suppressHydrationWarning>
+      {/* Бекдроп (затемнення) для мобілки */}
+      <div 
+        className={clsx(styles.backdrop, isSidebarOpen && styles.backdropVisible)} 
+        onClick={() => setIsSidebarOpen(false)} 
+      />
+
+      <aside className={clsx(styles.sidebar, isSidebarOpen && styles.sidebarOpen)}>
+        <div className={styles.sidebarHeader}>
+           <span className={styles.logo}>JByte</span>
+           <button className={styles.closeBtn} onClick={() => setIsSidebarOpen(false)}>
+             <IoCloseOutline size={24} />
+           </button>
+        </div>
+        
         <div className={styles.miniCalendarWrapper}>
-          {isMounted && (
-            <AppCalendar 
-              key={lessons.length}
-              value={currentDate} 
-              onChange={setCurrentDate} 
-              lessons={lessons} 
-            />
-          )}
+          {isMounted && <AppCalendar value={currentDate} onChange={setCurrentDate} lessons={lessons} />}
         </div>
         <div className={styles.sidebarSchedule}>
-          <DaySchedule 
-            title={`План на ${currentDate.format("DD MMM")}`} 
-            lessons={sidebarLessons} 
-          />
+          <DaySchedule title={`План на ${currentDate.format("DD MMM")}`} lessons={sidebarLessons} />
         </div>
       </aside>
 
       <main className={styles.main}>
         <header className={styles.toolbar}>
-            <div className={styles.toolbarLeft}>
-                <Button variant="secondary" onClick={() => setCurrentDate(dayjs().locale("uk"))}>Сьогодні</Button>
-                <div className={styles.navArrows}>
-                    <button onClick={() => setCurrentDate(currentDate.subtract(1, view))} className={styles.arrowBtn}>‹</button>
-                    <button onClick={() => setCurrentDate(currentDate.add(1, view))} className={styles.arrowBtn}>›</button>
-                </div>
-                <span className={styles.dateRange}>
-                    {view === "week" ? `${weekDays[0].format("D MMM")} — ${weekDays[6].format("D MMM YYYY")}` : currentDate.format("MMMM YYYY")}
-                </span>
+          <div className={styles.toolbarLeft}>
+            {/* Кнопка бургера — видима тільки на мобільних */}
+            <button className={styles.mobileMenuBtn} onClick={() => setIsSidebarOpen(true)}>
+              <IoMenuOutline size={24} />
+            </button>
+
+            <Button variant="secondary" onClick={() => setCurrentDate(dayjs())} className={styles.todayBtn}>
+              Сьогодні
+            </Button>
+            
+            <div className={styles.navArrows}>
+              <button onClick={() => setCurrentDate(currentDate.subtract(1, view))} className={styles.arrowBtn}>‹</button>
+              <button onClick={() => setCurrentDate(currentDate.add(1, view))} className={styles.arrowBtn}>›</button>
             </div>
-            <div className={styles.toolbarRight}>
-              <div className={styles.segmentedControl}>
-                <button 
-                  className={`${styles.viewBtn} ${view === "week" ? styles.viewBtnActive : ""}`}
-                  onClick={() => setView("week")}
-                >
-                  <IoCalendarOutline size={18} />
-                </button>
-                <button 
-                  className={`${styles.viewBtn} ${view === "month" ? styles.viewBtnActive : ""}`}
-                  onClick={() => setView("month")}
-                >
-                  <IoAppsOutline size={18} />
-                </button>
-              </div>
+            <span className={styles.dateRange}>
+              {view === "week" ? `${weekDays[0].format("D MMM")} — ${weekDays[6].format("D MMM")}` : currentDate.format("MMMM YYYY")}
+            </span>
+          </div>
+          
+          <div className={styles.toolbarRight}>
+            <div className={styles.segmentedControl}>
+              <button className={clsx(styles.viewBtn, view === "week" && styles.viewBtnActive)} onClick={() => setView("week")}>
+                <IoCalendarOutline size={18} />
+                <span className={styles.btnText}>Тиждень</span>
+              </button>
+              <button className={clsx(styles.viewBtn, view === "month" && styles.viewBtnActive)} onClick={() => setView("month")}>
+                <IoAppsOutline size={18} />
+                <span className={styles.btnText}>Місяць</span>
+              </button>
             </div>
+          </div>
         </header>
 
-        <div className={`${styles.scheduleContainer} ${styles[view]}`}>
-          <div className={styles.daysHeader}>
-            {view === "week" && <div className={styles.gutter} />}
-            {weekDays.map((day) => (
-              <div key={day.format()} className={`${styles.dayColHeader} ${day.isToday() ? styles.active : ""}`}>
-                {view === "week" && <span className={styles.dayNum}>{day.date()}</span>}
-                <span className={styles.dayLabel}>
-                  {view === "week" ? day.format("ddd").toUpperCase() : day.format("dddd").toUpperCase()}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.gridBody}>
-            {isMounted && view === "week" ? (
-              <WeekView 
-                hours={hours} 
-                weekDays={weekDays} 
-                events={lessons} 
-                now={now} 
-                indicatorPos={indicatorPos} 
-              />
-            ) : isMounted ? (
-              <MonthView 
-                monthDays={monthDays} 
-                currentDate={currentDate} 
-                events={lessons} 
-              />
-            ) : null}
+        <div className={clsx(styles.scheduleContainer, styles[view])}>
+          {/* Тут важливо, щоб заголовок (дні тижня) скролився разом з сіткою */}
+          <div className={styles.scrollWrapper}>
+             <div className={styles.daysHeader}>
+               <div className={styles.gutter} />
+               {weekDays.map((day) => (
+                 <div key={day.format()} className={clsx(styles.dayColHeader, day.isToday() && styles.active)}>
+                   <span className={styles.dayNum}>{day.date()}</span>
+                   <span className={styles.dayLabel}>{day.format("ddd").toUpperCase()}</span>
+                 </div>
+               ))}
+             </div>
+             <div className={styles.gridBody}>
+               {isMounted && (view === "week" 
+                 ? <WeekView hours={hours} weekDays={weekDays} events={lessons} now={now} />
+                 : <MonthView monthDays={monthDays} currentDate={currentDate} events={lessons} />
+               )}
+             </div>
           </div>
         </div>
       </main>

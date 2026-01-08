@@ -70,27 +70,55 @@ public class StatsServiceImpl {
     @Transactional(readOnly = true)
     public DashboardStatsDto calculateStats(String login) {
         User student = userRepository.findByLoginAndEnabledTrue(login).orElseThrow();
-        List<JournalRecord> records = journalRepository.findByStudentId(student.getId());
 
-        // 1. Прогрес-бари (завжди 4 типи)
+        // 1. Отримуємо оцінки з журналу
+        List<JournalRecord> journalRecords = journalRepository.findByStudentId(student.getId());
+
+        // 2. Отримуємо оцінки за ДЗ (submissions)
+        List<SubmissionStudent> homeworkSubmissions = submissionRepository.findByStudentId(student.getId())
+                .stream()
+                .filter(s -> s.getGrade() != null)
+                .toList();
+
+        // Розраховуємо середнє для Самостійної роботи (Журнал + ДЗ)
+        Double independentAvg = calculateIndependentAvg(journalRecords, homeworkSubmissions);
+
         List<SubjectStatDto> stats = List.of(
-                new SubjectStatDto("Класна робота", getAvg(records, WorkType.CLASSWORK), 12, "#6366f1"),
-                new SubjectStatDto("Самостійна", getAvg(records, WorkType.INDEPENDENT), 12, "#22c55e"),
-                new SubjectStatDto("Контрольні", getAvg(records, WorkType.TEST), 12, "#f59e0b"),
-                new SubjectStatDto("Екзамен", getAvg(records, WorkType.EXAM), 12, "#ef4444")
+                new SubjectStatDto("Класна робота", getAvg(journalRecords, WorkType.CLASSWORK), 12, "#6366f1"),
+                new SubjectStatDto("Самостійна", independentAvg, 12, "#22c55e"), // Оновлено
+                new SubjectStatDto("Контрольні", getAvg(journalRecords, WorkType.TEST), 12, "#f59e0b"),
+                new SubjectStatDto("Екзамен", getAvg(journalRecords, WorkType.EXAM), 12, "#ef4444")
         );
 
         List<SkillDto> skills = new ArrayList<>();
-        skills.add(new SkillDto("Відвідуваність", calculateAttendance(records)));
-        skills.add(new SkillDto("Класна робота", getPercent(records, WorkType.CLASSWORK)));
-        skills.add(new SkillDto("Самостійна", getPercent(records, WorkType.INDEPENDENT)));
-        skills.add(new SkillDto("Контрольні", getPercent(records, WorkType.TEST)));
-        skills.add(new SkillDto("Екзамен", getPercent(records, WorkType.EXAM)));
+        skills.add(new SkillDto("Відвідуваність", calculateAttendance(journalRecords)));
+        skills.add(new SkillDto("Класна робота", getPercent(journalRecords, WorkType.CLASSWORK)));
+        skills.add(new SkillDto("Самостійна", (int)((independentAvg * 100) / 12))); // Оновлено
+        skills.add(new SkillDto("Контрольні", getPercent(journalRecords, WorkType.TEST)));
+        skills.add(new SkillDto("Екзамен", getPercent(journalRecords, WorkType.EXAM)));
 
         return DashboardStatsDto.builder()
                 .stats(stats)
                 .skills(skills)
                 .build();
+    }
+
+    // Новий допоміжний метод для об'єднання оцінок
+    private Double calculateIndependentAvg(List<JournalRecord> records, List<SubmissionStudent> submissions) {
+        List<Double> allGrades = new ArrayList<>();
+
+        // Додаємо "Самостійні" з журналу
+        records.stream()
+                .filter(r -> r.getWorkType() == WorkType.INDEPENDENT && r.getGrade() != null && !r.getGrade().isEmpty())
+                .map(r -> Double.parseDouble(r.getGrade()))
+                .forEach(allGrades::add);
+
+        // Додаємо всі оцінені ДЗ
+        submissions.stream()
+                .map(s -> s.getGrade().doubleValue())
+                .forEach(allGrades::add);
+
+        return allGrades.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
     }
 
     private Double getAvg(List<JournalRecord> records, WorkType type) {

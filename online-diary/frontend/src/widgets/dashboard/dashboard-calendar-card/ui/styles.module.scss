@@ -25,3 +25,35 @@
 }
 
 
+.content {
+  gap: 16px;
+
+  padding: 16px ;
+}
+
+/* планшеты */
+@media (max-width: 768px) {
+  .content {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    align-items: start;
+  }
+}
+
+/* большие экраны */
+@media (max-width: 1280px) {
+  .content {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+  }
+}
+
+.calendar {
+  display: flex;
+  justify-content: center;
+}
+
+.schedule {
+  min-width: 0;
+}
+

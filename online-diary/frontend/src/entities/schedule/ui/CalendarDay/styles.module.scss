@@ -1,40 +1,35 @@
+.dayWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .day {
-  border-radius: 10px !important;
-  position: relative !important;
-  overflow: visible !important; 
+  // Твои базовые стили
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 12px !important;
+  position: relative;
+  z-index: 1; // Кнопка чуть ниже точек по z-index, если нужно
+}
 
-  &::before, &::after {
-    content: '';
-    position: absolute;
-    bottom: 2px;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    display: none;
-  }
+.dotContainer {
+  position: absolute;
+  bottom: 4px; // Расстояние от нижнего края
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  z-index: 2; // Точки всегда сверху
+  pointer-events: none; // Чтобы клик проходил сквозь точки на кнопку дня
+}
 
-  &::before {
-    left: calc(50% - 4px);
-  }
-
-  &::after {
-    left: calc(50% + 2px);
-  }
-
-  &.hasLecture::before {
-    display: block;
-    background: #4dabf7 !important;
-  }
-
-  &.hasPractice::after {
-    display: block;
-    background: #51cf66 !important;
-  }
-
-  &.hasExam::after {
-    display: block;
-    background: #ff6b6b !important;
-  }
-
-  &.hasLecture:not(:global(.Mui-selected)) { background-color: rgba(56, 189, 248, 0.1) !important; }
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  
+  &.dotLecture { background: #3b82f6; }
+  &.dotPractice { background: #22c55e; }
+  &.dotExam { background: #f43f5e; }
 }

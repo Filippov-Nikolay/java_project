@@ -1,11 +1,15 @@
 "use client";
-import { Dayjs } from "dayjs";
+
+import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { CalendarDay } from "../CalendarDay";
 import { ScheduleEvent } from "../../model/types"; 
+ 
 import styles from "./styles.module.scss";
+
+import "dayjs/locale/uk";
 
 interface Props {
   value: Dayjs;
@@ -24,14 +28,30 @@ export const AppCalendar = ({ value, onChange, onMonthChange, lessons }: Props) 
         slots={{ 
           day: CalendarDay as any 
         }}
-
         slotProps={{
-          day: (ownerState) => ({
+          day: {
             lessons: lessons,
-          }) as any,
+          } as any,
         }}
         className={styles.muiCalendar}
+        showDaysOutsideCurrentMonth
+        fixedWeekNumber={6} 
       />
     </LocalizationProvider>
+
+    <div className={styles.legend}>
+      <div className={styles.legendItem}>
+        <span className={`${styles.legendDot} ${styles.dotLecture}`} />
+        <span>Лекція</span>
+      </div>
+      <div className={styles.legendItem}>
+        <span className={`${styles.legendDot} ${styles.dotPractice}`} />
+        <span>Практика</span>
+      </div>
+      <div className={styles.legendItem}>
+        <span className={`${styles.legendDot} ${styles.dotExam}`} />
+        <span>Іспит</span>
+      </div>
+    </div>
   </div>
 );

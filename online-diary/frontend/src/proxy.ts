@@ -31,7 +31,7 @@ export function proxy(request: NextRequest) {
                 (pathname.startsWith('/admin') && !pathname.startsWith('/admin/journal'));
             
             if (isForbidden) {
-                return NextResponse.redirect(new URL('/schedule', request.url));
+                return NextResponse.redirect(new URL('/manage-homework', request.url));
             }
         }
     }
@@ -40,5 +40,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'], //
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'], 
 };

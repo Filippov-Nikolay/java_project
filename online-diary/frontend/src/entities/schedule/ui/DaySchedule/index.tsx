@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const DaySchedule = ({ title, lessons, emptyText = "Немає пар 🎉" }: Props) => {
-  const { user } = useUser(); 
+  const { user } = useUser(); // Отримуємо дані користувача
 
   return (
     <div className={styles.root}>
@@ -21,7 +21,7 @@ export const DaySchedule = ({ title, lessons, emptyText = "Немає пар �
       ) : (
         <div className={styles.list}>
           {lessons.map((l) => {
-
+            // Перевірка: чи може користувач редагувати журнал?
             const canManageJournal = user?.role === "ADMIN" || user?.role === "TEACHER";
             const isClickable = l.isActive && canManageJournal;
 
@@ -52,6 +52,7 @@ export const DaySchedule = ({ title, lessons, emptyText = "Немає пар �
               );
             }
 
+            // Для студентів або неактивних пар повертаємо просто div
             return (
               <div key={l.id} className={styles.disabledClick}>
                 {cardBody}

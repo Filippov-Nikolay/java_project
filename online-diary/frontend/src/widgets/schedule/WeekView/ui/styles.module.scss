@@ -1,24 +1,31 @@
-.gridBody { flex: 1; display: flex; flex-direction: column; }
+.weekGridContainer {
+  min-width: 750px; // Зменшили мінімалку, щоб влізало на 1024px без скролу
+  display: flex;
+  flex-direction: column;
+}
 
 .gridRow {
   display: grid;
-  grid-template-columns: 64px repeat(7, 1fr);
-  height: 80px; 
+  // Використовуємо 64px для часу, решта — гнучкі колонки
+  grid-template-columns: 64px repeat(7, 1fr); 
+  height: 80px;
 }
 
 .timeLabel {
-  font-size: 11px; color: var(--text-secondary);
-  text-align: right; padding-right: 112px; margin-top: 15px; 
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: right;
+  padding-right: 12px; // ВИПРАВЛЕНО: було 112px, що ламало все!
+  margin-top: -6px; // Центрування відносно лінії
 }
 
 .gridCell {
   border-left: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   position: relative;
-}
+  background: transparent;
 
-.timeIndicator {
-  position: absolute; left: 0; right: 0; height: 2px;
-  background-color: var(--accent); z-index: 5;
-  .timeBall { width: 10px; height: 10px; background-color: var(--accent); border-radius: 50%; position: absolute; left: -5px; top: -4px; }
+  &:last-child {
+    border-right: 1px solid var(--border-color);
+  }
 }

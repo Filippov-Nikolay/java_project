@@ -38,22 +38,26 @@ export const DashboardCalendarCard = () => {
 
   return (
     <DashboardCard 
-       title={selectedDate.format("MMMM YYYY")} 
-       className={styles.root}
-    >
+  title={selectedDate.format("MMMM YYYY")} 
+  className={styles.root}
+>
+  <div className={styles.content}>
+    <div className={styles.calendar}>
       <AppCalendar 
         key={lessons.length + selectedDate.month()} 
         value={selectedDate} 
         onChange={setSelectedDate} 
         lessons={lessons} 
       />
+    </div>
 
-      <div className={styles.scheduleWrapper}>
-        <DaySchedule 
-          title={`Розклад на ${selectedDate.format("DD MMM")}`} 
-          lessons={formattedLessons} 
-        />
-      </div>
-    </DashboardCard>
+    <div className={styles.schedule}>
+      <DaySchedule 
+        title={`Розклад на ${selectedDate.format("DD MMM")}`} 
+        lessons={formattedLessons} 
+      />
+    </div>
+  </div>
+</DashboardCard>
   );
 };

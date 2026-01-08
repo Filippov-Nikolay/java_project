@@ -1,19 +1,44 @@
 .page {
-  padding: 24px 32px 40px;
+  padding: 16px;
+  @media (min-width: 1024px) {
+    padding: 24px 32px 40px;
+  }
 }
 
 .grid {
   display: grid;
+  // Используем minmax(0, ...), чтобы колонки МОГЛИ сжиматься до нуля
   grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2.4fr);
-  gap: 24px;
+  gap: 20px;
+
+  @media (max-width: 1400px) {
+    gap: 16px;
+  }
+
+  @media (max-width: 1280px) {
+    // Планшеты/Ноутбуки: 2 колонки, календарь уходит вниз
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    
+    .colRight {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 900px) {
+    // Мобилки: всё в одну колонку
+    grid-template-columns: minmax(0, 1fr);
+    
+    .colRight {
+      grid-column: auto;
+    }
+  }
 }
 
-.colLeft,
-.colCenter,
-.colRight {
+.colLeft, .colCenter, .colRight {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  min-width: 0; // Позволяет колонке уменьшаться
 }
 
 @media (max-width: 1280px) {

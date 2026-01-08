@@ -3,16 +3,20 @@
   display: flex;
   flex-direction: column;
   background: var(--bg);
-  color: var(--text-primary);
+  // Жодного overflow: hidden тут, щоб працював стандартний скрол браузера
 }
 
 .body {
-  flex: 1;
   display: flex;
+  flex: 1;
   align-items: stretch;
+  min-width: 0; 
 }
 
 .content {
   flex: 1;
+  min-width: 0; // Це не дає контенту розпирати сторінку вбік
+  display: flex;
+  flex-direction: column;
   background: var(--bg);
 }
