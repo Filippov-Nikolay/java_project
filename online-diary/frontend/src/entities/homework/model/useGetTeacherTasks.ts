@@ -23,6 +23,7 @@ export const useGetTeacherTasks = () => {
           createdAt: new Date(item.createdAt).toLocaleDateString('uk-UA'),
           deadline: new Date(item.deadline).toLocaleDateString('uk-UA'),
           isOverdue: new Date(item.deadline) < new Date(),
+          iconFileName: item.iconFileName,
           stats: {
             submitted: item.submissionCount || 0,
             total: item.totalStudents || 0

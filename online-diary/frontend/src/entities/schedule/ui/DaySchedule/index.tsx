@@ -1,6 +1,7 @@
 "use client";
 import { ReactNode } from "react";
 import Link from "next/link";
+import { useUser } from "@entities/user/model/useUser"; // Імпортуємо ваш хук
 import styles from "./styles.module.scss";
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export const DaySchedule = ({ title, lessons, emptyText = "Немає пар 🎉" }: Props) => {
+  const { user } = useUser(); 
+
   return (
     <div className={styles.root}>
       <div className={styles.title}>{title}</div>
@@ -19,7 +22,8 @@ export const DaySchedule = ({ title, lessons, emptyText = "Немає пар �
         <div className={styles.list}>
           {lessons.map((l) => {
 
-            console.log(`Lesson ${l.title}: ID=${l.id}, Active=${l.isActive}`);
+            const canManageJournal = user?.role === "ADMIN" || user?.role === "TEACHER";
+            const isClickable = l.isActive && canManageJournal;
 
             const cardBody = (
               <div className={`${styles.item} ${l.isActive ? styles.active : styles.locked}`}>
@@ -36,7 +40,7 @@ export const DaySchedule = ({ title, lessons, emptyText = "Немає пар �
               </div>
             );
 
-            if (l.isActive) {
+            if (isClickable) {
               return (
                 <Link 
                   href={`/admin/journal/${l.id}`} 

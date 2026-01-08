@@ -34,7 +34,7 @@ public class SubjectServiceImpl implements ISubjectService {
     @Transactional(readOnly = true)
     public List<SubjectDto> findAll() {
         return subjectRepository.findAll().stream()
-                .map(this::mapToDto) // Перетворюємо кожну сутність у DTO
+                .map(this::mapToDto)
                 .collect(Collectors.toList());
     }
 
@@ -113,7 +113,6 @@ public class SubjectServiceImpl implements ISubjectService {
         Group group = groupRepository.findById(dto.getGroupId())
                 .orElseThrow(() -> new NotFoundException("Група", dto.getGroupId()));
 
-        // Додаємо зв'язки
         teacher.getSubjects().add(subject);
         group.getSubjects().add(subject);
 
@@ -126,14 +125,23 @@ public class SubjectServiceImpl implements ISubjectService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<SubjectDto> findByTeacherLogin(String login) {
+        log.info("Finding subjects for teacher login: {}", login);
+
+        return subjectRepository.findByTeachers_Login(login).stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<UserResponseDto> getTeachersBySubject(Long subjectId) {
         Subject subject = subjectRepository.findById(subjectId)
                 .orElseThrow(() -> new NotFoundException("Предмет", subjectId));
 
-        // Отримуємо вчителів через зв'язок @ManyToMany
         return subject.getTeachers().stream()
-                .filter(User::isEnabled) // Тільки активні
-                .map(this::mapUserToDto)  // Мапимо в DTO
+                .filter(User::isEnabled)
+                .map(this::mapUserToDto)
                 .collect(Collectors.toList());
     }
 

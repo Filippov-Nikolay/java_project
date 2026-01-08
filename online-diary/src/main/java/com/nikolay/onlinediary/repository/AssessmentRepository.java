@@ -13,4 +13,9 @@ public interface AssessmentRepository extends JpaRepository<Assessment, Long> {
 
     @Query("SELECT a FROM Assessment a JOIN FETCH a.subject JOIN FETCH a.group WHERE a.subject.id = :subjectId AND a.group.id = :groupId")
     List<Assessment> findBySubjectIdAndGroupId(@Param("subjectId") Long subjectId, @Param("groupId") Long groupId);
+
+    @Query("SELECT a FROM Assessment a WHERE a.teacher.login = :login")
+    List<Assessment> findByTeacherLogin(@Param("login") String login);
+
+    List<Assessment> findByGroupId(Long id);
 }

@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css"; // Імпорт стилів полоски
 import { HomeworkList } from "@widgets/homework/homework-list";
 import { useHomeworkFilters } from "@features/manage-homework/filter";
 import { SubjectPicker } from "@features/manage-homework/subject-picker/ui";
@@ -7,9 +10,11 @@ import { CustomSelect } from "@shared/ui/Select";
 import { useGetHomeworks } from "@entities/homework";
 import styles from "./styles.module.scss";
 
-export default function HomeworkPage() {
+// Налаштування nprogress
+NProgress.configure({ showSpinner: false, speed: 400, minimum: 0.2 });
 
-  const { homeworks, isLoading } = useGetHomeworks();
+export default function HomeworkPage() {
+  const { homeworks, isLoading, refetch } = useGetHomeworks();
 
   const {
     filteredItems,
@@ -22,6 +27,18 @@ export default function HomeworkPage() {
 
   const subjectsList = Array.from(new Set(homeworks.map((i) => i.subjectName)));
 
+  // Оновлена функція зміни таби з візуальним прогресом
+  const handleTabChange = async (tab: any) => {
+    setActiveTab(tab);
+    
+    NProgress.start(); // Запускаємо полоску зверху
+    try {
+      await refetch(); // Чекаємо завершення завантаження даних
+    } finally {
+      NProgress.done(); // Зупиняємо полоску
+    }
+  };
+
   if (isLoading) return null; 
 
   return (
@@ -32,7 +49,7 @@ export default function HomeworkPage() {
              <button
                key={tab}
                className={activeTab === tab ? styles.tabActive : styles.tab}
-               onClick={() => setActiveTab(tab as any)}
+               onClick={() => handleTabChange(tab as any)}
              >
                {tab === 'todo' ? 'До виконання' : tab === 'pending' ? 'На перевірці' : 'Виконані'}
              </button>
@@ -47,12 +64,14 @@ export default function HomeworkPage() {
               onSelect={setSubject}
             />
 
-            <button
-              className={`${styles.overdueToggle} ${sortByOverdue ? styles.overdueActive : ''}`}
-              onClick={() => setSortByOverdue(!sortByOverdue)}
-            >
-              ⚠️ Протерміновані
-            </button>
+            {activeTab === 'todo' && (
+              <button
+                className={`${styles.overdueToggle} ${sortByOverdue ? styles.overdueActive : ''}`}
+                onClick={() => setSortByOverdue(!sortByOverdue)}
+              >
+                ⚠️ Протерміновані
+              </button>
+            )}
             
             <span className={styles.sortLabel}>Доступно завдань: {totalCount}</span>
           </div>

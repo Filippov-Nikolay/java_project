@@ -1,45 +1,180 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 280px;
+
+  svg {
+    position: absolute;
+    left: 14px;
+    color: var(--text-secondary);
+    font-size: 18px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 14px 10px 42px;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
+    }
+  }
+}
+
 .wrapper {
   background: var(--surface);
-  border-radius: 12px;
+  border-radius: 20px;
   border: 1px solid var(--border-color);
   overflow: hidden;
+  box-shadow: var(--card-shadow);
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
+
   th {
-    padding: 16px;
     background: var(--surface-muted);
+    padding: 16px 24px;
     text-align: left;
-    font-size: 13px;
+    font-size: 12px;
+    text-transform: uppercase;
     color: var(--text-secondary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
   }
+
   td {
-    padding: 16px;
+    padding: 16px 24px;
     border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
   }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: rgba(var(--accent-rgb), 0.02); }
 }
 
-.statusDone { color: var(--success); font-weight: 600; }
-.statusMissing { color: var(--text-muted); }
+.rowMissing { opacity: 0.7; }
 
-.grade {
+.studentInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .name { font-weight: 700; font-size: 15px; }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+
+  &.badgeDone { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+  &.badgeMissing { background: var(--surface-muted); color: var(--text-secondary); }
+}
+
+.dateCell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  svg { font-size: 16px; opacity: 0.6; }
+}
+
+.downloadLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  background: rgba(var(--accent-rgb), 0.05);
+  padding: 8px 14px;
+  border-radius: 10px;
+  transition: 0.2s;
+
+  &:hover { background: var(--accent); color: white; }
+}
+
+.noFile { font-size: 13px; color: var(--text-muted); font-style: italic; }
+
+.gradeBadge {
+  display: inline-block;
   background: var(--accent);
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 4px;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 900;
+  font-size: 14px;
 }
+
+.notGraded { font-size: 13px; color: #f59e0b; font-weight: 600; }
 
 .actionBtn {
-  background: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
   border: 1px solid var(--border-color);
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 13px;
   cursor: pointer;
   transition: 0.2s;
-  &:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
-  &:disabled { opacity: 0.4; cursor: not-allowed; }
-}
 
-.link { color: var(--accent); text-decoration: none; &:hover { text-decoration: underline; } }
+  &:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  &:disabled { opacity: 0.3; cursor: not-allowed; }
+}

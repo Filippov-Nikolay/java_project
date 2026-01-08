@@ -29,12 +29,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 1. Налаштування CORS
+
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                // 2. Вимикаємо CSRF, бо ми використовуємо JWT
+
                 .csrf(AbstractHttpConfigurer::disable)
 
-                // 3. Налаштування прав доступу
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/v3/api-docs/**",
@@ -42,10 +41,9 @@ public class SecurityConfig {
                                 "/swagger-ui.html"
                         ).permitAll()
 
-                        // Дозволяємо перегляд усім авторизованим
+                        .requestMatchers(HttpMethod.GET, "/api/files/download/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/groups/**", "/api/subjects/**").authenticated()
 
-                        // ДОДАЙТЕ ЦІ РЯДКИ: Явно дозволяємо ADMIN керувати групами та предметами
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/groups/**", "/api/subjects/**").hasRole("ADMIN")
                         .requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/groups/**", "/api/subjects/**").hasRole("ADMIN")
                         .requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/groups/**", "/api/subjects/**").hasRole("ADMIN")
@@ -57,7 +55,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                // 4. Робимо сесії stateless (тільки JWT)
+
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
@@ -69,17 +67,14 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Використовуйте patterns замістьOrigins для кращої сумісності з allowCredentials
         configuration.setAllowedOriginPatterns(List.of("http://localhost:3000"));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
-        // Додайте всі необхідні заголовки
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With"));
 
         configuration.setAllowCredentials(true);
 
-        // Важливо: дозвольте браузеру читати заголовки, якщо це потрібно фронтенду
         configuration.setExposedHeaders(List.of("Authorization"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

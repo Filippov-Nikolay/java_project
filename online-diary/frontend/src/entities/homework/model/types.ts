@@ -26,6 +26,7 @@ export interface TeacherTask {
   createdAt: string;
   deadline: string;
   isOverdue: boolean;
+  iconFileName?: string;
   stats: {
     submitted: number;
     total: number;

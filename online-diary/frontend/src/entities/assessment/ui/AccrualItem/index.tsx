@@ -4,6 +4,7 @@ import { DashboardRowItem } from "@shared/ui/RowItem";
 
 import { Accrual, AccrualKind } from "../../model/types"; 
 import styles from "./styles.module.scss";
+import { FiBookOpen, FiCalendar, FiFolder } from "react-icons/fi";
 
 interface AccrualItemProps {
   data: Accrual;
@@ -15,10 +16,10 @@ const KIND_LABEL: Record<AccrualKind, string> = {
   homework: "Оцінка за ДЗ",
 };
 
-const KIND_ICON: Record<AccrualKind, string> = {
-  attendance: "📅",
-  classwork: "📘",
-  homework: "📂",
+const KIND_ICON: Record<AccrualKind, React.ReactNode> = {
+  attendance: <FiCalendar />,
+  classwork: <FiBookOpen />,
+  homework: <FiFolder />,
 };
 
 const KIND_COLOR: Record<AccrualKind, string> = {
@@ -41,9 +42,6 @@ export const AccrualItem = ({ data }: AccrualItemProps) => {
         </span>
       )}
 
-      {data.crystalsDelta && data.crystalsDelta > 0 ? (
-        <span className={styles.crystals}>+{data.crystalsDelta} 💎</span>
-      ) : null}
       
       <span className={styles.date}>{data.date}</span>
     </>

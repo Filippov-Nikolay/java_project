@@ -13,6 +13,7 @@ import styles from "./styles.module.scss";
 import { WeekView } from "@widgets/schedule/WeekView";
 import { MonthView } from "@widgets/schedule/MonthView";
 import { LESSON_TIMES } from "@shared/config/schedule";
+import { IoCalendarOutline, IoAppsOutline } from "react-icons/io5";
 
 dayjs.extend(isToday);
 dayjs.locale("uk");
@@ -54,11 +55,12 @@ export default function SchedulePage() {
   }, [currentDate, view, isMounted, loadScheduleData]);
 
   const isLessonActive = (lessonDate: string, lessonNumber: number) => {
-    const time = LESSON_TIMES[lessonNumber as keyof typeof LESSON_TIMES];
-    if (!time) return false;
-    const start = dayjs(`${lessonDate} ${time.start}`, "YYYY-MM-DD HH:mm");
-    const end = dayjs(`${lessonDate} ${time.end}`, "YYYY-MM-DD HH:mm");
-    return now.isAfter(start) && now.isBefore(end);
+    // const time = LESSON_TIMES[lessonNumber as keyof typeof LESSON_TIMES];
+    // if (!time) return false;
+    // const start = dayjs(`${lessonDate} ${time.start}`, "YYYY-MM-DD HH:mm");
+    // const end = dayjs(`${lessonDate} ${time.end}`, "YYYY-MM-DD HH:mm");
+    // return now.isAfter(start) && now.isBefore(end);
+    return true;
   };
 
   const weekDays = useMemo(() => {
@@ -128,10 +130,20 @@ export default function SchedulePage() {
                 </span>
             </div>
             <div className={styles.toolbarRight}>
-                <select className={styles.viewSelect} value={view} onChange={(e) => setView(e.target.value as any)}>
-                    <option value="week">Тиждень</option>
-                    <option value="month">Місяць</option>
-                </select>
+              <div className={styles.segmentedControl}>
+                <button 
+                  className={`${styles.viewBtn} ${view === "week" ? styles.viewBtnActive : ""}`}
+                  onClick={() => setView("week")}
+                >
+                  <IoCalendarOutline size={18} />
+                </button>
+                <button 
+                  className={`${styles.viewBtn} ${view === "month" ? styles.viewBtnActive : ""}`}
+                  onClick={() => setView("month")}
+                >
+                  <IoAppsOutline size={18} />
+                </button>
+              </div>
             </div>
         </header>
 

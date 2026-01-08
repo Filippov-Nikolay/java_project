@@ -28,6 +28,53 @@
 .toolbarLeft, .toolbarRight { display: flex; align-items: center; gap: 16px; }
 .navArrows { display: flex; gap: 4px; .arrowBtn { background: none; border: none; font-size: 20px; color: var(--text-primary); cursor: pointer; padding: 4px 8px; &:hover { background: var(--surface-muted); } } }
 
+.segmentedControl {
+  display: flex;
+  background: var(--surface-muted); // фоновий колір для перемикача
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.viewBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    color: var(--text-primary);
+    background: rgba(var(--accent-rgb), 0.05);
+    
+    svg {
+      transform: scale(1.1);
+    }
+  }
+
+  &.viewBtnActive {
+    background: var(--surface); 
+    color: var(--accent);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05);
+    
+    svg {
+      color: var(--accent);
+    }
+  }
+}
+
+
 .scheduleContainer { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
 
 .daysHeader {

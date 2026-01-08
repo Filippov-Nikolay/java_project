@@ -61,7 +61,7 @@ public class JournalServiceImpl implements IJournalService {
                 .studentFullName(student.getLastName() + " " + student.getFirstName())
                 .attendance(null)
                 .grade("")
-                .workType(WorkType.REGULAR)
+                .workType(WorkType.CLASSWORK)
                 .build()
         ).collect(Collectors.toList());
     }
@@ -72,6 +72,23 @@ public class JournalServiceImpl implements IJournalService {
         if (records == null || records.isEmpty()) return;
 
         log.info("Saving {} journal records", records.size());
-        journalRepository.saveAll(records);
+
+        for (JournalRecord incoming : records) {
+            // 1. Шукаємо існуючий запис за парою ключів (Пара + Студент)
+            JournalRecord recordToSave = journalRepository
+                    .findByScheduleIdAndStudentId(incoming.getScheduleId(), incoming.getStudentId())
+                    .orElse(new JournalRecord());
+
+            // 2. Оновлюємо або встановлюємо поля
+            recordToSave.setScheduleId(incoming.getScheduleId());
+            recordToSave.setStudentId(incoming.getStudentId());
+            recordToSave.setStudentFullName(incoming.getStudentFullName());
+            recordToSave.setAttendance(incoming.getAttendance());
+            recordToSave.setGrade(incoming.getGrade());
+            recordToSave.setWorkType(incoming.getWorkType());
+
+            // 3. Зберігаємо (JPA автоматично зробить UPDATE, якщо ID існує, або INSERT, якщо ні)
+            journalRepository.save(recordToSave);
+        }
     }
 }
