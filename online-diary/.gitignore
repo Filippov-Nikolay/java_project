@@ -2,3 +2,4 @@
 .idea/
 .vscode/
 frontend/node_modules/
+/.metadata/
