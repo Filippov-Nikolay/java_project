@@ -1,0 +1,26 @@
+# Doxygen configuration file
+PROJECT_NAME           = "Online Diary"
+PROJECT_BRIEF          = "Course project: online diary system"
+
+# Input
+INPUT                  = online-diary/src/main/java docs-src
+FILE_PATTERNS          = *.java *.md
+RECURSIVE              = YES
+
+# Output
+OUTPUT_DIRECTORY       = docs
+GENERATE_HTML          = YES
+HTML_OUTPUT            = .
+GENERATE_LATEX         = NO
+
+# Java and Markdown
+OPTIMIZE_OUTPUT_JAVA   = YES
+JAVADOC_AUTOBRIEF      = YES
+MARKDOWN_SUPPORT       = YES
+USE_MDFILE_AS_MAINPAGE = docs-src/index.md
+
+# Quality
+EXTRACT_ALL            = YES
+SOURCE_BROWSER         = YES
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
