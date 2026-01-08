@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j; // Додано для логування
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity; // ЦЕЙ ІМПОРТ ВИПРАВЛЯЄ ПОМИЛКУ
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,17 @@ public class SubjectsController {
     public SubjectDto create(@Valid @RequestBody SubjectDto dto) {
         log.info("REST request to create subject: {}", dto.getName());
         return subjectService.create(dto);
+    }
+
+    @GetMapping("/my")
+    @PreAuthorize("hasAnyRole('TEACHER', 'ADMIN')")
+    public List<SubjectDto> getMySubjects() {
+
+        String login = org.springframework.security.core.context.SecurityContextHolder
+                .getContext().getAuthentication().getName();
+
+        log.info("REST request to get subjects for current teacher: {}", login);
+        return subjectService.findByTeacherLogin(login);
     }
 
     @PostMapping("/assign-teacher")

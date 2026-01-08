@@ -22,4 +22,6 @@ public interface ISubjectService {
     void assignTeacherToSubject(AssignTeacherDto dto);
 
     List<UserResponseDto> getTeachersBySubject(Long subjectId);
+
+    List<SubjectDto> findByTeacherLogin(String login);
 }

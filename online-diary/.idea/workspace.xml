@@ -5,137 +5,60 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c07b65b-094d-4972-a172-5916e46c1f15" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/PasswordResetToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/LessonType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/AssignTeacherDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/ScheduleDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/ScheduleResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/UserResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/UserUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/JournalRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/PasswordResetTokenRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/ScheduleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/IJournalService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/IScheduleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/AuthServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JournalServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/ScheduleServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/JournalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/ScheduleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/AccrualDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/DashboardStatsDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/SkillDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/SubjectStatDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/StatsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/StudentStatsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/next.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/dashboard/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/dashboard/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/homework/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/homework/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/homework/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/homework/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/manage-homework/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/manage-homework/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/manage-homework/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/manage-homework/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/schedule/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/schedule/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/schedule/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/schedule/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/login/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/login/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/recovery/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/recovery/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/recovery/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/recovery/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/register/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/admin/journal/[id]/page.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/admin/journal/[id]/page.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/admin/journal/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/admin/journal/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/admin/layout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/admin/layout.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/admin/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/admin/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/entities/assessment/api/assessmentApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/assessment/api/assessmentApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/entities/assessment/api/mockData.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/entities/assessment/lib/mapToAccrual.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/assessment/lib/mapToAccrual.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/entities/assessment/model/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/assessment/model/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/assessment/ui/AssessmentForm/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/assessment/ui/AssessmentForm/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/assessment/ui/AssessmentRow/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/assessment/ui/AssessmentRow/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/contact/api/contactApi.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/contact/model/types.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/contact/ui/ContactRow/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/contact/ui/ContactRow/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/group/api/groupApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/group/api/groupApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/subject/api/subjectApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/subject/api/subjectApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/subject/model/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/subject/model/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/user/api/userApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/user/api/userApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/user/model/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/user/model/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/entities/assessment/ui/AccrualItem/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/assessment/ui/AccrualItem/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/entities/homework/model/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/homework/model/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/entities/homework/model/useGetTeacherTasks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/homework/model/useGetTeacherTasks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/DaySchedule/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/DaySchedule/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/features/auth/model/useAuth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/auth/model/useAuth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/auth/ui/PasswordField/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/auth/ui/PasswordField/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/auth/ui/PasswordField/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/auth/ui/PasswordField/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/auth/ui/RegisterForm/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/auth/ui/RegisterForm/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/layouts/AppSidebar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/layouts/AppSidebar/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/manage-submissions/grade-student/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/manage-submissions/grade-student/ui/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/manage-submissions/grade-student/ui/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/manage-submissions/grade-student/ui/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/middleware.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/shared/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/ui/Button/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/ui/Button/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/ui/Modal/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/ui/Modal/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/ui/Modal/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/ui/Modal/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/ui/Select/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/ui/Select/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/ui/Select/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/ui/Select/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/DashboardTable/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/DashboardTable/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/dashboard/TodaySchedule/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/dashboard/TodaySchedule/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/dashboard/dashboard-profile-card/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/dashboard/dashboard-profile-card/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/journal/GroupJournal/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/journal/GroupJournal/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/journal/StudentProgress/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/journal/StudentProgress/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/config/AsyncConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/config/OpenApiConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/config/ExceptionHandlingConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/config/SchedulingConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/config/WebConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/submissions-table/ui/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/widgets/submissions-table/ui/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/submissions-table/ui/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/widgets/submissions-table/ui/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Assessment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Assessment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Contact.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/GroupSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/JournalRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Subject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Submission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Submission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/TeacherSubject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/Schedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/AssessmentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/AttendanceStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/WorkType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/SubmissionStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/SubmissionStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/SubmissionStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/SubmissionStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/WorkType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/domain/enums/WorkType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/AssessmentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/AssessmentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/ContactForm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/GroupDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/GroupDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/SubjectDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/SubjectDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/SubmissionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/SubmissionDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/GradeRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/GradeRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/SubmissionResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/dto/SubmissionResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/AssessmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/AssessmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/ContactRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/GroupRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/GroupRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/JournalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/JournalRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/SubjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/SubjectRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/SubmissionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/SubmissionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/SubmissionStudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/repository/SubmissionStudentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/IAssessmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/IAssessmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/IAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/IAuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/IContactService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/IGroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/IGroupService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/ISubjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/ISubjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/ISubmissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/api/ISubmissionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/AssessmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/AssessmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/ContactServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/GroupServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/GroupServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JdbcAssessmentRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JdbcContactRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JdbcGroupRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JdbcHealthDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JdbcSubjectRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JdbcSubmissionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JdbcUserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JournalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JournalServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/SubjectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/SubjectServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/SubmissionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/SubmissionServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/AssessmentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/AssessmentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/ContactRestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/ContactsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/GroupsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/GroupsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/FileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/SubjectsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/SubjectsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/SubmissionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/SubmissionsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/ViewsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -147,8 +70,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Exception" />
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>

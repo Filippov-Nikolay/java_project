@@ -9,12 +9,25 @@ import Button from "@shared/ui/Button";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
 
+// Реакт іконки
+import { 
+  IoAdd, 
+  IoStatsChartOutline, 
+  IoCreateOutline, 
+  IoTrashOutline, 
+  IoPeopleOutline, 
+  IoBookOutline,
+  IoTimeOutline,
+  IoCheckmarkDoneOutline,
+  IoImageOutline
+} from "react-icons/io5";
+
 export default function ManageHomeworkPage() {
   const { tasks, isLoading, refetch } = useGetTeacherTasks();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
-  const pendingCheck = tasks.reduce((acc, task) => acc + task.stats.submitted, 0);
+  const totalSubmissions = tasks.reduce((acc, task) => acc + task.stats.submitted, 0);
 
   const handleDelete = async (id: number | string) => {
     if (!window.confirm("Ви впевнені, що хочете видалити це завдання?")) return;
@@ -28,96 +41,134 @@ export default function ManageHomeworkPage() {
     }
   };
 
-  const handleViewSubmissions = (id: number | string) => {
 
-    router.push(`/manage-homework/${id}/submissions`);
-  };
-
-  if (isLoading) return null;
 
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <div>
-          <h1>Завдання</h1>
+        <div className={styles.headerText}>
+          <h1>Керування завданнями</h1>
+          <p className={styles.subtitle}>Створюйте та перевіряйте роботи ваших студентів</p>
         </div>
-        <Button variant="primary" onClick={() => setIsModalOpen(true)}>
-          + Створити нове завдання
+        <Button variant="primary" onClick={() => setIsModalOpen(true)} className={styles.createBtn}>
+          <IoAdd size={20} />
+          <span>Створити завдання</span>
         </Button>
       </header>
 
-      <section className={styles.stats}>
+      {/* Статистичні картки */}
+      <section className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <span>Активні завдання</span>
-          <strong>{tasks.filter(t => !t.isOverdue).length}</strong>
+          <div className={clsx(styles.statIcon, styles.blue)}>
+            <IoBookOutline />
+          </div>
+          <div className={styles.statInfo}>
+            <span>Активні курси</span>
+            <strong>{Array.from(new Set(tasks.map(t => t.subjectName))).length}</strong>
+          </div>
         </div>
         <div className={styles.statCard}>
-          <span>Всього відповідей учнів</span>
-          <strong>{pendingCheck}</strong>
+          <div className={clsx(styles.statIcon, styles.orange)}>
+            <IoTimeOutline />
+          </div>
+          <div className={styles.statInfo}>
+            <span>Очікують дедлайну</span>
+            <strong>{tasks.filter(t => !t.isOverdue).length}</strong>
+          </div>
+        </div>
+        <div className={styles.statCard}>
+          <div className={clsx(styles.statIcon, styles.green)}>
+            <IoCheckmarkDoneOutline />
+          </div>
+          <div className={styles.statInfo}>
+            <span>Здано робіт (всього)</span>
+            <strong>{totalSubmissions}</strong>
+          </div>
         </div>
       </section>
 
-      <div className={styles.tableWrapper}>
+      <div className={styles.tableCard}>
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>Предмет / Назва</th>
+              <th>Завдання</th>
               <th>Група</th>
-              <th>Здано робіт</th>
-              <th>Задано</th>
-              <th>Дедлайн</th>
+              <th>Прогрес здачі</th>
+              <th>Терміни</th>
               <th>Статус</th>
-              <th>Дії</th>
+              <th align="right">Дії</th>
             </tr>
           </thead>
           <tbody>
             {tasks.map((task) => (
               <tr key={task.id}>
                 <td>
-                  <div className={styles.taskTitleCell}>
-                    <span className={styles.subjectBadge}>{task.subjectName}</span>
-                    <strong>{task.title}</strong>
+                  <div className={styles.taskCell}>
+                    <div className={styles.taskIcon}>
+                      {/* Якщо ми додали поле iconFileName раніше */}
+                      {task.iconFileName ? (
+                        <img src={`/api/files/download/${task.iconFileName}`} alt="" />
+                      ) : (
+                        <IoImageOutline />
+                      )}
+                    </div>
+                    <div className={styles.taskMeta}>
+                      <span className={styles.subjectName}>{task.subjectName}</span>
+                      <strong className={styles.taskTitle}>{task.title}</strong>
+                    </div>
                   </div>
                 </td>
-                <td>{task.groupName}</td>
                 <td>
-                  <div className={styles.progressWrapper}>
-                    <div className={styles.progressText}>
-                      {task.stats.submitted} / {task.stats.total}
+                  <div className={styles.groupCell}>
+                    <IoPeopleOutline />
+                    <span>{task.groupName}</span>
+                  </div>
+                </td>
+                <td>
+                  <div className={styles.progressContainer}>
+                    <div className={styles.progressHeader}>
+                      <span>{Math.round((task.stats.submitted / task.stats.total) * 100)}%</span>
+                      <small>{task.stats.submitted}/{task.stats.total}</small>
                     </div>
-                    <div className={styles.progressBar}>
+                    <div className={styles.progressTrack}>
                       <div 
-                        className={styles.progressFill} 
+                        className={styles.progressThumb} 
                         style={{ width: `${(task.stats.submitted / task.stats.total) * 100}%` }} 
                       />
                     </div>
                   </div>
                 </td>
-                <td className={styles.date}>{task.createdAt}</td>
-                <td className={clsx(styles.date, task.isOverdue && styles.overdue)}>
-                  {task.deadline}
+                <td>
+                  <div className={styles.datesCell}>
+                    <div className={styles.dateRow}>
+                      <small>Від:</small> <span>{task.createdAt}</span>
+                    </div>
+                    <div className={clsx(styles.dateRow, task.isOverdue && styles.overdue)}>
+                      <small>До:</small> <span>{task.deadline}</span>
+                    </div>
+                  </div>
                 </td>
                 <td>
-                  <span className={task.isOverdue ? styles.statusClosed : styles.statusActive}>
+                  <span className={clsx(styles.statusBadge, task.isOverdue ? styles.closed : styles.active)}>
                     {task.isOverdue ? "Завершено" : "Активне"}
                   </span>
                 </td>
                 <td>
                   <div className={styles.actions}>
                     <button 
-                      className={styles.checkBtn} 
-                      title="Переглянути список здач"
-                      onClick={() => handleViewSubmissions(task.id)}
+                      className={styles.actionBtn} 
+                      onClick={() => router.push(`/manage-homework/${task.id}/submissions`)}
+                      title="Статистика та оцінювання"
                     >
-                      📊
+                      <IoStatsChartOutline />
                     </button>
-                    <button className={styles.editBtn} title="Редагувати">✏️</button>
+
                     <button 
-                      className={styles.deleteBtn} 
-                      title="Видалити"
+                      className={clsx(styles.actionBtn, styles.delete)} 
                       onClick={() => handleDelete(task.id)}
+                      title="Видалити"
                     >
-                      🗑️
+                      <IoTrashOutline />
                     </button>
                   </div>
                 </td>

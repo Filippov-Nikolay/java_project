@@ -1,5 +1,9 @@
 package com.nikolay.onlinediary.domain.enums;
 
 public enum WorkType {
-    REGULAR, TEST, LAB
+    CLASSWORK,   // Класна робота
+    INDEPENDENT, // Самостійна
+    TEST,        // Контрольні
+    EXAM,        // Екзамен
+    THEMATIC     // Тематична
 }

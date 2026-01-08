@@ -3,6 +3,7 @@ package com.nikolay.onlinediary.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,8 +12,8 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "subjects")
-@EqualsAndHashCode(exclude = "subjects")
+@ToString(exclude = {"subjects", "students"})
+@EqualsAndHashCode(exclude = {"subjects", "students"})
 public class Group {
 
     @Id
@@ -24,6 +25,9 @@ public class Group {
 
     @Column(name = "\"course\"", nullable = false)
     private Integer course;
+
+    @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
+    private List<User> students;
 
     @Builder.Default
     @ManyToMany

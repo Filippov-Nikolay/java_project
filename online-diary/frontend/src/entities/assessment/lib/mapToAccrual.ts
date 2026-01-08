@@ -7,6 +7,5 @@ export const mapSubmissionToAccrual = (s: any): Accrual => ({
     kind: s.assessment.type.toLowerCase() as any,
     score: s.points,
     maxScore: s.assessment.maxScore,
-    date: new Date(s.gradedAt || s.submittedAt).toLocaleDateString('uk-UA', { day: '2-digit', month: 'short' }),
-    crystalsDelta: s.points >= s.assessment.maxScore * 0.9 ? 1 : 0 
+    date: new Date(s.gradedAt || s.submittedAt).toLocaleDateString('uk-UA', { day: '2-digit', month: 'short' })
 });

@@ -8,7 +8,6 @@ export interface Accrual {
   score: number;
   maxScore: number;
   date: string;
-  crystalsDelta?: number;
 }
 
 export interface SubjectStat {

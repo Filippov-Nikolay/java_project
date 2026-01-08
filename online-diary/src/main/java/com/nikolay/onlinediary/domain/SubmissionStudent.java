@@ -1,21 +1,16 @@
 package com.nikolay.onlinediary.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "\"Submissions\"")
+@Table(name = "\"Submission_student\"")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Submission_student {
-
+public class SubmissionStudent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,11 +23,14 @@ public class Submission_student {
     @JoinColumn(name = "\"student_id\"", nullable = false)
     private User student;
 
-    @Column(name = "\"submitted_at\"")
+    @Column(name = "\"submitted_at\"", nullable = false, updatable = false)
     private LocalDateTime submittedAt;
 
     @Column(name = "\"file_name\"")
     private String fileName;
+
+    @Column(name = "\"student_comment\"", length = 1000)
+    private String studentComment;
 
     @Column(name = "\"grade\"")
     private Integer grade;
