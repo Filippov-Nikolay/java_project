@@ -59,11 +59,5 @@ doxygen Doxyfile
 ```
 This outputs HTML to `docs/`.
 
-### Publish with GitHub Pages
-1. Commit the generated `docs/` folder.
-2. In GitHub repository settings, enable Pages from the `main` branch and `/docs` folder.
-3. The site will be available at:
-`https://<github-user>.github.io/<repo>/index.html`
-
 ## Documentation Links
-- Main documentation page: `https://<github-user>.github.io/<repo>/index.html`
+- Main documentation page: `https://filippov-nikolay.github.io/java_project/`
