@@ -15,8 +15,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -31,6 +37,7 @@ public class AuthServiceImpl implements IAuthService {
     private final PasswordResetTokenRepository tokenRepository; // ДОДАТИ
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final String AVATAR_PATH = "uploads/avatars";
 
     @Override
     @Transactional(readOnly = true)
@@ -39,6 +46,35 @@ public class AuthServiceImpl implements IAuthService {
         return userRepository.findByLoginAndEnabledTrue(login)
                 .map(this::mapToResponse)
                 .orElseThrow(() -> new RuntimeException("Користувача не знайдено"));
+    }
+
+    @Override
+    @Transactional
+    public void updateAvatar(String login, MultipartFile file) {
+        // 1. Перевірка на порожній файл
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("Файл не вибрано");
+        }
+
+        long maxSizeBytes = 1024 * 1024;
+        if (file.getSize() > maxSizeBytes) {
+            throw new IllegalArgumentException("Файл занадто великий! Максимальний розмір: 1МБ");
+        }
+
+        String contentType = file.getContentType();
+        if (contentType == null || !contentType.startsWith("image/")) {
+            throw new IllegalArgumentException("Можна завантажувати тільки зображення");
+        }
+
+        User user = userRepository.findByLoginAndEnabledTrue(login)
+                .orElseThrow(() -> new RuntimeException("Користувача не знайдено"));
+
+        try {
+            user.setAvatar(file.getBytes());
+            userRepository.save(user);
+        } catch (IOException e) {
+            throw new RuntimeException("Помилка обробки зображення");
+        }
     }
 
     @Override
@@ -128,8 +164,32 @@ public class AuthServiceImpl implements IAuthService {
         tokenRepository.delete(resetToken); // Видаляємо токен після використання
     }
 
+    @Override
+    @Transactional
+    public void updatePassword(String login, String newPassword) {
+
+        if (newPassword == null || newPassword.length() < 6) {
+            throw new IllegalArgumentException("Пароль має містити мінімум 6 символів");
+        }
+
+        User user = userRepository.findByLoginAndEnabledTrue(login)
+                .orElseThrow(() -> new RuntimeException("Користувача не знайдено"));
+
+        if (passwordEncoder.matches(newPassword, user.getPassword())) {
+            throw new IllegalArgumentException("Новий пароль не може збігатися зі старим");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
 
     private UserResponseDto mapToResponse(User u) {
+        String base64Avatar = null;
+        if (u.getAvatar() != null && u.getAvatar().length > 0) {
+            base64Avatar = Base64.getEncoder().encodeToString(u.getAvatar());
+        }
+
         return UserResponseDto.builder()
                 .id(u.getId())
                 .login(u.getLogin())
@@ -139,6 +199,7 @@ public class AuthServiceImpl implements IAuthService {
                 .role(u.getRole())
                 .groupId(u.getGroup() != null ? u.getGroup().getId() : null)
                 .groupName(u.getGroup() != null ? u.getGroup().getName() : null)
+                .avatar(base64Avatar) // Це поле має бути в UserResponseDto (тип String)
                 .build();
     }
 }

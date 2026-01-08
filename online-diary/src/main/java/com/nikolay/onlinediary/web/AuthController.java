@@ -5,13 +5,17 @@ import com.nikolay.onlinediary.dto.UserUpdateDto;
 import com.nikolay.onlinediary.repository.UserRepository;
 import com.nikolay.onlinediary.security.JwtService;
 import com.nikolay.onlinediary.service.api.IAuthService;
+import com.nikolay.onlinediary.service.impl.AuthServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -82,5 +86,26 @@ public class AuthController {
     public ResponseEntity<?> confirmReset(@RequestBody Map<String, String> request) {
         authService.resetPassword(request.get("token"), request.get("password"));
         return ResponseEntity.ok(Map.of("message", "Пароль успішно змінено"));
+    }
+
+    @PostMapping(value = "/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadAvatar(@RequestPart("file") MultipartFile file) {
+
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        authService.updateAvatar(login, file);
+
+        return ResponseEntity.ok(Map.of("message", "Аватар оновлено"));
+    }
+
+    @PostMapping("/update-password")
+    public ResponseEntity<?> updatePassword(@RequestBody Map<String, String> request) {
+        // Отримуємо логін із контексту безпеки (з JWT токена)
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        String newPassword = request.get("password");
+
+        authService.updatePassword(login, newPassword);
+
+        return ResponseEntity.ok(Map.of("message", "Пароль успішно оновлено"));
     }
 }

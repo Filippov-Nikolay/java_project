@@ -16,4 +16,5 @@ public class UserResponseDto {
     private Role role;
     private Long groupId;
     private String groupName;
+    private String avatar;
 }

@@ -1,9 +1,15 @@
+import Cookies from "js-cookie";
 import { User } from "../model/types";
 
-export const userApi = {
-    async getMe(token: string): Promise<User> {
 
-        const response = await fetch("/api/auth/me", {
+const BASE_URL = "/api/auth"; 
+
+export const userApi = {
+
+    async getMe(): Promise<User> {
+        const token = Cookies.get("token");
+        
+        const response = await fetch(`${BASE_URL}/me`, {
             headers: { 
                 "Authorization": `Bearer ${token}`,
                 "Accept": "application/json"
@@ -11,10 +17,9 @@ export const userApi = {
         });
 
         if (!response.ok) {
-
             const text = await response.text();
             if (text.startsWith("<!DOCTYPE")) {
-                throw new Error("Сервер повернув HTML замість JSON. Перевірте проксі у next.config.ts");
+                throw new Error("Сервер повернув HTML. Перевірте проксі у next.config.ts");
             }
             throw new Error("Помилка авторизації");
         }
@@ -29,10 +34,37 @@ export const userApi = {
             email: data.email,
             role: data.role,
             groupId: data.groupId,
-
             groupName: data.groupName || data.group?.name || "Група не вказана", 
-            
             avatarUrl: data.avatar ? `data:image/jpeg;base64,${data.avatar}` : undefined,
         };
+    },
+
+    async updateAvatar(file: File) {
+        const token = Cookies.get("token");
+        const formData = new FormData();
+        formData.append("file", file);
+
+        return fetch(`${BASE_URL}/avatar`, {
+            method: "POST",
+            headers: { 
+                "Authorization": `Bearer ${token}` 
+ 
+            },
+            body: formData
+        });
+    },
+
+    /** Оновити пароль */
+    async updatePassword(password: string) {
+        const token = Cookies.get("token");
+        
+        return fetch(`${BASE_URL}/update-password`, {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` 
+            },
+            body: JSON.stringify({ password })
+        });
     }
 };

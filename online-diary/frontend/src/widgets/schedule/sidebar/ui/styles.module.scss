@@ -1,0 +1,56 @@
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: var(--surface);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (max-width: 1024px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
+
+    &.sidebarOpen {
+      transform: translateX(0);
+    }
+  }
+}
+
+.sidebarHeader {
+  display: none;
+  @media (max-width: 1024px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    
+    .logo {
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--accent);
+    }
+  }
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.miniCalendarWrapper {
+    padding: 16px;
+}
+
+.sidebarSchedule {
+    flex: 1;
+    overflow-y: auto;
+}

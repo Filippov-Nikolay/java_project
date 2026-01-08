@@ -18,6 +18,12 @@ export function proxy(request: NextRequest) {
 
     if (token && role) {
 
+        if (role === 'ADMIN') {
+            if (pathname === '/dashboard' || pathname.startsWith('/homework') || pathname.startsWith('/manage-homework') || pathname.startsWith('/Schedule')) {
+                return NextResponse.redirect(new URL('/admin', request.url));
+            }
+        }
+
         if (role === 'STUDENT') {
             if (pathname.startsWith('/admin') || pathname.startsWith('/manage-homework')) {
                 return NextResponse.redirect(new URL('/dashboard', request.url));

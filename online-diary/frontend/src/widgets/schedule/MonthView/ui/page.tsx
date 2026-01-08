@@ -6,7 +6,7 @@ export const MonthView = ({ monthDays, currentDate, events }: any) => (
   <div className={styles.monthGrid}>
     {monthDays.map((day: dayjs.Dayjs) => (
       <div key={day.format()} className={`${styles.monthCell} ${day.month() !== currentDate.month() ? styles.otherMonth : ""}`}>
-        <span className={`${styles.monthDate} ${day.isToday() ? styles.activeDate : ""}`}>{day.date()}</span>
+        <span className={`${styles.monthDate} ${day.isSame(currentDate, 'day') ? styles.activeDate : ""}`}>{day.date()}</span>
         <div className={styles.monthEventList}>
           {events.filter((e: any) => e.date === day.format("YYYY-MM-DD"))
             .sort((a: any, b: any) => a.lessonNumber - b.lessonNumber)

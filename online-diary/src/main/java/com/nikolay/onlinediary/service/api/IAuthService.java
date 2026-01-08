@@ -2,6 +2,8 @@ package com.nikolay.onlinediary.service.api;
 
 import com.nikolay.onlinediary.dto.UserResponseDto;
 import com.nikolay.onlinediary.dto.UserUpdateDto;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface IAuthService {
@@ -17,4 +19,8 @@ public interface IAuthService {
 
     void requestPasswordReset(String email);
     void resetPassword(String token, String newPassword);
+
+    void updateAvatar(String login, MultipartFile file);
+
+    void updatePassword(String login, String newPassword);
 }

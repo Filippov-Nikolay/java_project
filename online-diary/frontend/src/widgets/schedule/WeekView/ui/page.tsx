@@ -43,7 +43,7 @@ export const WeekView = ({ hours, weekDays, events, now, indicatorPos }: any) =>
                   return <LessonCard key={e.id} event={eventData} top={top} height={height} />;
                 })}
 
-              {day.isToday() && now.hour() === hour && (
+              {day.isSame(now, 'day') && now.hour() === hour && (
                 <div 
                   className={styles.timeIndicator} 
                   style={{ top: `${(now.minute() / 60) * 80}px` }}

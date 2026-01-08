@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import NProgress from "nprogress";
-import "nprogress/nprogress.css"; // Імпорт стилів полоски
+import "nprogress/nprogress.css"; 
 import { HomeworkList } from "@widgets/homework/homework-list";
 import { useHomeworkFilters } from "@features/manage-homework/filter";
 import { SubjectPicker } from "@features/manage-homework/subject-picker/ui";
@@ -10,7 +10,6 @@ import { CustomSelect } from "@shared/ui/Select";
 import { useGetHomeworks } from "@entities/homework";
 import styles from "./styles.module.scss";
 
-// Налаштування nprogress
 NProgress.configure({ showSpinner: false, speed: 400, minimum: 0.2 });
 
 export default function HomeworkPage() {
@@ -27,15 +26,14 @@ export default function HomeworkPage() {
 
   const subjectsList = Array.from(new Set(homeworks.map((i) => i.subjectName)));
 
-  // Оновлена функція зміни таби з візуальним прогресом
   const handleTabChange = async (tab: any) => {
     setActiveTab(tab);
     
-    NProgress.start(); // Запускаємо полоску зверху
+    NProgress.start(); 
     try {
-      await refetch(); // Чекаємо завершення завантаження даних
+      await refetch();
     } finally {
-      NProgress.done(); // Зупиняємо полоску
+      NProgress.done(); 
     }
   };
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Dayjs } from "dayjs";
-import { fetchSchedule } from "../api/scheduleApi";
+import { scheduleApi } from "../api/scheduleApi";
 import { ScheduleEvent } from "../model/types";
 
 export const useDaySchedule = (currentDate: Dayjs) => {
@@ -16,7 +16,7 @@ export const useDaySchedule = (currentDate: Dayjs) => {
                 const start = currentDate.startOf("week").format("YYYY-MM-DD");
                 const end = currentDate.endOf("week").format("YYYY-MM-DD");
                 
-                const data = await fetchSchedule(start, end);
+                const data = await scheduleApi.fetchSchedule(start, end);
                 setLessons(data);
             } catch (err) {
                 console.error(err);

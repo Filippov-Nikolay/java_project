@@ -1,7 +1,6 @@
-/* --- 1. Базовая разметка страницы --- */
+/* --- 1. Базова розметка сторінки --- */
 .page {
   display: flex;
-
   width: 100%;
   overflow: hidden;
   background: var(--background);
@@ -12,44 +11,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 0; // Предотвращает раздувание флекс-контейнера
+  min-width: 0;
   overflow: hidden;
-}
-
-/* --- 2. Сайдбар и мобильные элементы --- */
-.sidebar {
-  width: 280px;
-  min-width: 280px;
-  background: var(--surface);
-  border-right: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  z-index: 1001;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-  @media (max-width: 1024px) {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    transform: translateX(-100%);
-    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
-
-    &.sidebarOpen {
-      transform: translateX(0);
-    }
-  }
-}
-
-.sidebarHeader {
-  display: none;
-  @media (max-width: 1024px) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px;
-    border-bottom: 1px solid var(--border-color);
-  }
 }
 
 .backdrop {
@@ -72,112 +35,15 @@
   }
 }
 
-/* --- 3. Тулбар (Верхняя панель управления) --- */
-.toolbar {
-  height: 64px;
-  min-height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border-color);
-
-  @media (max-width: 768px) {
-    height: auto;
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-}
-
-.toolbarLeft, .toolbarRight {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.navArrows {
-  display: flex;
-  gap: 4px;
-  .arrowBtn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    color: var(--text-primary);
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 6px;
-    &:hover { background: var(--surface-muted); }
-  }
-}
-
-.dateRange {
-  font-weight: 600;
-  white-space: nowrap;
-  @media (max-width: 480px) { font-size: 13px; }
-}
-
-.mobileMenuBtn {
-  display: none;
-  @media (max-width: 1024px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--surface-muted);
-    border: 1px solid var(--border-color);
-    padding: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: var(--accent);
-  }
-}
-
-/* --- 4. Переключатель вида (Segmented Control) --- */
-.segmentedControl {
-  display: flex;
-  background: var(--surface-muted);
-  padding: 4px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-}
-
-.viewBtn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border: none;
-  background: none;
-  border-radius: 8px;
-  cursor: pointer;
-  color: var(--text-secondary);
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-
-  &.viewBtnActive {
-    background: var(--surface);
-    color: var(--accent);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
-
-  .btnText {
-    @media (max-width: 600px) { display: none; }
-  }
-}
-
-/* --- 5. Контейнер расписания и Скролл --- */
+/* --- 2. Контейнер розкладу та Скролл --- */
 .scheduleContainer {
   flex: 1;
-  overflow: auto; // Основной скролл страницы
+  overflow: auto; 
   display: flex;
   flex-direction: column;
 }
 
 .scrollWrapper {
-  // Минимальная ширина, чтобы сетка не ломалась на мобилках
   min-width: 800px; 
   flex: 1;
   display: flex;
@@ -188,16 +54,18 @@
   }
 }
 
-/* --- 6. Общие элементы сетки (Заголовки дней) --- */
+/* --- 3. Заголовки днів --- */
 .daysHeader {
   display: grid;
-  grid-template-columns: 64px repeat(7, 1fr);
+  grid-template-columns: 64px repeat(7, 1fr); // 64px під колонку часу
   position: sticky;
   top: 0;
   z-index: 100;
   background: var(--surface);
   border-bottom: 1px solid var(--border-color);
 }
+
+.gutter { width: 64px; }
 
 .dayColHeader {
   padding: 12px 0;
@@ -206,7 +74,7 @@
   align-items: center;
   border-left: 1px solid var(--border-color);
 
-  .dayNum { font-size: 24px; font-weight: 500; }
+  .dayNum { font-size: 24px; font-weight: 500; color: var(--text-primary); }
   .dayLabel { font-size: 11px; color: var(--text-secondary); }
 
   &.active {
@@ -223,7 +91,12 @@
   }
 }
 
-/* --- 7. Вид "Неделя" (WeekView) --- */
+/* --- 4. Сітка (WeekView) --- */
+.gridBody {
+  display: flex;
+  flex-direction: column;
+}
+
 .gridRow {
   display: grid;
   grid-template-columns: 64px repeat(7, 1fr);
@@ -235,7 +108,7 @@
   color: var(--text-secondary);
   text-align: right;
   padding-right: 12px;
-  margin-top: -6px; // Выравнивание по линии сетки
+  margin-top: -6px;
 }
 
 .gridCell {
@@ -250,7 +123,7 @@
   right: 0;
   height: 2px;
   background: var(--accent);
-  z-index: 5;
+  z-index: 10;
   pointer-events: none;
 
   .timeBall {
@@ -264,60 +137,8 @@
   }
 }
 
-/* --- 8. Вид "Месяц" (MonthView) --- */
+/* --- 5. Режим місяця --- */
 .month {
-  .daysHeader {
-    grid-template-columns: repeat(7, 1fr);
-  }
-
-  .monthGrid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    flex: 1;
-    min-width: 1000px;
-  }
-
-  .monthCell {
-    min-height: 120px;
-    border-right: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-    padding: 8px;
-    background: var(--surface);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-
-    &:nth-child(7n) { border-right: none; }
-    &.otherMonth { opacity: 0.3; }
-  }
-
-  .monthDate {
-    font-size: 12px;
-    color: var(--text-secondary);
-    &.activeDate {
-      background: var(--accent);
-      color: #fff;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-}
-
-.monthEventBadge {
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: var(--surface-muted);
-  border-left: 3px solid var(--accent);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  &.lecture { border-left-color: #38bdf8; }
-  &.practice { border-left-color: #a855f7; }
-  &.exam { border-left-color: #f43f5e; }
+  .daysHeader { grid-template-columns: repeat(7, 1fr); }
+  .gutter { display: none; }
 }

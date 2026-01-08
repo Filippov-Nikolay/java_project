@@ -7,7 +7,6 @@ import Button from "@shared/ui/Button";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
 
-// Імпортуємо іконки
 import { 
   IoClose, 
   IoTimeOutline, 

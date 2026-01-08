@@ -7,9 +7,8 @@ import styles from "./layout.module.scss";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
 
-  if (isLoading) return <div className={styles.loading}>Завантаження доступу...</div>;
 
   const isAdmin = user?.role === "ADMIN";
   const isTeacher = user?.role === "TEACHER";

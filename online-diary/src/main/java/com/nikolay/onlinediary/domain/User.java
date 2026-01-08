@@ -2,6 +2,9 @@ package com.nikolay.onlinediary.domain;
 
 import com.nikolay.onlinediary.domain.enums.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,9 +28,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Логін не може бути порожнім")
+    @Size(min = 3, max = 50, message = "Логін має бути від 3 до 50 символів")
     @Column(name = "\"login\"", unique = true, nullable = false)
     private String login;
 
+    @Email(message = "Некоректний формат email")
+    @NotBlank(message = "Email обов'язковий")
     @Column(name = "\"email\"")
     private String email;
 
@@ -38,9 +45,11 @@ public class User implements UserDetails {
     @Column(name = "\"role\"")
     private Role role;
 
+    @NotBlank(message = "Ім'я обов'язкове")
     @Column(name = "\"first_name\"")
     private String firstName;
 
+    @NotBlank(message = "Прізвище обов'язкове")
     @Column(name = "\"last_name\"")
     private String lastName;
 

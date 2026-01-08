@@ -1,6 +1,6 @@
 .header {
   height: 64px;
-  width: 100%; // Завжди на всю ширину вікна
+  width: 100%;
   padding: 0 16px;
   display: flex;
   align-items: center;
@@ -14,25 +14,146 @@
   @media (min-width: 1024px) { padding: 0 24px; }
 }
 
-.left, .right { display: flex; align-items: center; gap: 12px; }
-
-.burger {
-  display: flex; background: none; border: none; color: var(--text-primary); cursor: pointer;
-  @media (min-width: 768px) { display: none; }
+.left, .right { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
 }
 
-.logoText { font-weight: 700; font-size: 20px; color: #6366f1; @media (max-width: 1100px) { display: none; } }
+.logoText { 
+  font-weight: 700; 
+  font-size: 20px; 
+  color: var(--accent); 
+  @media (max-width: 1100px) { display: none; } 
+}
 
+.userMenuWrapper {
+  position: relative;
+  margin-left: 4px;
+}
 
 .avatarButton {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 6px; border-radius: 12px; border: 1px solid var(--border-color);
-  background: var(--surface-muted); cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover, &.active {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+  }
 }
 
-.avatarInitials {
-  width: 24px; height: 24px; border-radius: 50%;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 600;
+.avatarCircle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  overflow: hidden; 
+
+  .avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
+.chevron {
+  font-size: 14px;
+  color: var(--text-secondary);
+  transition: transform 0.2s ease;
+  &.rotate { transform: rotate(180deg); }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 220px;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 8px;
+  z-index: 1200;
+  animation: dropdownFade 0.2s ease-out;
+}
+
+.dropdownInfo {
+  padding: 10px 12px;
+  
+  .userName { 
+    font-weight: 600; 
+    font-size: 14px; 
+    color: var(--text-primary); 
+    margin-bottom: 2px;
+  }
+  
+  .userEmail { 
+    font-size: 12px; 
+    color: var(--text-secondary); 
+    margin-bottom: 6px;
+    word-break: break-all;
+  }
+
+  .userGroup {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(99, 102, 241, 0.1);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+}
+
+.dropdownDivider { 
+  height: 1px; 
+  background: var(--border-color); 
+  margin: 6px 0; 
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+
+  &:hover { 
+    background: var(--surface-muted); 
+    color: var(--accent);
+  }
+  
+  &.logout { 
+    color: var(--error); 
+    &:hover { background: rgba(239, 68, 68, 0.08); }
+  }
+
+  svg { font-size: 18px; }
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

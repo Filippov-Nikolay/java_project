@@ -35,7 +35,7 @@
   height: 36px;
   border-radius: 50%;
   color: var(--text-secondary);
-  font-size: 24px; // Розмір іконки IoClose
+  font-size: 24px; 
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -112,7 +112,7 @@
     color: var(--accent);
     border: 1px solid var(--border-color);
     transition: 0.2s;
-    svg { font-size: 18px; } // Іконка IoDocumentTextOutline
+    svg { font-size: 18px; } 
     &:hover { border-color: var(--accent); transform: translateY(-2px); }
   }
 }
@@ -128,7 +128,7 @@
   margin-bottom: 32px;
   .deadlineInfo {
     display: flex; align-items: center; gap: 14px;
-    .clockIcon { font-size: 22px; color: var(--text-secondary); } // IoTimeOutline
+    .clockIcon { font-size: 22px; color: var(--text-secondary); } 
     .dText {
       display: flex; flex-direction: column;
       .dLabel { font-size: 10px; text-transform: uppercase; color: var(--text-secondary); font-weight: 800; }
@@ -165,7 +165,7 @@
   transition: 0.3s;
   background: var(--surface-muted);
   &:hover { border-color: var(--accent); background: var(--bg); }
-  .uploadIcon { font-size: 44px; margin-bottom: 12px; color: var(--text-secondary); opacity: 0.6; } // IoCloudUploadOutline
+  .uploadIcon { font-size: 44px; margin-bottom: 12px; color: var(--text-secondary); opacity: 0.6; } 
   p { margin: 8px 0; font-weight: 600; font-size: 15px; }
   .blue { color: var(--accent); font-weight: 800; }
   small { color: var(--text-secondary); font-size: 12px; }
@@ -173,20 +173,66 @@
 .dragActive { border-color: var(--accent); background: rgba(37, 99, 235, 0.05); }
 
 .fileList {
-  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
-  .fileChip {
-    background: var(--accent);
-    color: var(--accent-contrast);
-    padding: 8px 14px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 700;
-    display: flex; align-items: center; gap: 10px;
-    svg { font-size: 16px; } // IoDocumentTextOutline
-    .removeFileBtn { 
-      background: rgba(0,0,0,0.1); border: none; color: inherit; cursor: pointer; 
-      width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      &:hover { background: rgba(0,0,0,0.2); }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.fileChip {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  padding: 6px 8px 6px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.2); 
+  transition: all 0.2s ease;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  svg { font-size: 18px; opacity: 0.9; }
+
+  .fileName {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .removeFile {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    svg {
+      font-size: 16px;
+      transition: transform 0.2s;
+    }
+
+    &:hover {
+
+      color: white;
+      transform: scale(1.1);
+
+
+      svg {
+        transform: rotate(90deg);
+      }
+    }
+
+    &:active {
+      transform: scale(0.9);
     }
   }
 }
