@@ -5,37 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c07b65b-094d-4972-a172-5916e46c1f15" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/dashboard/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/dashboard/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/homework/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/homework/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/homework/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/homework/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/schedule/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/schedule/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/schedule/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/schedule/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/(main)/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/(main)/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/homework/model/useHomeworkStats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/homework/model/useHomeworkStats.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/schedule/model/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/schedule/model/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/schedule/model/useCalendarMarks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/schedule/model/useCalendarMarks.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/AppCalendar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/AppCalendar/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/AppCalendar/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/AppCalendar/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/CalendarDay/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/CalendarDay/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/CalendarDay/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/CalendarDay/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/DaySchedule/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/DaySchedule/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/DaySchedule/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/schedule/ui/DaySchedule/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/auth/model/useAuth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/auth/model/useAuth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/manage-submissions/grade-student/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/manage-submissions/grade-student/ui/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/proxy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/proxy.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/layouts/AppHeader/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/layouts/AppHeader/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/layouts/AppSidebar/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/layouts/AppSidebar/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/dashboard/dashboard-calendar-card/ui/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/widgets/dashboard/dashboard-calendar-card/ui/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/dashboard/dashboard-calendar-card/ui/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/widgets/dashboard/dashboard-calendar-card/ui/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/schedule/MonthView/ui/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/widgets/schedule/MonthView/ui/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/schedule/MonthView/ui/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/widgets/schedule/MonthView/ui/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/schedule/WeekView/ui/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/widgets/schedule/WeekView/ui/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/widgets/submissions-table/ui/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/widgets/submissions-table/ui/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/AssessmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/AssessmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/StatsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/StatsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/submissions/Shvets_Danylo_КН-П-321.zip" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/submissions/Shvets_Danylo_КН-П-321.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
