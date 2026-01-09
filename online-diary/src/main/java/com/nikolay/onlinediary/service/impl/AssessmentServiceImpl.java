@@ -39,7 +39,6 @@ public class AssessmentServiceImpl implements IAssessmentService {
     private final UserRepository userRepository;
     private final SubmissionStudentRepository submissionStudentRepository;
 
-    // Шлях до папки завантажень (відносно кореня проекту)
     private final String UPLOAD_PATH = "uploads/submissions";
     private final String ICON_PATH = "uploads/icons";
 
@@ -78,7 +77,7 @@ public class AssessmentServiceImpl implements IAssessmentService {
         String savedFileName = null;
 
         try {
-            // 1. Збереження ІКОНКИ (Thumbnail)
+
             if (icon != null && !icon.isEmpty()) {
                 savedIconName = "icon_" + System.currentTimeMillis() + "_" + icon.getOriginalFilename();
                 Path iconPath = Paths.get(ICON_PATH);
@@ -282,11 +281,11 @@ public class AssessmentServiceImpl implements IAssessmentService {
                     .status(status.name().toLowerCase())
                     .grade(grade)
                     .feedback(feedback)
-                    .submissionFileName(studentFile) // Це файл студента
-                    // --- ДОДАЙТЕ ЦІ ДВА РЯДКИ ---
-                    .iconFileName(a.getIconFileName()) // Назва іконки з БД
-                    .fileName(a.getFileName())         // Файл-завдання від вчителя
-                    // ----------------------------
+                    .submissionFileName(studentFile) 
+
+                    .iconFileName(a.getIconFileName())
+                    .fileName(a.getFileName())    
+
                     .build();
         }).collect(Collectors.toList());
     }
@@ -317,9 +316,9 @@ public class AssessmentServiceImpl implements IAssessmentService {
                 .groupId(a.getGroup().getId())
                 .groupName(a.getGroup().getName())
                 .teacherName(teacherFullName)
-                // ДОДАЙ ЦЕЙ РЯДОК:
+
                 .iconFileName(a.getIconFileName())
-                // ------------------
+
                 .submissionCount(a.getSubmissions() != null ? a.getSubmissions().size() : 0)
                 .totalStudents(a.getGroup() != null && a.getGroup().getStudents() != null
                         ? a.getGroup().getStudents().size() : 0)

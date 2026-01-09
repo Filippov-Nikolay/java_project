@@ -36,17 +36,16 @@ public class ScheduleController {
 
         log.info("Schedule request from: {}, Role: {}", user.getLogin(), user.getRole());
 
-        // Для Студента - розклад групи
+
         if (user.getRole() == Role.STUDENT && user.getGroup() != null) {
             return ResponseEntity.ok(scheduleService.findByGroup(user.getGroup().getId()));
         }
 
-        // Для Вчителя - його пари
+
         if (user.getRole() == Role.TEACHER) {
             return ResponseEntity.ok(scheduleService.findByTeacher(user.getId()));
         }
 
-        // Для Адміна - ПОВНИЙ список (щоб працювала сторінка ScheduleListPage)
         if (user.getRole() == Role.ADMIN) {
             return ResponseEntity.ok(scheduleService.findAll());
         }

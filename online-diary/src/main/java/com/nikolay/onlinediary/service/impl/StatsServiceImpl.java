@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 public class StatsServiceImpl {
     private final JournalRepository journalRepository;
     private final UserRepository userRepository;
-    private final SubmissionStudentRepository submissionRepository; // Додано
-    private final ScheduleRepository scheduleRepository;           // Додано
+    private final SubmissionStudentRepository submissionRepository;
+    private final ScheduleRepository scheduleRepository;        
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM", new Locale("uk"));
 
@@ -48,7 +48,6 @@ public class StatsServiceImpl {
             }
         });
 
-        // 2. Оцінки за домашні завдання
         submissionRepository.findByStudentId(student.getId()).stream()
                 .filter(s -> s.getGrade() != null)
                 .forEach(s -> history.add(AccrualDto.builder()
@@ -61,7 +60,6 @@ public class StatsServiceImpl {
                         .date(s.getSubmittedAt().format(formatter))
                         .build()));
 
-        // Сортуємо: нові події зверху
         return history.stream()
                 .sorted((a, b) -> b.getId().compareTo(a.getId()))
                 .collect(Collectors.toList());
@@ -71,16 +69,13 @@ public class StatsServiceImpl {
     public DashboardStatsDto calculateStats(String login) {
         User student = userRepository.findByLoginAndEnabledTrue(login).orElseThrow();
 
-        // 1. Отримуємо оцінки з журналу
         List<JournalRecord> journalRecords = journalRepository.findByStudentId(student.getId());
 
-        // 2. Отримуємо оцінки за ДЗ (submissions)
         List<SubmissionStudent> homeworkSubmissions = submissionRepository.findByStudentId(student.getId())
                 .stream()
                 .filter(s -> s.getGrade() != null)
                 .toList();
 
-        // Розраховуємо середнє для Самостійної роботи (Журнал + ДЗ)
         Double independentAvg = calculateIndependentAvg(journalRecords, homeworkSubmissions);
 
         List<SubjectStatDto> stats = List.of(
@@ -103,17 +98,14 @@ public class StatsServiceImpl {
                 .build();
     }
 
-    // Новий допоміжний метод для об'єднання оцінок
     private Double calculateIndependentAvg(List<JournalRecord> records, List<SubmissionStudent> submissions) {
         List<Double> allGrades = new ArrayList<>();
 
-        // Додаємо "Самостійні" з журналу
         records.stream()
                 .filter(r -> r.getWorkType() == WorkType.INDEPENDENT && r.getGrade() != null && !r.getGrade().isEmpty())
                 .map(r -> Double.parseDouble(r.getGrade()))
                 .forEach(allGrades::add);
 
-        // Додаємо всі оцінені ДЗ
         submissions.stream()
                 .map(s -> s.getGrade().doubleValue())
                 .forEach(allGrades::add);

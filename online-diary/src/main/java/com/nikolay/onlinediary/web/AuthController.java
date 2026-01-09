@@ -45,7 +45,6 @@ public class AuthController {
         return authService.getAllUsers();
     }
 
-    // Цей метод тепер буде працювати правильно, бо він стоїть перед {id}
     @GetMapping("/users/teachers")
     public List<UserResponseDto> getTeachers() {
         log.info("Fetching all active teachers for assignment dropdown");
@@ -54,7 +53,6 @@ public class AuthController {
                 .toList();
     }
 
-    // SENIOR FIX: Додаємо [0-9]+, щоб маршрут не перехоплював слово "teachers"
     @GetMapping("/users/{id:[0-9]+}")
     public UserResponseDto getUserById(@PathVariable Long id) {
         return authService.getUserById(id);
@@ -100,7 +98,7 @@ public class AuthController {
 
     @PostMapping("/update-password")
     public ResponseEntity<?> updatePassword(@RequestBody Map<String, String> request) {
-        // Отримуємо логін із контексту безпеки (з JWT токена)
+
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         String newPassword = request.get("password");
 

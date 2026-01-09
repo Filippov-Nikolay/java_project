@@ -94,7 +94,7 @@ public class SubjectServiceImpl implements ISubjectService {
     @Override
     @Transactional
     public void assignTeacherToSubject(AssignTeacherDto dto) {
-        // SENIOR CHECK: Валідація вхідних даних
+
         if (dto.getTeacherId() == null || dto.getSubjectId() == null || dto.getGroupId() == null) {
             log.error("Assignment failed: One of the IDs is null. DTO: {}", dto);
             throw new IllegalArgumentException("Вчитель, предмет та група мають бути обрані");

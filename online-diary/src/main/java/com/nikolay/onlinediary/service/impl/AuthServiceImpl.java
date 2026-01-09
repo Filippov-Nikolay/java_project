@@ -34,7 +34,7 @@ public class AuthServiceImpl implements IAuthService {
 
     private final UserRepository userRepository;
     private final GroupRepository groupRepository;
-    private final PasswordResetTokenRepository tokenRepository; // ДОДАТИ
+    private final PasswordResetTokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
     private final String AVATAR_PATH = "uploads/avatars";
@@ -51,7 +51,7 @@ public class AuthServiceImpl implements IAuthService {
     @Override
     @Transactional
     public void updateAvatar(String login, MultipartFile file) {
-        // 1. Перевірка на порожній файл
+
         if (file.isEmpty()) {
             throw new IllegalArgumentException("Файл не вибрано");
         }
@@ -127,7 +127,7 @@ public class AuthServiceImpl implements IAuthService {
         User user = userRepository.findByEmailAndEnabledTrue(email)
                 .orElseThrow(() -> new RuntimeException("Користувача з таким email не знайдено"));
 
-        // 1. Генеруємо токен
+
         String token = UUID.randomUUID().toString();
         PasswordResetToken resetToken = PasswordResetToken.builder()
                 .token(token)
@@ -137,7 +137,6 @@ public class AuthServiceImpl implements IAuthService {
 
         tokenRepository.save(resetToken);
 
-        // 2. ВІДПРАВЛЯЄМО РЕАЛЬНИЙ ЛИСТ замість логів
         try {
             emailService.sendRecoveryEmail(user.getEmail(), token);
         } catch (Exception e) {
@@ -161,7 +160,7 @@ public class AuthServiceImpl implements IAuthService {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
 
-        tokenRepository.delete(resetToken); // Видаляємо токен після використання
+        tokenRepository.delete(resetToken);
     }
 
     @Override
@@ -199,7 +198,7 @@ public class AuthServiceImpl implements IAuthService {
                 .role(u.getRole())
                 .groupId(u.getGroup() != null ? u.getGroup().getId() : null)
                 .groupName(u.getGroup() != null ? u.getGroup().getName() : null)
-                .avatar(base64Avatar) // Це поле має бути в UserResponseDto (тип String)
+                .avatar(base64Avatar)
                 .build();
     }
 }

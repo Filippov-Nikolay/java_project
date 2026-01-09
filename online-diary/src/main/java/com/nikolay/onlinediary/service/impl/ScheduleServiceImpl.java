@@ -105,7 +105,6 @@ public class ScheduleServiceImpl implements IScheduleService {
             throw new RuntimeException("Вчитель не закріплений за цим предметом");
         }
 
-        // Оновлюємо поля
         schedule.setDate(dto.getDate());
         schedule.setLessonNumber(dto.getLessonNumber());
         schedule.setRoom(dto.getRoom());
@@ -153,7 +152,6 @@ public class ScheduleServiceImpl implements IScheduleService {
                     throw new RuntimeException("Рядок " + currentRowNum + ": Некоректне ПІБ вчителя '" + teacherFullName + "'");
                 }
 
-                // ВИПРАВЛЕНО: Викликаємо метод, який реально існує в репозиторії
                 User teacher = userRepository.findByLastNameAndFirstNameAndEnabledTrue(nameParts[0], nameParts[1])
                         .orElseThrow(() -> new RuntimeException("Рядок " + currentRowNum + ": Вчитель '" + teacherFullName + "' не знайдений або деактивований"));
 

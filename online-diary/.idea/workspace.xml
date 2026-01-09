@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c07b65b-094d-4972-a172-5916e46c1f15" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/AssessmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/AssessmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/AuthServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JournalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/JournalServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/ScheduleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/ScheduleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/StatsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/StatsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/SubjectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/service/impl/SubjectServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/ScheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikolay/onlinediary/web/ScheduleController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

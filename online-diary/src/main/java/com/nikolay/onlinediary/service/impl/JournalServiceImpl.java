@@ -32,11 +32,9 @@ public class JournalServiceImpl implements IJournalService {
     public List<JournalRecord> getJournalBySchedule(Long scheduleId) {
         log.info("Fetching journal records for schedule ID: {}", scheduleId);
 
-        // 1. Шукаємо існуючі записи в базі
         List<JournalRecord> existingRecords = journalRepository.findByScheduleIdOrderByStudentFullNameAsc(scheduleId);
 
         if (!existingRecords.isEmpty()) {
-            // Оновлюємо ПІБ студентів (на випадок, якщо вони змінилися в профілі)
             existingRecords.forEach(record ->
                     userRepository.findById(record.getStudentId())
                             .ifPresent(u -> record.setStudentFullName(u.getLastName() + " " + u.getFirstName()))
@@ -44,7 +42,6 @@ public class JournalServiceImpl implements IJournalService {
             return existingRecords;
         }
 
-        // 2. Якщо записів немає, створюємо їх на основі активних студентів групи
         Schedule schedule = scheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new NotFoundException("Заняття", scheduleId));
 
@@ -74,12 +71,10 @@ public class JournalServiceImpl implements IJournalService {
         log.info("Saving {} journal records", records.size());
 
         for (JournalRecord incoming : records) {
-            // 1. Шукаємо існуючий запис за парою ключів (Пара + Студент)
             JournalRecord recordToSave = journalRepository
                     .findByScheduleIdAndStudentId(incoming.getScheduleId(), incoming.getStudentId())
                     .orElse(new JournalRecord());
 
-            // 2. Оновлюємо або встановлюємо поля
             recordToSave.setScheduleId(incoming.getScheduleId());
             recordToSave.setStudentId(incoming.getStudentId());
             recordToSave.setStudentFullName(incoming.getStudentFullName());
@@ -87,7 +82,7 @@ public class JournalServiceImpl implements IJournalService {
             recordToSave.setGrade(incoming.getGrade());
             recordToSave.setWorkType(incoming.getWorkType());
 
-            // 3. Зберігаємо (JPA автоматично зробить UPDATE, якщо ID існує, або INSERT, якщо ні)
+           
             journalRepository.save(recordToSave);
         }
     }

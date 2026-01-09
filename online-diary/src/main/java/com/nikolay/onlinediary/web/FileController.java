@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-@Slf4j // Використовуємо стандартне логування Lombok
+@Slf4j
 @RestController
 @RequestMapping("/api/files")
 @CrossOrigin(origins = "http://localhost:3000")
