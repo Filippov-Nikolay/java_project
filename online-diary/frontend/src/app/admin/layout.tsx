@@ -3,15 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUser } from "@entities/user/model/useUser"; 
+import { useAuth } from "@features/auth/model/useAuth"; 
+import { IoLogOutOutline } from "react-icons/io5"; 
 import styles from "./layout.module.scss";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user } = useUser();
-
+  const { logout } = useAuth(); 
 
   const isAdmin = user?.role === "ADMIN";
-  const isTeacher = user?.role === "TEACHER";
 
   const menuItems = [
     { name: "Статистика", href: "/admin" },
@@ -25,6 +26,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {isAdmin && (
         <aside className={styles.sidebar}>
           <div className={styles.logo}>JByte Admin</div>
+          
           <nav className={styles.nav}>
             {menuItems.map((item) => (
               <Link 
@@ -36,8 +38,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </Link>
             ))}
           </nav>
+
           <div className={styles.footer}>
-            <Link href="/dashboard" className={styles.backLink}>← На сайт</Link>
+
+            <button onClick={logout} className={styles.logoutBtn}>
+              <IoLogOutOutline /> <span>Вийти</span>
+            </button>
           </div>
         </aside>
       )}
