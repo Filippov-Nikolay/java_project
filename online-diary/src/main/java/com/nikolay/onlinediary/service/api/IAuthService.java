@@ -16,7 +16,7 @@ public interface IAuthService {
     UserResponseDto updateUser(Long id, UserUpdateDto dto);
 
     void deleteUser(Long id);
-
+    UserResponseDto register(UserUpdateDto dto, String password, MultipartFile file);
     void requestPasswordReset(String email);
     void resetPassword(String token, String newPassword);
 

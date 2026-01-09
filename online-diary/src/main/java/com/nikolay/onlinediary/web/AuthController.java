@@ -1,5 +1,6 @@
 package com.nikolay.onlinediary.web;
 
+import com.nikolay.onlinediary.domain.enums.Role;
 import com.nikolay.onlinediary.dto.UserResponseDto;
 import com.nikolay.onlinediary.dto.UserUpdateDto;
 import com.nikolay.onlinediary.repository.UserRepository;
@@ -105,5 +106,30 @@ public class AuthController {
         authService.updatePassword(login, newPassword);
 
         return ResponseEntity.ok(Map.of("message", "Пароль успішно оновлено"));
+    }
+
+    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> register(
+            @RequestPart("login") String login, // Додай цей параметр
+            @RequestPart("firstName") String firstName,
+            @RequestPart("lastName") String lastName,
+            @RequestPart("email") String email,
+            @RequestPart("password") String password,
+            @RequestPart(value = "role", required = false) String roleStr,
+            @RequestPart(value = "groupId", required = false) String groupId,
+            @RequestPart(value = "file", required = false) MultipartFile file
+    ) {
+        Role userRole = (roleStr != null) ? Role.valueOf(roleStr.toUpperCase()) : Role.STUDENT;
+
+        UserUpdateDto dto = UserUpdateDto.builder()
+                .login(login)
+                .firstName(firstName)
+                .lastName(lastName)
+                .email(email)
+                .role(userRole)
+                .groupId(groupId != null ? Long.parseLong(groupId) : null)
+                .build();
+
+        return ResponseEntity.ok(authService.register(dto, password, file));
     }
 }

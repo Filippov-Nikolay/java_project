@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import com.nikolay.onlinediary.domain.enums.Role;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -146,7 +147,13 @@ public class AssessmentServiceImpl implements IAssessmentService {
         Assessment assessment = repository.findById(assessmentId)
                 .orElseThrow(() -> new NotFoundException("Завдання", assessmentId));
 
-        List<User> students = assessment.getGroup().getStudents();
+        // ВИПРАВЛЕНО: Замість assessment.getGroup().getStudents() використовуємо твій репозиторій
+        // Це відфільтрує видалених (enabled=false) та відсортує за прізвищем
+        List<User> students = userRepository.findByGroupIdAndRoleAndEnabledTrueOrderByLastNameAsc(
+                assessment.getGroup().getId(),
+                Role.STUDENT
+        );
+
         List<SubmissionStudent> submissions = submissionStudentRepository.findByAssessmentId(assessmentId);
 
         return students.stream().map(student -> {
@@ -163,6 +170,7 @@ public class AssessmentServiceImpl implements IAssessmentService {
                     .studentComment(submission.map(SubmissionStudent::getStudentComment).orElse(null))
                     .grade(submission.map(SubmissionStudent::getGrade).orElse(null))
                     .feedback(submission.map(SubmissionStudent::getFeedback).orElse(null))
+                    // Можна додати прапорець для фронта, хоча тут будуть лише активні
                     .build();
         }).collect(Collectors.toList());
     }

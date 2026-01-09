@@ -31,4 +31,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByGroupIdAndRoleAndEnabledTrueOrderByLastNameAsc(Long groupId, Role role);
 
     Optional<User> findByEmailAndEnabledTrue(String email);
+
+    List<User> findAllByGroupIdAndEnabledTrue(Long groupId);
 }

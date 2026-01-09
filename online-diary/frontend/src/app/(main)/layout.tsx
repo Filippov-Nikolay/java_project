@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { AppHeader } from "@shared/layouts/AppHeader";
 import { AppSidebar } from "@shared/layouts/AppSidebar";
-import { AppAuthWrapper } from "@app/(main)/AppAuthWrapper/page"; 
+import { AppAuthWrapper } from "@app/providers/AppAuthWrapper"; 
 import { SidebarProvider } from "@shared/lib/context/SidebarContext";
 import styles from "./styles.module.scss";
 

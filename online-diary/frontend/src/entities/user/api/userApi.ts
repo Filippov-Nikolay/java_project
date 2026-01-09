@@ -54,7 +54,6 @@ export const userApi = {
         });
     },
 
-    /** Оновити пароль */
     async updatePassword(password: string) {
         const token = Cookies.get("token");
         
@@ -66,5 +65,35 @@ export const userApi = {
             },
             body: JSON.stringify({ password })
         });
+    },
+
+    async register(data: any, avatarFile?: File) {
+        const formData = new FormData();
+        
+        formData.append("firstName", data.firstName);
+        formData.append("lastName", data.lastName);
+        formData.append("email", data.email);
+        formData.append("password", data.password);
+        formData.append("role", data.role || "STUDENT");
+
+        if (data.groupId) {
+            formData.append("groupId", data.groupId.toString());
+        }
+
+        if (avatarFile) {
+            formData.append("file", avatarFile);
+        }
+
+        const response = await fetch(`${BASE_URL}/register`, {
+            method: "POST",
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || "Помилка реєстрації. Можливо, email вже зайнятий.");
+        }
+
+        return response.json();
     }
 };

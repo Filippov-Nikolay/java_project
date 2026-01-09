@@ -19,6 +19,8 @@ public class UserUpdateDto {
     @NotBlank(message = "Прізвище не може бути порожнім")
     private String lastName;
 
+    private String login;
+
     @Email(message = "Некоректний формат email")
     @NotBlank(message = "Email обов'язковий")
     private String email;

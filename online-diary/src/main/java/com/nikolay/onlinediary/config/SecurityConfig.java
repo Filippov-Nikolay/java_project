@@ -47,6 +47,7 @@ public class SecurityConfig {
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/groups/**", "/api/subjects/**").hasRole("ADMIN")
                         .requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/groups/**", "/api/subjects/**").hasRole("ADMIN")
                         .requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/groups/**", "/api/subjects/**").hasRole("ADMIN")
+                        .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/password-reset/**").permitAll()
 
                         .requestMatchers(HttpMethod.DELETE, "/api/groups/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/groups/**").hasRole("ADMIN")

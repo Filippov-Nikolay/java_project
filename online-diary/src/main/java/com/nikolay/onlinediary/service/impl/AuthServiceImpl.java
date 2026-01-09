@@ -2,6 +2,7 @@ package com.nikolay.onlinediary.service.impl;
 
 import com.nikolay.onlinediary.domain.PasswordResetToken;
 import com.nikolay.onlinediary.domain.User;
+import com.nikolay.onlinediary.domain.enums.Role;
 import com.nikolay.onlinediary.dto.UserResponseDto;
 import com.nikolay.onlinediary.dto.UserUpdateDto;
 import com.nikolay.onlinediary.exception.NotFoundException;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import com.nikolay.onlinediary.domain.Group;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -161,6 +163,41 @@ public class AuthServiceImpl implements IAuthService {
         userRepository.save(user);
 
         tokenRepository.delete(resetToken);
+    }
+
+    @Override
+    @Transactional
+    public UserResponseDto register(UserUpdateDto dto, String password, MultipartFile file) {
+        // 1. Перевірка на дублікат (запобігаємо ORA-00001)
+        if (userRepository.findByLoginAndEnabledTrue(dto.getEmail()).isPresent()) {
+            throw new RuntimeException("Користувач з таким email вже існує!");
+        }
+
+        // 2. Пошук групи
+        Group group = null;
+        if (dto.getGroupId() != null) {
+            group = groupRepository.findById(dto.getGroupId())
+                    .orElseThrow(() -> new RuntimeException("Групу не знайдено"));
+        }
+
+        byte[] avatarBytes = null;
+        if (file != null && !file.isEmpty()) {
+            try { avatarBytes = file.getBytes(); } catch (IOException e) { /* log error */ }
+        }
+
+        User user = User.builder()
+                .login(dto.getLogin()) // ВИПРАВЛЕНО: беремо саме логін, а не пошту
+                .email(dto.getEmail())
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
+                .password(passwordEncoder.encode(password))
+                .role(dto.getRole())
+                .group(group) // ПРИВ'ЯЗУЄМО ГРУПУ
+                .avatar(avatarBytes)
+                .enabled(true)
+                .build();
+
+        return mapToResponse(userRepository.save(user));
     }
 
     @Override
